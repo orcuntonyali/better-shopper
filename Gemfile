@@ -20,6 +20,7 @@ gem "sprockets-rails"
 gem "stimulus-rails"
 gem "turbo-rails"
 gem "tzinfo-data", platforms: %i[ mingw mswin x64_mingw jruby ]
+gem "geocoder"
 
 # gem "redis", "~> 4.0"
 # gem "kredis"
