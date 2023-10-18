@@ -1,6 +1,5 @@
 class Store < ApplicationRecord
-  has_many :items
+  has_many :items, dependent: :destroy
 
   validates :name, presence: true
-  validates :latitude, :longitude, presence: true, numericality: true
 end
