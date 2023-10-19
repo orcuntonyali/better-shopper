@@ -8,9 +8,12 @@ gem "autoprefixer-rails"
 gem "bootsnap", require: false
 gem "bootstrap", "~> 5.2"
 gem "devise"
+gem 'dotenv'
 gem "font-awesome-sass", "~> 6.1"
+gem "geocoder"
 gem "jbuilder"
 gem "importmap-rails"
+gem 'mapbox-sdk', '2.3.3'
 gem "pg", "~> 1.1"
 gem "puma", "~> 5.0"
 gem "rails", "~> 7.0.8"

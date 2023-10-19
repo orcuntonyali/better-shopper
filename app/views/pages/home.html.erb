@@ -1,2 +1,12 @@
 <h1>Pages#home</h1>
 <p>Find me in app/views/pages/home.html.erb</p>
+
+<div>
+  <% banana_items = Item.where(name: 'banana') %>
+  <% banana_items.each do |item| %>
+    <p>
+      <%= "Name: #{item.name}, Price: #{item.unit_price}, Store: #{item.store.name}" %><br>
+      <%= image_tag item.image_url, alt: "#{item.name} image", width: "100" %>
+    </p>
+  <% end %>
+</div>
