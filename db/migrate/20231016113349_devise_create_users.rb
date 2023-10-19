@@ -39,6 +39,7 @@ class DeviseCreateUsers < ActiveRecord::Migration[7.0]
       ## Additional columns
       t.string :name,               null: false, default: ""
       t.string :surname,            null: false, default: ""
+      t.string :address,            null: false, default: ""
 
       t.timestamps null: false
     end

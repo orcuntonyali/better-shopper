@@ -12,6 +12,7 @@ User.create!(name: 'better',
              surname: 'shopper',
              email: 'bettershopper@bettershopper.com',
              password: '123456',
+             address: 'Rudi-Dutschke-Straße 26, 10969 Berlin',
              latitude: 52.506931,
              longitude: 13.391634
              )
