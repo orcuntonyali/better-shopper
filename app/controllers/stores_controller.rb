@@ -1,5 +1,4 @@
 class StoresController < ApplicationController
-
   def index
     @stores = Store.all
     @markers = @stores.geocoded.map do |store|
@@ -10,5 +9,4 @@ class StoresController < ApplicationController
       }
     end
   end
-
 end
