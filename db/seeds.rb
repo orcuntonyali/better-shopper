@@ -8,56 +8,57 @@ User.delete_all
 
 puts "Create the master user"
 # Create the master user with default location in Rudi-Dutschke-Straße 26, 10969 Berlin
-User.create!(name: 'better',
-             surname: 'shopper',
+User.create!(name: 'Mark',
+             surname: 'Schönberger',
              email: 'bettershopper@bettershopper.com',
              password: '123456',
+             address: 'Rudi-Dutschke-Straße 26, 10969 Berlin',
              latitude: 52.506931,
              longitude: 13.391634
              )
 
 # Create Stores with their real-world information
 store_data = [
-  ['EDEKA Ungefroren' ,52.513684 ,13.4060088],
-  ['LIDL Leip' ,52.5103726499999 ,13.3950062221126],
-  ['EDEKA Annenstraße' ,52.507766 ,13.415128],
-  ['NETTO Supermarket' ,52.516746 ,13.420105],
-  ['BerlinASIA LEBENSMITTEL' ,52.5115103 ,13.4165757],
-  ['REWE Litf' ,52.52233 ,13.4033909],
-  ['NETTO Marken-Discount' ,52.4746327999999 ,13.4553717578071],
-  ['LIDL Sonn' ,52.4753044 ,13.4513227],
-  ['DÜZGÜN Supermarkt' ,52.4781326 ,13.4477401],
-  ['KAUFLAND Berlin-Neukölln' ,52.4686178 ,13.442591],
-  ['EUROGIDA' ,52.469888 ,13.4420344],
-  ['BIO COMPANY' ,52.51066 ,13.4168797],
-  ['ASIA LEBENSMITTEL' ,52.5115103 ,13.4165757],
-  ['REWE TO GO BEI ARAL' ,52.5138544 ,13.421876],
-  ['EDEKA Annenstraße' ,52.507766 ,13.415128],
-  ['ALDI Nord' ,52.5065406 ,13.4162889],
-  ['KAUFLAND Storkower' ,52.5336384 ,13.4572219],
-  ['NETTO Marken-Discount' ,52.5341078 ,13.4514365],
-  ['SPAR EXPRESS' ,52.5341078 ,13.4514365],
-  ['ALDI Nord' ,52.5265323 ,13.458277],
-  ['MÄC-GEIZ' ,52.5411818 ,13.4405578],
-  ['LIDL Kni' ,52.5344952 ,13.4461438],
-  ['KAUFLAND Herm' ,52.524014 ,13.46171],
-  ['REWE Lan' ,52.5291187 ,13.4551573],
-  ['PENNY Hermm' ,52.5227409 ,13.464873],
-  ['REWE Kurf' ,52.4978714 ,13.2971416],
-  ['PENNY Ku' ,52.498772 ,13.302941],
-  ['GALERIA Markthalle' ,52.5036224 ,13.3328311],
-  ['TC MARKT OPEN 24' ,52.4998394 ,13.3079665],
-  ['EDELKORPB' ,52.4987072 ,13.2987243],
-  ['REWE TO GO BEI ARAL Ku' ,52.49586865 ,13.287716290458],
-  ['LIDL Knes' ,52.500475 ,13.321294],
-  ['REWE Uhl' ,52.5009824 ,13.3248411],
-  ['AMERICANFOOD4U' ,52.5032784 ,13.3300767],
-  ['EDEKA Knesebeckstraße' ,52.50040645 ,13.3223217648596],
-  ['HIT' ,52.5055145 ,13.3305178]
+  ['EDEKA Ungefroren' ,52.513684 ,13.4060088, 'Fischerinsel 12, 10179 Berlin, Germany'],
+  ['LIDL Leip' ,52.5103726499999 ,13.3950062221126, 'Leipziger Straße 42, 10117 Berlin, Germany'],
+  ['EDEKA Annenstraße' ,52.507766 ,13.415128, 'Annenstraße 4 A, 10179 Berlin, Germany'],
+  ['NETTO Supermarket' ,52.516746 ,13.420105,   'Schillingstraße 1 A, 10179 Berlin, Germany'],
+  ['BerlinASIA LEBENSMITTEL' ,52.5115103 ,13.4165757,   'Brückenstraße 15A, 10179 Berlin, Germany'],
+  ['REWE Litf' ,52.52233 ,13.4033909, 'Litfaß-Platz 4, 10178 Berlin, Germany'],
+  ['NETTO Marken-Discount' ,52.4746327999999 ,13.4553717578071, 'Sonnenallee 215, 12059 Berlin, Germany'],
+  ['LIDL Sonn' ,52.4753044 ,13.4513227, 'Sonnenallee 192, 12059 Berlin, Germany'],
+  ['DÜZGÜN Supermarkt' ,52.4781326 ,13.4477401, 'Sonnenallee 163, 12059 Berlin, Germany'],
+  ['KAUFLAND Berlin-Neukölln' ,52.4686178 ,13.442591, 'Karl-Marx-Straße 231, 12055 Berlin, Germany'],
+  ['EUROGIDA' ,52.469888 ,13.4420344, 'Karl-Marx-Straße 225, 12055 Berlin, Germany'],
+  ['BIO COMPANY' ,52.51066 ,13.4168797, 'Köpenicker Straße 103, 10179 Berlin, Germany'],
+  ['ASIA LEBENSMITTEL' ,52.5115103 ,13.4165757,'Brückenstraße 15A, 10179 Berlin, Germany'],
+  ['REWE TO GO BEI ARAL' ,52.5138544 ,13.421876, 'Holzmarktstraße 12/14, 10179 Berlin, Germany'],
+  ['EDEKA Annenstraße' ,52.507766 ,13.415128, 'Annenstraße 4 A, 10179 Berlin, Germany'],
+  ['ALDI Nord' ,52.5065406 ,13.4162889, 'Heinrich-Heine-Platz 8-12, 10179 Berlin, Germany'],
+  ['KAUFLAND Storkower' ,52.5336384 ,13.4572219, 'Storkower Straße 139, 10407 Berlin, Germany'],
+  ['NETTO Marken-Discount' ,52.5341078 ,13.4514365, 'Storkower Straße 126, 10407 Berlin, Germany'],
+  ['SPAR EXPRESS' ,52.5341078 ,13.4514365, 'Storkower Straße 126, 10407 Berlin, Germany'],
+  ['ALDI Nord' ,52.5265323 ,13.458277, 'Storkower Straße 176, 10369 Berlin, Germany'],
+  ['MÄC-GEIZ' ,52.5411818 ,13.4405578, 'Storkower Straße 7, 10409 Berlin, Germany'],
+  ['LIDL Kni' ,52.5344952 ,13.4461438, 'Kniprodestraße 26, 10407 Berlin, Germany'],
+  ['KAUFLAND Herm' ,52.524014 ,13.46171, 'Hermann-Blankenstein-Straße 38, 10249 Berlin, Germany'],
+  ['REWE Lan' ,52.5291187 ,13.4551573, 'Landsberger Allee 117, 10407 Berlin, Germany'],
+  ['PENNY Hermm' ,52.5227409 ,13.464873, 'Hermann-Blankenstein-Straße 40, 10249 Berlin, Germany'],
+  ['REWE City' ,52.4978714 ,13.2971416, 'Kurfürstendamm 142, 10709 Berlin, Germany'],
+  ['PENNY Ku' ,52.498772 ,13.302941, 'Kurfürstendamm 156, 10709 Berlin, Germany'],
+  ['GALERIA Markthalle' ,52.5036224 ,13.3328311, 'Kurfürstendamm 231, 10719 Berlin, Germany'],
+  ['TC MARKT OPEN 24' ,52.4998394 ,13.3079665, 'Kurfürstendamm 166, 10707 Berlin, Germany'],
+  ['EDELKORPB' ,52.4987072 ,13.2987243, 'Kurfürstendamm 96, 10709 Berlin, Germany'],
+  ['REWE TO GO BEI ARAL Ku' ,52.49586865 ,13.287716290458, 'Kurfürstendamm 128, 10711 Berlin, Germany'],
+  ['LIDL Knes' ,52.500475 ,13.321294, 'Knesebeckstraße 48, 10719 Berlin, Germany'],
+  ['REWE Uhl' ,52.5009824 ,13.3248411, 'Uhlandstraße 30, 10719 Berlin, Germany'],
+  ['AMERICANFOOD4U' ,52.5032784 ,13.3300767, 'Kurfürstendamm 225, 10719 Berlin, Germany'],
+  ['EDEKA Knesebeckstraße' ,52.50040645 ,13.3223217648596, 'Knesebeckstraße 56-58, 10719 Berlin, Germany'],
+  ['HIT' ,52.5055145 ,13.3305178, 'Kantstraße 7, 10623 Berlin, Germany']
 ]
 
-store_data.each do |name, lat, long|
-  Store.create!(name: name, latitude: lat, longitude: long)
+store_data.each do |name, lat, long, address|
+  Store.create!(name: name, latitude: lat, longitude: long, address: address)
 end
 
 # Create Items with fictional prices

@@ -2,7 +2,9 @@
 
 <h1>Stores</h1>
 
-<div id='map' style="width: 100%; height: 300px;"
-  data-controller="map"
-  data-map-markers-value="<%= @markers.to_json %>"
-  data-map-api-key-value="<%= ENV['MAPBOX_API_KEY'] %>"></div>
+<div id='map'
+     style="width: 100%; height: 300px;"
+     data-controller="map"
+     data-map-markers-value="<%= @markers.to_json %>"
+     data-map-api-key-value="<%= ENV['MAPBOX_API_KEY'] %>">
+</div>

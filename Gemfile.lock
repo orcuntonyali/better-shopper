@@ -354,7 +354,7 @@ DEPENDENCIES
   geocoder
   importmap-rails
   jbuilder
-  mapbox-sdk (= 2.3.3)
+  mapbox-sdk (~> 2.3, >= 2.3.3)
   pg (~> 1.1)
   puma (~> 5.0)
   rails (~> 7.0.8)
