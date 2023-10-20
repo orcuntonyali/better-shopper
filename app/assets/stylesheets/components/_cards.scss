@@ -1,0 +1,20 @@
+.item-card {
+  display: flex;
+  align-items: center;
+  margin: 1rem;
+}
+
+.item-card-text {
+  flex: 1;
+  padding: 0 1rem;
+}
+
+p {
+  font-size: 0.9rem;
+}
+
+.no-decoration {
+  text-decoration: none;
+  color: black;
+  text-transform: capitalize;
+}
