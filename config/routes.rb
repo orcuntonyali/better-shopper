@@ -3,9 +3,9 @@ Rails.application.routes.draw do
   root "pages#home"
 
   # RESTful routes for resources
-  resources :stores, only: [:index, :show]
+  resources :stores, only: [:index]
   resources :items
   resources :orders do
-    resources :cart_items, only: [:create, :update, :destroy]
+    resources :cart_items, only: [:new, :show, :create, :update, :destroy]
   end
 end
