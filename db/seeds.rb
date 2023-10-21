@@ -23,7 +23,7 @@ store_data = [
   ['LIDL Leip' ,52.5103726499999 ,13.3950062221126, 'Leipziger Straße 42, 10117 Berlin, Germany'],
   ['EDEKA Annenstraße' ,52.507766 ,13.415128, 'Annenstraße 4 A, 10179 Berlin, Germany'],
   ['NETTO Supermarket' ,52.516746 ,13.420105,   'Schillingstraße 1 A, 10179 Berlin, Germany'],
-  ['BerlinASIA LEBENSMITTEL' ,52.5115103 ,13.4165757,   'Brückenstraße 15A, 10179 Berlin, Germany'],
+  ['ASIA LEBENSMITTEL' ,52.5115103 ,13.4165757,   'Brückenstraße 15A, 10179 Berlin, Germany'],
   ['REWE Litf' ,52.52233 ,13.4033909, 'Litfaß-Platz 4, 10178 Berlin, Germany'],
   ['NETTO Marken-Discount' ,52.4746327999999 ,13.4553717578071, 'Sonnenallee 215, 12059 Berlin, Germany'],
   ['LIDL Sonn' ,52.4753044 ,13.4513227, 'Sonnenallee 192, 12059 Berlin, Germany'],

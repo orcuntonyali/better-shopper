@@ -1,0 +1,78 @@
+.quantity-button {
+  display: flex;
+  align-items: center;
+  padding: 1px;
+  margin: 1px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  cursor: pointer;
+  background-color: white; 
+  color: black; 
+  border: 1.9px solid #6200EE;
+  border-radius: 30px;
+  width: 70px; /* Set a fixed width */
+  height: 31px; /* Set a fixed height */
+
+  &:hover {
+    background-color: #6200EE;
+    color: white;
+
+    .minus-plus {
+      color: white;
+    }
+  }
+}
+
+.minus-plus {
+  border: none;
+  background: none;
+}
+
+.button-container {
+  display: flex;
+  justify-content: space-between;
+}
+
+.violet-button {
+  display: flex;
+  padding: 6px;
+  margin: 6px;
+  color: white; 
+  background-color: #6200EE;
+  border-radius: 6px;
+  border-style: none;
+  outline: none;
+  overflow: hidden;
+  width: 120px;
+  text-align: center;
+  font-size: 14px;
+  text-decoration: none;
+  display: inline-block;
+  cursor: pointer;
+}
+
+
+.confirm-selection {
+  display: flex;
+  justify-content: center;
+}
+
+.violet-button-confirm-selection {
+  display: flex;
+  padding: 6px;
+  margin: 6px;
+  color: white; 
+  background-color: #6200EE;
+  border-radius: 6px;
+  border-style: none;
+  outline: none;
+  overflow: hidden;
+  width: auto;
+  text-align: center;
+  font-size: 14px;
+  text-decoration: none;
+  display: inline-block;
+  cursor: pointer;
+}

@@ -1,9 +1,22 @@
-<h1>All Items</h1>
+<%= javascript_include_tag 'controllers/items' %>
 
-<ul>
-  <% @items.each do |item| %>
-    <li>
-      <%= link_to item.name, item_path(item) %>
-    </li>
-  <% end %>
-</ul>
+<% @items.each do |item| %>
+  <div class="item-card">
+    <img class='align-self-center mr-3' src="<%= item.image_url %>" alt="<%= item.name %> image" width="100">
+    <div class="item-card-text">
+      <h5 class="mt-0"><%= link_to item.name, item_path(item), class: 'no-decoration' %></h5>
+      <p>From <%= item.store.name %></p>
+      <p>€<%= item.unit_price %></p>
+    </div>
+    <div class="quantity-button">
+      <button class="minus-plus" data-item-id="<%= item.id %>" data-action="decrement">-</button>
+      <span id="quantity_<%= item.id %>">1</span>
+      <button class="minus-plus" data-item-id="<%= item.id %>" data-action="increment">+</button>
+    </div>
+  </div>
+<% end %>
+
+<div class="button-container">
+  <button class="violet-button">+ ADD ITEMS</button>
+  <button class="violet-button">CHECKOUT</button>
+</div>
