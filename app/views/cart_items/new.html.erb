@@ -1,0 +1,19 @@
+<h1>Let's talk groceries!</h1>
+<p>Speak, text, edit as you like! Shoot it when you're ready!</p>
+
+<div data-controller="audio-input">
+  <button data-action="click->audio-input#startRecording">Touch to speak</button>
+  <button data-action="click->audio-input#stopRecording" disabled>Touch when done</button>
+  <br>
+  <br>
+
+  <!-- Textbox for order editing -->
+  <textarea data-audio-input-target="transcribedText" id="transcribedText" style="width: 100%; height: 200px;"></textarea>
+
+  <!-- Button to submit the reviewed order -->
+  <button id="submitReview" data-action="click->audio-input#submitReviewedText">I'm ready, prepare my groceries!</button>
+
+  <ul id="cart-items-list">
+  <!-- Items will be populated here by JavaScript -->
+  </ul>
+</div>
