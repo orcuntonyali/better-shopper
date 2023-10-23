@@ -15,6 +15,7 @@ gem "jbuilder"
 gem "importmap-rails"
 gem 'mapbox-sdk', "~> 2.3", ">= 2.3.3"
 gem "pg", "~> 1.1"
+gem 'pg_search'
 gem "puma", "~> 5.0"
 gem "rails", "~> 7.0.8"
 gem "simple_form", github: "heartcombo/simple_form"
@@ -23,7 +24,6 @@ gem "sprockets-rails"
 gem "stimulus-rails"
 gem "turbo-rails"
 gem "tzinfo-data", platforms: %i[ mingw mswin x64_mingw jruby ]
-
 # "OpenAI"
 gem "openai", "~> 0.2.0"
 gem "ruby-openai", "~> 5.1"
