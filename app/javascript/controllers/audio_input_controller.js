@@ -70,25 +70,16 @@ export default class extends Controller {
     })
     .then(response => response.json())
     .then(data => {
-      console.log("Returned data from server:", data);
-      const itemList = document.querySelector('#cart-items-list');
-      itemList.innerHTML = ''; // Clear the current list
-
-      // Check if 'processed_order' exists and is an array
       if (data.processed_order && Array.isArray(data.processed_order)) {
-        data.processed_order.forEach(item => {
-          const listItem = document.createElement('li');
-          listItem.textContent = `Item: ${item.name}, Quantity: ${item.quantity}`;
-          itemList.appendChild(listItem);
-        });
+        // Redirect to cart item creation page, assuming you store processed_order in the session or send it through params
+        window.location.href = "/cart_items/display_cart_items";
       } else {
-        const errorItem = document.createElement('li');
-        errorItem.textContent = 'Error processing items.';
-        itemList.appendChild(errorItem);
+        console.log('Error processing items.');
       }
     })
     .catch(error => {
       console.log("Order processing failed:", error);
     });
   }
+
 }

@@ -11,6 +11,7 @@ Rails.application.routes.draw do
     collection do
       post 'process_audio'
       post 'process_order'
+      get 'display_cart_items'
     end
   end
 end
