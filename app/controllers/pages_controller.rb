@@ -10,5 +10,9 @@ class PagesController < ApplicationController
         info_window_html: render_to_string(partial: "popup", locals: { user: user})
       }
     end
+    if current_user
+      @user_address = current_user.address
+    end
   end
+
 end
