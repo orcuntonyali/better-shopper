@@ -1,21 +1,31 @@
-<h1>Pages#home</h1>
 
-<p style="color: green"><%= notice %></p>
+<body>
+  <div class="app-content">
+    <div class="welcome-box">
+      <h1 data-controller="welcome" data-welcome-user-signed-in="<%= user_signed_in? %>"
+         data-welcome-username="<%= user_signed_in? ? current_user.name : '' %>">
+        Welcome <%= user_signed_in? ? 'back,' : 'to' %><br>
+        <span data-welcome-target="welcomeBox.userName"><%= user_signed_in? ? current_user.name : '' %></span>
+      </h1>
+    </div>
 
-<div id='map'
-     style="width: 100%; height: 400px;"
-     data-controller="map"
-     data-map-markers-value="<%= @markers.to_json %>"
-     data-map-api-key-value="<%= ENV['MAPBOX_API_KEY'] %>">
-</div>
+    <div id='map'
+      data-controller="map"
+      data-map-markers-value="<%= @markers.to_json %>"
+      data-map-api-key-value="<%= ENV['MAPBOX_API_KEY'] %>">
+    </div>
 
+    <div class="user-details" data-user-address="<%= @user_address %>">
+      <p data-target="userAddress.address">
+        <%= @user_address %>
+      </p>
+    </div>
 
-<div>
-  <% banana_items = Item.where(name: 'banana') %>
-  <% banana_items.each do |item| %>
-    <p>
-      <%= "Name: #{item.name}, Price: #{item.unit_price}, Store: #{item.store.name}" %><br>
-      <%= image_tag item.image_url, alt: "#{item.name} image", width: "100" %>
-    </p>
-  <% end %>
-</div>
+    <div class="buttons" data-controller="buttons">
+      <a href="#" data-action="click->buttons#changeAddress" data-button-type="change-address"
+         class="change-address-button">CHANGE ADDRESS</a>
+      <a href="#" data-action="click->buttons#lookingGood" data-button-type="looking-good"
+         class="looking-good-button">LOOKING GOOD</a>
+    </div>
+  </div>
+</body>
