@@ -1,2 +1,51 @@
-<h1><%= @item.name %></h1>
-<p><%= @item.unit_price %></p>
+<%# app/views/items/show.html.erb %>
+
+<div class="container">
+  <div class="item-details" data-controller="items">
+    <h1><%= "Item ID: #{@item.id} - Purchase Options" %></h1>
+    <div class="image-container" data-action="click->items#changeImage" data-image-url="<%= @item.image_url %>" data-items-target="image">
+      <% if @item.image_url.present? %>
+        <img src="<%= @item.image_url %>" alt="<%= @item.name %>" />
+      <% else %>
+        <!-- Display a placeholder image or message when no image is available -->
+        <p data-items-target="item">No image available</p>
+      <% end %>
+    </div>
+
+    <div class="purchase-options">
+      <div class="purchase-option" data-items-target="firstOption">
+        <div class="store-name">Edeka XYZ</div>
+        <div class="discount">41%</div>
+        <div class="price">2.41 €</div>
+        <input type="checkbox" data-action="change->items#selectOption" data-items-target="checkbox" />
+      </div>
+      <div class="purchase-option" data-items-target="secondOption">
+        <div class="store-name">Rewe XYZ</div>
+        <div class="discount">35%</div>
+        <div class="price">2.63 €</div>
+        <input type="checkbox" data-action="change->items#selectOption" data-items-target="checkbox" />
+      </div>
+      <div class="purchase-option" data-items-target="thirdOption">
+        <div class="store-name">Penny1 XYZ</div>
+        <div class="discount">27%</div>
+        <div class="price">2.80 €</div>
+        <input type="checkbox" data-action="change->items#selectOption" data-items-target="checkbox" />
+      </div>
+      <div class="purchase-option" data-items-target="fourthOption">
+        <div class="store-name">Penny2 XYZ</div>
+        <div class="discount">21%</div>
+        <div class="price">2.99 €</div>
+        <input type="checkbox" data-action="change->items#selectOption" data-items-target="checkbox" />
+      </div>
+      <div class="purchase-option" data-items-target="fifthOption">
+        <div class="store-name">Penny3 AB</div>
+        <div class="discount">18%</div>
+        <div class="price">2.99 €</div>
+        <input type="checkbox" data-action="change->items#selectOption" data-items-target="checkbox" />
+      </div>
+      <!-- Include other purchase options here -->
+    </div>
+
+    <button class="confirm-button">CONFIRM SELECTION</button>
+  </div>
+</div>
