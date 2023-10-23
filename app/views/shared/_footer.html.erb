@@ -1,0 +1,21 @@
+<nav class="navbar footer navbar-expand-sm">
+  <div class="footer-nav">
+    <%= link_to root_path, class: "nav-item nav-link active" do %>
+      <i class="fas fa-house fa-lg fa-2x"></i>
+    <% end %>
+    <%= link_to orders_path, class: "nav-item nav-link active" do %>
+      <i class="fas fa-user fa-lg fa-2x"></i>
+    <% end %>
+    <%= link_to cart_items_path, class: "nav-item nav-link active" do %>
+      <i class="fas fa-shopping-cart fa-lg fa-2x"></i>
+    <% end %>
+  </div>
+</nav>
+
+
+<!-- Home Page -->
+<%# Path: app/views/home/index.html.erb %>
+<!-- Orders page -->
+<%# Path: app/views/orders/index.html.erb %>
+<!-- Cart page -->
+<%# Path: app/views/cart_items/index.html.erb %>

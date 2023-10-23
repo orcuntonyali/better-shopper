@@ -7,10 +7,12 @@
 
 <% @items.each do |item| %>
   <div class="item-card">
-    <img class='align-self-center mr-3' src="<%= item.image_url %>" alt="<%= item.name %> image" width="100">
+    <img class='align-self-center mr-3' src="<%= item.image_url %>" alt="<%= item.name %> image" width="80">
     <div class="item-card-text">
       <h5 class="mt-0"><%= link_to item.name, item_path(item), class: 'no-decoration' %></h5>
-      <p>From <%= item.store.name %></p>
+      <div class="truncate-text" data-max-length="15">
+        <p>From <%= item.store.name %></p>
+      </div>
       <p>€<%= item.unit_price %></p>
     </div>
     <div class="quantity-button">
