@@ -5,7 +5,12 @@ Rails.application.routes.draw do
   # RESTful routes for resources
   resources :stores, only: [:index]
   resources :items
-  resources :orders do
-    resources :cart_items, only: [:new, :show, :create, :update, :destroy]
+  resources :orders
+
+  resources :cart_items, only: [:new, :show, :create, :update, :destroy] do
+    collection do
+      post 'process_audio'
+      post 'process_order'
+    end
   end
 end

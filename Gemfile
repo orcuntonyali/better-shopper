@@ -8,7 +8,7 @@ gem "autoprefixer-rails"
 gem "bootsnap", require: false
 gem "bootstrap", "~> 5.2"
 gem "devise"
-gem 'dotenv'
+gem "dotenv"
 gem "font-awesome-sass", "~> 6.1"
 gem "geocoder"
 gem "jbuilder"
@@ -23,6 +23,10 @@ gem "sprockets-rails"
 gem "stimulus-rails"
 gem "turbo-rails"
 gem "tzinfo-data", platforms: %i[ mingw mswin x64_mingw jruby ]
+
+# "OpenAI"
+gem "openai", "~> 0.2.0"
+gem "ruby-openai", "~> 5.1"
 
 # gem "redis", "~> 4.0"
 # gem "kredis"
