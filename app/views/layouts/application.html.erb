@@ -10,18 +10,18 @@
 
     <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
     <link href="https://api.mapbox.com/mapbox-gl-js/v2.14.1/mapbox-gl.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/v5.0.0/mapbox-gl-geocoder.css" type="text/css">
+
     <%= javascript_importmap_tags %>
   </head>
 
   <body>
     <div class="d-flex justify-content-center align-items-center" style="min-height: 100vh;">
-      <div class="row justify-content-center">
-        <div class="col-12 bg-white" style="position: relative; width: 360px; height: 800px; overflow-y: hidden; overflow-x: hidden;">
-          <%= render "shared/navbar" %>
-          <%= render "shared/flashes" %>
-          <%= yield %>
-          <%= render "shared/footer" %>
-        </div>
+      <div class="col-12" style="position: relative; width: 360px; height: 800px; overflow-y: hidden; overflow-x: hidden;">
+        <%= render "shared/navbar" %>
+        <%= render "shared/flashes" %>
+        <%= yield %>
+        <%= render "shared/footer" %>
       </div>
     </div>
   </body>
