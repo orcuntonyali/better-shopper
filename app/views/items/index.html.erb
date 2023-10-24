@@ -1,5 +1,7 @@
 <%= javascript_include_tag 'controllers/items' %>
 
+DON'T USE THIS PAGE
+
 <div class="button-container">
   <button class="violet-button">+ ADD ITEMS</button>
   <button class="violet-button">CHECKOUT</button>
@@ -12,8 +14,9 @@
       <h5 class="mt-0"><%= link_to item.name, item_path(item), class: 'no-decoration' %></h5>
       <div class="truncate-text" data-max-length="15">
         <p>From <%= item.store.name %></p>
+        <p>€<%= item.unit_price %></p>
       </div>
-      <p>€<%= item.unit_price %></p>
+      
     </div>
     <div class="quantity-button">
       <button class="minus-plus" data-item-id="<%= item.id %>" data-action="decrement">-</button>
