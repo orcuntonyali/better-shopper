@@ -12,8 +12,8 @@
   color: black; 
   border: 1.9px solid #6200EE;
   border-radius: 30px;
-  width: 70px; /* Set a fixed width */
-  height: 31px; /* Set a fixed height */
+  width: 70px !important; /* Set a fixed width */
+  height: 30px; /* Set a fixed height */
 
   &:hover {
     background-color: #6200EE;
@@ -52,7 +52,6 @@
   display: inline-block;
   cursor: pointer;
 }
-
 
 .centered-button {
   display: flex;

@@ -8,6 +8,7 @@
 .app-content {
    background-color: #bfe4ff;
    position: relative;
+   height: 100%;
 }
 
 
@@ -15,8 +16,7 @@
   background-color: none;
   border-style: none;
   border-radius: 5px;
-  max-width: 300px;
-  margin: 10px auto;
+  width: 100%;
   padding: 20px;
   text-align: center;
 }
