@@ -8,13 +8,15 @@
     <% @processed_items.each do |item| %>
       <div class="item-card">
         <img class='align-self-center mr-3' src="<%= item['image_url'] %>" alt="<%= item['name'] %> image" width="100">
-        <div class="item-card-text">
-          <h5 class="mt-0 no-decoration"><%= item['name'].capitalize %></h5>
-          <div class="truncate-text" data-max-length="15">
-            <p>From <%= item['store'] %></p>
-            <p>€<%= item['price'] %></p>
+        <a href="<%= item_path(id: item['id']) %>" class="no-decoration">
+          <div class="item-card-text">
+            <h5 class="mt-0 no-decoration"><%= item['name'].capitalize %></h5>
+            <div class="truncate-text" data-max-length="15">
+              <p>From <%= item['store'] %></p>
+              <p>€<%= item['price'] %></p>
+            </div>
           </div>
-        </div>
+        </a>
         <div class="quantity-button">
           <button class="minus-plus" data-item-id="<%= item['id'] %>" data-action="decrement">-</button>
           <span id="quantity_<%= item['id'] %>"><%= item['quantity'] %></span>
@@ -37,5 +39,5 @@
 
 <div class="button-container">
   <%= link_to '+ ADD ITEMS', new_cart_item_path, class: 'violet-button' %>
-  <button class="violet-button">CHECKOUT</button> 
+  <button class="violet-button">CHECKOUT</button>
 </div><br>

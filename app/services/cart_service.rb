@@ -22,6 +22,7 @@ class CartService
 
       if cheapest_item.present?
         cheapest_items << {
+          'id' => cheapest_item.id,
           'name' => cheapest_item.name,
           'price' => cheapest_item.unit_price.to_f,
           'quantity' => item_quantity,
