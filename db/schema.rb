@@ -57,6 +57,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_10_16_141207) do
     t.string "encrypted_password", default: "", null: false
     t.float "latitude"
     t.float "longitude"
+    t.float "max_distance", default: 5.0
     t.string "reset_password_token"
     t.datetime "reset_password_sent_at"
     t.datetime "remember_created_at"

@@ -14,7 +14,8 @@ User.create!(name: 'Mark',
              password: '123456',
              address: 'Rudi-Dutschke-Straße 26, 10969 Berlin',
              latitude: 52.506931,
-             longitude: 13.391634
+             longitude: 13.391634,
+             max_distance: 15.0,
              )
 
 # Create Stores with their real-world information
