@@ -45,7 +45,7 @@ class OpenaiService
   def self.prompt_details
     <<-HEREDOC
       1 Listen to filter the item and quantity information from a grocery order
-      2 If the input is not in English, translate and then process
+      2 If the input is not in American English, translate and then process
       3 Create a JSON response only similar to:
         {
           "cart_items": [
@@ -55,7 +55,7 @@ class OpenaiService
           ]
         }
       4 with no duplicates names
-      5 with names always singular and always in English and 2 words max
+      5 with names always singular and always in American English and 2 words max
       6 with Quantity is integer and >= 1
       7 If it's an empty JSON response, return an error message
     HEREDOC
