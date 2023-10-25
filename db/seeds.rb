@@ -103,7 +103,7 @@ stores = Store.all
 
 items_with_images.each do |item_name, image_url|
   stores.each do |store|
-    Item.create!(name: item_name, image_url: image_url, store: store, unit_price: rand(1.0..5.0).round(2))
+    Item.create!(name: item_name, image_url: image_url, store: store, unit_price: rand(1.0..3.5).round(2))
     puts "Created #{item_name}, #{store.name}"
   end
 end
