@@ -1,8 +1,9 @@
 <%# app/views/items/show.html.erb %>
+<% @navbar_text = "#{@item.name.capitalize} - Purchase options" %>
+<%= render "shared/navbar" %>
 
 <div class="container">
   <div class="item-details" data-controller="items">
-    <h1><%= "Item ID: #{@item.id} - Purchase Options" %></h1>
     <div class="image-container" data-action="click->items#changeImage" data-image-url="<%= @item.image_url %>" data-items-target="image">
       <% if @item.image_url.present? %>
         <img src="<%= @item.image_url %>" alt="<%= @item.name %>" />

@@ -1,27 +1,39 @@
+.cards-container {
+  margin-top: 1.5rem;
+}
+
 .item-card {
   display: flex;
   align-items: center;
-  margin: 1rem;
+  padding-left: 1.2rem;
+  padding-right: 1.2rem;
+  padding-top: 0.5rem;
+  // padding-bottom: 0.3rem;
+}
+
+.item-card-text p {
+  color: #555555;
+  font-size: 0.9rem;
 }
 
 .item-card-text {
   flex: 1;
-  padding: 0 1rem;
+  padding: 0.5rem;
 }
 
-.ellipsis { // truncate text
+.ellipsis { 
   cursor: pointer;
   color: #000000;
   font-weight: bold;
 }
 
-
 p {
-  font-size: 0.9rem;
+  font-size: 0.8rem;
 }
+
 
 .no-decoration {
   text-decoration: none;
   color: black;
-  text-transform: capitalize;
+  text-transform: capitalize !important;
 }
