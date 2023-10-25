@@ -10,15 +10,16 @@ DON'T USE THIS PAGE
 <% @items.each do |item| %>
   <div class="item-card">
     <img class='align-self-center mr-3' src="<%= item.image_url %>" alt="<%= item.name %> image" width="80">
-    <div class="item-card-text">
-      <h5 class="mt-0"><%= link_to item.name, item_path(item), class: 'no-decoration' %></h5>
-      <div class="truncate-text" data-max-length="15">
-        <p>From <%= item.store.name %></p>
-        <p>€<%= item.unit_price %></p>
-      </div>
-      
-    </div>
-    <div class="quantity-button">
+    <a href="<%= item_path(item) %>" class="no-decoration">
+       <div class="item-card-text">
+        <h5 class="mt-0 "><%= item.name %></h5>
+          <div class="truncate-text" data-max-length="15">
+           <p>From <%= item.store.name %></p>
+           <p>€<%= item.unit_price %></p>
+          </div>
+        </div>
+      </a>
+    <div class="ml-auto quantity-button">
       <button class="minus-plus" data-item-id="<%= item.id %>" data-action="decrement">-</button>
       <span id="quantity_<%= item.id %>">1</span>
       <button class="minus-plus" data-item-id="<%= item.id %>" data-action="increment">+</button>

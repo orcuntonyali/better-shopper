@@ -2,14 +2,15 @@
   display: flex;
   align-items: center;
   padding: 1px;
+  margin-left: auto;
   margin: 1px;
   text-align: center;
   text-decoration: none;
   display: inline-block;
   font-size: 16px;
   cursor: pointer;
-  background-color: white; 
-  color: black; 
+  background-color: white;
+  color: black;
   border: 1.9px solid #6200EE;
   border-radius: 30px;
   width: 70px !important; /* Set a fixed width */
@@ -39,7 +40,7 @@
   display: flex;
   padding: 6px;
   margin: 20px;
-  color: white; 
+  color: white;
   background-color: #6200EE;
   border-radius: 6px;
   border-style: none;
@@ -62,7 +63,7 @@
   display: flex;
   padding: 6px;
   margin: 20px;
-  color: white; 
+  color: white;
   background-color: #6200EE;
   border-radius: 6px;
   border-style: none;
