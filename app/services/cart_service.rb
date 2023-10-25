@@ -1,5 +1,5 @@
 class CartService
-  def self.process_order(processed_order)
+  def self.process_order(processed_order) # add user_location later
     cheapest_items = []
     not_found_items = []
 
@@ -8,10 +8,17 @@ class CartService
       item_quantity = order_item['quantity']
 
       # Using pg_search scope for partial and fuzzy match
-      matching_items = Item.search_by_name(item_name)
+      matching_items = Item.search_by_name(item_name).to_a
 
-      # Sorting the matching items by price and picking the cheapest one
-      cheapest_item = matching_items.order(:unit_price).first
+      # Placeholder for sorting by proximity logic (to be implemented later)
+      # For now, it has no effect
+      # matching_items = sort_by_proximity(matching_items, user_location)
+
+      # Sorting the items by unit price
+      sorted_items = matching_items.sort_by { |item| item.unit_price }
+
+      # Picking the cheapest item
+      cheapest_item = sorted_items.first
 
       if cheapest_item.present?
         cheapest_items << {
@@ -35,5 +42,11 @@ class CartService
       'cheapest_items' => cheapest_items,
       'not_found_message' => not_found_message
     }
+  end
+
+  # Placeholder for proximity sorting method
+  def self.sort_by_proximity(matching_items, user_location)
+    # TODO: Implement proximity sorting logic
+    matching_items
   end
 end
