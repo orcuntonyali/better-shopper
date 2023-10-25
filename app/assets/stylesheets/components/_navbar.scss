@@ -1,12 +1,11 @@
-.navbar-lewagon {
-  justify-content: space-between;
-  background: white;
-}
-
-.navbar-lewagon .navbar-collapse {
-  flex-grow: 0;
-}
-
-.navbar-lewagon .navbar-brand img {
-  width: 40px;
+.violet-navbar {
+  background-color: #6200EE;
+  width: 100%;
+  height: 60px;
+  color: #FFFFFF;
+  font-size: 17px;
+  font-weight: bold;
+  text-align: left;
+  padding-left: 25px;
+  line-height: 60px;
 }
