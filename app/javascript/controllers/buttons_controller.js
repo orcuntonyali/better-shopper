@@ -29,4 +29,9 @@ export default class extends Controller {
       window.location.href = "/cart_items/new";
     }
   }
+
+    // Redirect to the items_path
+    confirmSelection() {
+      window.location.href = "<%= items_path %>";
+    }
 }
