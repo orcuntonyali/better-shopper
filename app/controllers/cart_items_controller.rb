@@ -28,12 +28,15 @@ class CartItemsController < ApplicationController
     processed_order = session[:processed_order]
 
     # Initialize CartService with the user's latitude and longitude
-    cart_service = CartService.new(latitude: latitude, longitude: longitude)
+    cart_service = CartService.new(latitude:, longitude:)
 
     # Pass max_distance and processed_order to the service
     service_result = cart_service.process_order(processed_order, max_distance)
     @processed_items = service_result['cheapest_items']
     @not_found_message = service_result['not_found_message']
+  end
+
+  def create
   end
 
   def show
