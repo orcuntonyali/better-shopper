@@ -20,11 +20,23 @@ class CartItemsController < ApplicationController
   end
 
   def display_cart_items
+    user = User.find(current_user.id)
+    latitude = user.latitude
+    longitude = user.longitude
+    max_distance = user.max_distance
+
     processed_order = session[:processed_order]
-    service_result = CartService.process_order(processed_order)
+
+    # Initialize CartService with the user's latitude and longitude
+    cart_service = CartService.new(latitude:, longitude:)
+
+    # Pass max_distance and processed_order to the service
+    service_result = cart_service.process_order(processed_order, max_distance)
     @processed_items = service_result['cheapest_items']
     @not_found_message = service_result['not_found_message']
-    Rails.logger.debug "Debugging @processed_items: #{@processed_items.inspect}"
+  end
+
+  def create
   end
 
   def show

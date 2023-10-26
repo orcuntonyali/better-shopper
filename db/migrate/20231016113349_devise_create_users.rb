@@ -10,6 +10,7 @@ class DeviseCreateUsers < ActiveRecord::Migration[7.0]
       ## Location fields
       t.float :latitude
       t.float :longitude
+      t.float :max_distance, default: 5.0
 
       ## Recoverable
       t.string   :reset_password_token

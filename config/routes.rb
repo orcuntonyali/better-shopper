@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
-  devise_for :users
+  devise_for :users, controllers: { registrations: 'users/registrations' }
+  post 'set_max_distance', to: 'users/registrations#set_max_distance'
   root "pages#home"
 
   # RESTful routes for resources

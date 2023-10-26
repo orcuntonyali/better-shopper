@@ -1,43 +1,19 @@
 class CartService
-  def self.process_order(processed_order) # add user_location later
+  def initialize(latitude:, longitude:)
+    @latitude = latitude
+    @longitude = longitude
+  end
+
+  def process_order(processed_order, max_distance)
     cheapest_items = []
     not_found_items = []
+    stores_within_distance = find_stores_within_distance(max_distance)
 
     processed_order.each do |order_item|
-      item_name = order_item['name']
-      item_quantity = order_item['quantity']
-
-      # Using pg_search scope for partial and fuzzy match
-      matching_items = Item.search_by_name(item_name).to_a
-
-      # Placeholder for sorting by proximity logic (to be implemented later)
-      # For now, it has no effect
-      # matching_items = sort_by_proximity(matching_items, user_location)
-
-      # Sorting the items by unit price
-      sorted_items = matching_items.sort_by { |item| item.unit_price }
-
-      # Picking the cheapest item
-      cheapest_item = sorted_items.first
-
-      if cheapest_item.present?
-        cheapest_items << {
-          'id' => cheapest_item.id,
-          'name' => cheapest_item.name,
-          'price' => cheapest_item.unit_price.to_f,
-          'quantity' => item_quantity,
-          'store' => cheapest_item.store.name,
-          'image_url' => cheapest_item.image_url
-        }
-      else
-        # Accumulating names of not found items
-        not_found_items << item_name
-      end
+      process_single_order_item(order_item, cheapest_items, not_found_items, stores_within_distance)
     end
 
-    if not_found_items.any?
-      not_found_message = "The following items couldn't be found:\n* " + not_found_items.join(",\n* ")
-    end
+    not_found_message = build_not_found_message(not_found_items)
 
     {
       'cheapest_items' => cheapest_items,
@@ -45,9 +21,58 @@ class CartService
     }
   end
 
-  # Placeholder for proximity sorting method
-  def self.sort_by_proximity(matching_items, user_location)
-    # TODO: Implement proximity sorting logic
-    matching_items
+  private
+
+  def process_single_order_item(order_item, cheapest_items, not_found_items, stores_within_distance)
+    cheapest_item, item_name = find_cheapest_item(order_item, stores_within_distance)
+
+    if cheapest_item
+      cheapest_items << format_cheapest_item(cheapest_item, order_item['quantity'])
+    else
+      not_found_items << item_name
+    end
+  end
+
+  def find_stores_within_distance(max_distance)
+    # Fetch stores within the given distance
+    Store.near([@latitude, @longitude], max_distance, units: :km).to_a
+  end
+
+  def find_cheapest_item(order_item, stores_within_distance)
+    return [nil, order_item['name']] if stores_within_distance.nil? || !stores_within_distance.respond_to?(:map)
+
+    item_name = order_item['name']
+    return [nil, item_name] if item_name.nil?
+
+    store_ids = stores_within_distance.map(&:id)
+    puts "Store IDs: #{store_ids}"
+
+    matching_items = Item.joins(:store).where(stores: { id: store_ids }).search_by_name(item_name).to_a
+    puts "Matching items: #{matching_items}"
+
+    return [nil, item_name] if matching_items.empty?
+
+    sorted_items = matching_items.sort_by do |item|
+      item.respond_to?(:unit_price) ? item.unit_price : Float::INFINITY
+    end
+
+    [sorted_items.first, item_name]
+  end
+
+  def format_cheapest_item(cheapest_item, item_quantity)
+    {
+      'id' => cheapest_item.id,
+      'name' => cheapest_item.name,
+      'price' => cheapest_item.unit_price.to_f,
+      'quantity' => item_quantity,
+      'store' => cheapest_item.store.name,
+      'image_url' => cheapest_item.image_url
+    }
+  end
+
+  def build_not_found_message(not_found_items)
+    return unless not_found_items.any?
+
+    "The following items couldn't be found:\n* #{not_found_items.join(",\n* ")}"
   end
 end
