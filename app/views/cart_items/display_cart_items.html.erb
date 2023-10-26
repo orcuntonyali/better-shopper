@@ -1,5 +1,3 @@
-<%= javascript_include_tag 'controllers/items' %>
-
 <% @navbar_text = "Taking your order" %>
 <%= render "shared/navbar" %>
 
@@ -7,20 +5,20 @@
   <div class="cards-container">
     <% @processed_items.each do |item| %>
       <div class="item-card">
-        <img class='align-self-center mr-3' src="<%= item['image_url'] %>" alt="<%= item['name'] %> image" width="100">
+        <img class='align-self-center mr-3' src="<%= item['image_url'] %>" alt="<%= item['name'] %> image" width="90">
         <a href="<%= item_path(id: item['id']) %>" class="no-decoration">
           <div class="item-card-text">
             <h5 class="mt-0 no-decoration"><%= item['name'].capitalize %></h5>
-            <div class="truncate-text" data-max-length="15">
-              <p>From <%= item['store'] %></p>
-              <p>€<%= item['price'] %></p>
-            </div>
+              <div>
+                <p>From <%= item['store'] %></p>
+                <p> €<%= item['price'] %></p>
+              </div>
           </div>
-        </a>
-        <div class="quantity-button">
-          <button class="minus-plus" data-item-id="<%= item['id'] %>" data-action="decrement">-</button>
-          <span id="quantity_<%= item['id'] %>"><%= item['quantity'] %></span>
-          <button class="minus-plus" data-item-id="<%= item['id'] %>" data-action="increment">+</button>
+        </a> 
+        <div class="quantity-button" data-controller="minus-plus">
+          <button class="minus-plus" data-action="click->minus-plus#decrement" data-item-id="<%= item['id'] %>">-</button>
+          <span id="quantity_<%= item['id'] %>" data-minus-plus-target="quantity"><%= item['quantity'] %></span>
+          <button class="minus-plus" data-action="click->minus-plus#increment" data-item-id="<%= item['id'] %>">+</button>
         </div>
       </div>
     <% end %>
