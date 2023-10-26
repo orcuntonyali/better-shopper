@@ -39,6 +39,6 @@ class CartItemsController < ApplicationController
   def create
   end
 
-  def show
+  def update
   end
 end

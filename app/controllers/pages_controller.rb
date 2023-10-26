@@ -1,18 +1,46 @@
 class PagesController < ApplicationController
-  skip_before_action :authenticate_user!, only: [ :home ]
+  before_action :authenticate_user!, except: [:home]
+  before_action :initialize_markers, only: [:home]
+  before_action :redirect_unauthenticated_user, only: [:home]
 
   def home
-    @users = User.all
-    @markers = @users.map do |user|
-      {
-        lat: user.latitude,
-        lng: user.longitude,
-        info_window_html: render_to_string(partial: "popup", locals: { user: user})
+    add_user_marker
+    add_nearby_stores_markers
+    @user_address = current_user.address if current_user
+  end
+
+  private
+
+  def initialize_markers
+    @markers = []
+  end
+
+  def redirect_unauthenticated_user
+    redirect_to new_user_session_path unless current_user
+  end
+
+  def add_nearby_stores_markers
+    return unless current_user
+
+    nearby_stores = Store.near([current_user.latitude, current_user.longitude], current_user.max_distance)
+    nearby_stores.each do |store|
+      @markers << {
+        lat: store.latitude,
+        lng: store.longitude,
+        info_window_html: render_to_string(partial: "store_popup", locals: { store: }),
+        marker_color: 'gray'
       }
-    end
-    if current_user
-      @user_address = current_user.address
     end
   end
 
+  def add_user_marker
+    return unless current_user
+
+    @markers << {
+      lat: current_user.latitude,
+      lng: current_user.longitude,
+      info_window_html: render_to_string(partial: "user_popup", locals: { user: current_user }),
+      marker_color: 'blue'
+    }
+  end
 end

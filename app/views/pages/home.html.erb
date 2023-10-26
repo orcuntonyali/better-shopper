@@ -15,7 +15,9 @@
     <div id='map'
       data-controller="map"
       data-map-markers-value="<%= @markers.to_json %>"
-      data-map-api-key-value="<%= ENV['MAPBOX_API_KEY'] %>">
+      data-map-api-key-value="<%= ENV['MAPBOX_API_KEY'] %>"
+      data-user-latitude="<%= current_user.latitude %>"
+      data-user-longitude="<%= current_user.longitude %>">
     </div>
 
     <div class="user-details" data-user-address="<%= @user_address %>">
@@ -32,5 +34,4 @@
       <a href="#" data-action="click->buttons#nowLookingGood" data-button-type="now-looking-good"
         class="now-looking-good-button" style="display: none">NOW LOOKING GOOD</a>
     </div>
-
   </div>
