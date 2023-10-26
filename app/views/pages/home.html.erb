@@ -1,15 +1,17 @@
 
   <div class="app-content">
     <div class="welcome-box">
-      <h1 data-controller="welcome" data-welcome-target="messageContent">
-        Welcome <%= user_signed_in? ? 'back,' : 'to' %><br>
-        <span data-welcome-target="welcomeBox.userName"><%= user_signed_in? ? current_user.name : '' %></span>
+      <h1>
+        Welcome <%= user_signed_in? ? "back, #{current_user.name}" : "to the app" %>
       </h1>
+      <% if user_signed_in? %>
+        <p>Your address is: <%= current_user.address %></p>
+      <% end %>
     </div>
 
     <div class="updating-your-address"
-    data-controller="welcome" data-target="messageContent" style="display: none">
-                Updating your Address...
+      data-controller="welcome" data-target="messageContent" style="display: none">
+      Updating your Address...
     </div>
 
     <div id='map'
