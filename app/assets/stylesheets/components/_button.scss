@@ -76,3 +76,47 @@
   display: inline-block;
   cursor: pointer;
 }
+
+.buttons {
+  margin: 20px 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.change-address-button,
+.looking-good-button,
+.now-looking-good-button {
+  display: flex;
+  padding: 6px;
+  margin: 6px 0;
+  color: white;
+  border-radius: 6px;
+  width: 170px;
+  text-align: center;
+  font-size: 14px;
+  text-decoration: none;
+  display: inline-block;
+  cursor: pointer;
+  transition: border 0.3s;
+}
+
+.change-address-button {
+  background-color: grey;
+  border: none;
+  outline: none;
+}
+
+.looking-good-button {
+  background-color: #6200EE;
+  border: none;
+  outline: none;
+  margin-bottom: 50px;
+}
+
+.now-looking-good-button {
+  background-color: #6200EE;
+  border: none;
+  outline: none;
+  margin-top: 50px;
+}
