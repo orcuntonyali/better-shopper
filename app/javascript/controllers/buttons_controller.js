@@ -54,6 +54,7 @@ export default class extends Controller {
       if (data.status === 'success') {
         // Handle successful update of max distance
         alert("Max distance has been updated.");
+        console.log(`Max Distance is: ${value}`);
       } else {
         // Handle failure to update max distance
         alert("An error occurred. Could not update max distance.");
@@ -69,3 +70,4 @@ export default class extends Controller {
     }
   }
 }
+

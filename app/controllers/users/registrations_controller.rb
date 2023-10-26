@@ -9,6 +9,15 @@ module Users
       puts "Debugging user location: #{current_user.location}"
     end
 
+    def set_max_distance
+      if user_signed_in?
+        current_user.update(max_distance: params[:max_distance])
+        render json: { status: 'success', max_distance: params[:max_distance] }
+      else
+        render json: { status: 'failure', message: 'User not signed in' }, status: 401
+      end
+    end
+
     protected
 
     def configure_permitted_parameters
