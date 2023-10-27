@@ -1,13 +1,11 @@
 
   <div class="app-content">
 
+    <%= button_to "Logout", destroy_user_session_path, method: :delete %>
+
     <div class="welcome-box">
-      <h1>
-        Welcome <%= user_signed_in? ? "back, #{current_user.name}" : "to the app" %>
-      </h1>
-      <% if user_signed_in? %>
-        <p>Your address is: <%= current_user.address %></p>
-      <% end %>
+      <h1>Welcome back, <%= current_user.name %></h1>
+      <p>Your address is: <%= current_user.address %></p>
     </div>
 
     <div class="updating-your-address"
@@ -29,12 +27,11 @@
       </p>
     </div>
 
-    <div class="buttons" data-controller="buttons">
-      <a href="#" data-action="click->buttons#changeAddress" data-button-type="change-address"
-        class="change-address-button">CHANGE ADDRESS</a>
-      <a href="#" data-action="click->buttons#lookingGood" data-button-type="looking-good"
-        class="looking-good-button">LOOKING GOOD</a>
-      <a href="#" data-action="click->buttons#nowLookingGood" data-button-type="now-looking-good"
-        class="now-looking-good-button" style="display: none">NOW LOOKING GOOD</a>
-    </div>
+   <div class="buttons d-flex flex-column" data-controller="buttons">
+    <a href="#" data-action="click->buttons#changeAddress" data-button-type="change-address" class="gray-button">CHANGE ADDRESS</a>
+    <a href="#" data-action="click->buttons#lookingGood" data-button-type="looking-good" class="violet-button">LOOKING GOOD</a>
+    <a href="#" data-action="click->buttons#nowLookingGood" data-button-type="now-looking-good" class="violet-button" style="display: none">NOW LOOKING GOOD</a>
+  </div>
+
+
   </div>

@@ -2,11 +2,6 @@
 
 DON'T USE THIS PAGE
 
-<div class="button-container">
-  <button class="violet-button">+ ADD ITEMS</button>
-  <button class="violet-button">CHECKOUT</button>
-</div><br>
-
 <% @items.each do |item| %>
   <div class="item-card">
     <img class='align-self-center mr-3' src="<%= item.image_url %>" alt="<%= item.name %> image" width="80">

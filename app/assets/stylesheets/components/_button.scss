@@ -1,3 +1,20 @@
+.button {
+  display: flex;
+  padding: 6px;
+  margin: 20px;
+  color: white;
+  border-radius: 6px;
+  border-style: none;
+  outline: none;
+  overflow: hidden;
+  min-width: 120px;
+  text-align: center;
+  font-size: 14px;
+  text-decoration: none;
+  display: inline-block;
+  cursor: pointer;
+}
+
 .quantity-button {
   display: flex;
   align-items: center;
@@ -26,9 +43,12 @@
   }
 }
 
-.minus-plus {
-  border: none;
-  background: none;
+.violet {
+  background-color: #6200EE;
+}
+
+.gray {
+  background-color: grey;
 }
 
 .button-container {
@@ -36,69 +56,24 @@
   justify-content: space-between;
 }
 
-.violet-button {
-  display: flex;
-  padding: 6px;
-  margin: 20px;
-  color: white;
-  background-color: #6200EE;
-  border-radius: 6px;
-  border-style: none;
-  outline: none;
-  overflow: hidden;
-  width: 120px;
-  text-align: center;
-  font-size: 14px;
-  text-decoration: none;
-  display: inline-block;
-  cursor: pointer;
-}
 
 .centered-button {
   display: flex;
   justify-content: center;
 }
 
-.violet-button-confirm-selection {
-  display: flex;
-  padding: 6px;
-  margin: 20px;
-  color: white;
-  background-color: #6200EE;
-  border-radius: 6px;
-  border-style: none;
-  outline: none;
-  overflow: hidden;
-  width: auto;
-  text-align: center;
-  font-size: 14px;
-  text-decoration: none;
-  display: inline-block;
-  cursor: pointer;
-}
-
-.buttons {
-  margin: 20px 0;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
+// .buttons {
+//   margin: 20px 0;
+//   display: flex;
+//   flex-direction: column;
+//   align-items: center;
+// }
 
 .change-address-button,
-.looking-good-button,
-.now-looking-good-button {
-  display: flex;
-  padding: 6px;
+.looking-good-button {
   margin: 6px 0;
-  color: white;
-  border-radius: 6px;
   width: 170px;
   text-align: center;
-  font-size: 14px;
-  text-decoration: none;
-  display: inline-block;
-  cursor: pointer;
-  transition: border 0.3s;
 }
 
 .change-address-button {
@@ -114,9 +89,8 @@
   margin-bottom: 50px;
 }
 
-.now-looking-good-button {
-  background-color: #6200EE;
+
+.minus-plus {
   border: none;
-  outline: none;
-  margin-top: 50px;
+  background: none;
 }
