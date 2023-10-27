@@ -1,6 +1,6 @@
 class PagesController < ApplicationController
   before_action :authenticate_user!, except: [:home]
-  before_action :initialize_markers, only: [:home]
+  before_action :initialize_markers, only: [:setup]
   before_action :redirect_unauthenticated_user, only: [:home]
 
   def home
