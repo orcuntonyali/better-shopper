@@ -1,9 +1,9 @@
 .button {
   display: flex;
-  padding: 6px;
-  margin: 20px;
+  padding: 8px;
+  margin: 8px;
   color: white;
-  border-radius: 6px;
+  border-radius: 8px;
   border-style: none;
   outline: none;
   overflow: hidden;
@@ -15,31 +15,23 @@
   cursor: pointer;
 }
 
-.quantity-button {
-  display: flex;
+.quantity {
   align-items: center;
-  padding: 1px;
-  margin-left: 3px;
+  padding: 12px;
   margin: 1px;
   text-align: center;
   text-decoration: none;
-  display: inline-block;
   font-size: 16px;
-  cursor: pointer;
   background-color: white;
-  color: black;
   border: 1.9px solid #6200EE;
   border-radius: 30px;
-  width: 70px !important; /* Set a fixed width */
-  height: 30px; /* Set a fixed height */
+  width: 70px;
+  height: 30px;
+  cursor: pointer;
 
   &:hover {
     background-color: #6200EE;
     color: white;
-
-    .minus-plus {
-      color: white;
-    }
   }
 }
 
@@ -49,48 +41,4 @@
 
 .gray {
   background-color: grey;
-}
-
-.button-container {
-  display: flex;
-  justify-content: space-between;
-}
-
-
-.centered-button {
-  display: flex;
-  justify-content: center;
-}
-
-// .buttons {
-//   margin: 20px 0;
-//   display: flex;
-//   flex-direction: column;
-//   align-items: center;
-// }
-
-.change-address-button,
-.looking-good-button {
-  margin: 6px 0;
-  width: 170px;
-  text-align: center;
-}
-
-.change-address-button {
-  background-color: grey;
-  border: none;
-  outline: none;
-}
-
-.looking-good-button {
-  background-color: #6200EE;
-  border: none;
-  outline: none;
-  margin-bottom: 50px;
-}
-
-
-.minus-plus {
-  border: none;
-  background: none;
 }

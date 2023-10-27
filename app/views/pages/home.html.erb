@@ -1,37 +1,15 @@
+<script src="https://unpkg.com/@dotlottie/player-component@latest/dist/dotlottie-player.mjs" type="module"></script>
 
-  <div class="app-content">
-
-    <%= button_to "Logout", destroy_user_session_path, method: :delete %>
-
-    <div class="welcome-box">
-      <h1>Welcome back, <%= current_user.name %></h1>
-      <p>Your address is: <%= current_user.address %></p>
-    </div>
-
-    <div class="updating-your-address"
-      data-controller="welcome" data-target="messageContent" style="display: none">
-      Updating your Address...
-    </div>
-
-    <div id='map'
-      data-controller="map"
-      data-map-markers-value="<%= @markers.to_json %>"
-      data-map-api-key-value="<%= ENV['MAPBOX_API_KEY'] %>"
-      data-user-latitude="<%= current_user.latitude %>"
-      data-user-longitude="<%= current_user.longitude %>">
-    </div>
-
-    <div class="user-details" data-user-address="<%= @user_address %>">
-      <p data-target="userAddress.address">
-        <%= @user_address %>
-      </p>
-    </div>
-
-   <div class="buttons d-flex flex-column" data-controller="buttons">
-    <a href="#" data-action="click->buttons#changeAddress" data-button-type="change-address" class="gray-button">CHANGE ADDRESS</a>
-    <a href="#" data-action="click->buttons#lookingGood" data-button-type="looking-good" class="violet-button">LOOKING GOOD</a>
-    <a href="#" data-action="click->buttons#nowLookingGood" data-button-type="now-looking-good" class="violet-button" style="display: none">NOW LOOKING GOOD</a>
+<div class="app-content d-flex justify-content-center">
+  <div>
+    <dotlottie-player src="https://lottie.host/9debb8ff-b5c2-427d-a7ea-22a69122761a/wGneHfmL9S.json" background="transparent"
+                      speed="1" style="width: 300px; height: 300px;" loop autoplay></dotlottie-player>
+  </div>
+  <div class="welcome-box">
+    <h1>Welcome back, <%= current_user.name %></h1>
   </div>
 
-
+  <div class="button-violet">
+    <%= link_to "Go to Setup", setup_path %>
   </div>
+</div>

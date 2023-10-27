@@ -4,6 +4,9 @@ class PagesController < ApplicationController
   before_action :redirect_unauthenticated_user, only: [:home]
 
   def home
+  end
+
+  def setup
     add_user_marker
     add_nearby_stores_markers
     @user_address = current_user.address if current_user

@@ -1,0 +1,35 @@
+  <div class="app-content">
+
+    <%= button_to "Logout", destroy_user_session_path, method: :delete %>
+
+    <div class="welcome-box">
+      <h1>Welcome back, <%= current_user.name %></h1>
+      <p>Your address is: <%= current_user.address %></p>
+    </div>
+
+    <div id='map'
+      data-controller="map"
+      data-map-markers-value="<%= @markers.to_json %>"
+      data-map-api-key-value="<%= ENV['MAPBOX_API_KEY'] %>"
+      data-user-latitude="<%= current_user.latitude %>"
+      data-user-longitude="<%= current_user.longitude %>">
+    </div>
+
+    <div class="d-flex flex-column">
+      <a href="#" data-action="click->buttons#changeAddress" data-button-type="change-address" class="button gray">CHANGE ADDRESS</a>
+      <a href="#" data-action="click->buttons#lookingGood" data-button-type="looking-good" class="button violet">LOOKING GOOD</a>
+      <a href="#" data-action="click->buttons#nowLookingGood" data-button-type="now-looking-good" class="violet-button" style="display: none">NOW LOOKING GOOD</a>
+    </div>
+
+    <div class="updating-your-address"
+      data-controller="welcome" data-target="messageContent" style="display: none">
+      Updating your Address...
+    </div>
+
+    <div class="user-details" data-user-address="<%= @user_address %>">
+      <p data-target="userAddress.address">
+        <%= @user_address %>
+      </p>
+    </div>
+
+  </div>

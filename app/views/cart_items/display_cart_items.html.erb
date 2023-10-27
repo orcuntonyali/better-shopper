@@ -14,11 +14,11 @@
                 <p> €<%= item['price'] %></p>
               </div>
           </div>
-        </a> 
-        <div class="quantity-button" data-controller="minus-plus">
-          <button class="minus-plus" data-action="click->minus-plus#decrement" data-item-id="<%= item['id'] %>">-</button>
-          <span id="quantity_<%= item['id'] %>" data-minus-plus-target="quantity"><%= item['quantity'] %></span>
-          <button class="minus-plus" data-action="click->minus-plus#increment" data-item-id="<%= item['id'] %>">+</button>
+        </a>
+        <div class="d-flex justify-content-between quantity" data-controller="minus-plus">
+          <div data-action="click->minus-plus#decrement" data-item-id="<%= item['id'] %>">-</div>
+          <div id="quantity_<%= item['id'] %>" data-minus-plus-target="quantity"><%= item['quantity'] %></div>
+          <div data-action="click->minus-plus#increment" data-item-id="<%= item['id'] %>">+</div>
         </div>
       </div>
     <% end %>
@@ -35,7 +35,7 @@
   </div>
 <% end %>
 
-<div class="button-container">
-  <%= link_to '+ ADD ITEMS', new_cart_item_path, class: 'violet-button' %>
-  <button class="violet-button">CHECKOUT</button>
-</div><br>
+<div class="d-flex justify-content-between">
+  <%= link_to '+ ADD ITEMS', new_cart_item_path, class: 'button violet' %>
+  <button class="button violet">CHECKOUT</button>
+</div>
