@@ -16,12 +16,12 @@
   </head>
 
   <body>
-    <div class="d-flex justify-content-center align-items-center" style="min-height: 100vh;">
-      <div class="col-12" style="position: relative; width: 360px; height: 800px; overflow-y: hidden; overflow-x: hidden;">
+    <div class="d-flex flex-column justify-content-between align-items-center" style="height: 800px; width: 360px;">
+      <div class="hide" style="overflow-y: scroll; flex-grow: 1; width: 100%;">
         <%= render "shared/flashes" %>
         <%= yield %>
-        <%= render "shared/footer" %>
       </div>
+      <%= render "shared/footer" %>
     </div>
   </body>
 </html>

@@ -10,7 +10,7 @@ puts "Create the master user"
 # Create the master user with default location in Rudi-Dutschke-Straße 26, 10969 Berlin
 User.create!(name: 'Mark',
              surname: 'Schönberger',
-             email: 'bettershopper@bettershopper.com',
+             email: 'mark@bettershopper.com',
              password: '123456',
              address: 'Rudi-Dutschke-Straße 26, 10969 Berlin',
              latitude: 52.506931,
