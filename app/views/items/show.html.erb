@@ -1,7 +1,7 @@
 <% @ribbon_text = "#{@item.name.capitalize} - Purchase options" %>
 <%= render "shared/ribbon" %>
 
-<div class="container">
+<div class="bg-white">
   <div class="item-details" data-controller="items">
     <div class="image-container" data-action="click->items#changeImage" data-image-url="<%= @item.image_url %>" data-items-target="image">
       <% if @item.image_url.present? %>
@@ -23,7 +23,7 @@
     <% end %>
   </div>
 
-<div class="d-flex justify-content-center">
-    <button class="violet-button" data-action="click->buttons#confirmSelection" data-items-url="<%= item_path %>">CONFIRM SELECTION</button>
+  <div class="center-content">
+    <button class="violet button" data-action="click->buttons#confirmSelection" data-items-url="<%= item_path %>">CONFIRM SELECTION</button>
   </div>
 </div>

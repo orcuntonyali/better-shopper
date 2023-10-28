@@ -15,9 +15,9 @@
     <%= javascript_importmap_tags %>
   </head>
 
-  <body>
-    <div class="d-flex flex-column justify-content-between align-items-center" style="height: 800px; width: 360px;">
-      <div class="hide" style="overflow-y: scroll; flex-grow: 1; width: 100%;">
+  <body class="center-content">
+    <div class="main-container">
+      <div class="hide content-div">
         <%= render "shared/flashes" %>
         <%= yield %>
       </div>
