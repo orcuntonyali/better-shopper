@@ -1,60 +1,19 @@
-.item-details {
-  text-align: center;
-  margin-bottom: 20px;
-
-  .image-container {
-    img {
-      max-width: 100%;
-      max-height: 300px;
-      border: none;
-      box-shadow: none;
-      margin-top: 5px;
-    }
-  }
-
-  .purchase-options {
-    display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
-    gap: 10px;
-  }
-
-  .purchase-option {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 10px;
-    border-bottom: 1px solid #ccc;
-      color: grey;
-  cursor: pointer;
-
-  &:hover {
-    color: black;
-  }
+.img-show {
+  width: 100%;
+  object-fit: cover;
 }
 
-  .purchase-option.selected {
+.table-view {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px;
+  border-bottom: 1px solid #ccc;
+  color: grey;
+  cursor: pointer;
+
+    &:hover,
+    &:active {
     color: black;
-  }
-
-  .store-data {
-    flex: 1;
-    text-align: left; /* Left-align store name */
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-  }
-
-  .unit-price {
-    text-align: right;
-  }
-
-  .select-option {
-    text-align: right;
-    margin-left: 10px; /* Add spacing between price and checkbox */
-  }
-
-  .centered-button {
-    text-align: center;
-    margin-top: 20px;
   }
 }

@@ -13,7 +13,7 @@
             <p> €<%= item['price'] %></p>
             </div>
           </a>
-          <div class="space-between quantity" data-controller="minus-plus">
+          <div class="space-between button-quantity" data-controller="minus-plus">
             <div data-action="click->minus-plus#decrement" data-item-id="<%= item['id'] %>">-</div>
             <div id="quantity_<%= item['id'] %>" data-minus-plus-target="quantity"><%= item['quantity'] %></div>
             <div data-action="click->minus-plus#increment" data-item-id="<%= item['id'] %>">+</div>
