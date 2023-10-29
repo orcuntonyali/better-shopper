@@ -1,4 +1,4 @@
-.footer-nav {
+.footer {
   position: sticky;
   width: 100%;
   bottom: 0;
@@ -7,13 +7,30 @@
   padding: 0 20px;
 }
 
-.nav-item-icon {
+.icon-sm {
   justify-content: center;
+  border-radius: 50%;
   background-color: #D9D9D9;
   color: #fff;
   font-size: 1.3em;
-  border-radius: 50%;
   width: 40px;
   height: 40px;
   padding: 15px;
+}
+
+.icon-lg {
+  justify-content: center;
+  border-radius: 50%;
+  background-color: #D9D9D9;
+  color: #fff;
+  font-size: 2em;
+  width: 60px;
+  height: 60px;
+  padding: 15px;
+  cursor: pointer;
+}
+
+.icon-lg:hover,
+.icon-lg:active {
+  background-color: #6200EE;
 }

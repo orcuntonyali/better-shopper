@@ -7,38 +7,40 @@ export default class extends Controller {
     this.allowSingleSelection();
   }
 
-  // Handle click on the table-view div
   toggleCheckbox(event) {
     const clickedDiv = event.currentTarget;
     const checkbox = clickedDiv.querySelector('input[type="checkbox"]');
     checkbox.checked = !checkbox.checked;
-    this.selectOption({ currentTarget: checkbox });
+    this.selectOption({ currentTarget: checkbox, clickedDiv: clickedDiv });
   }
 
-  // Handle selection of checkboxes
   selectOption(event) {
     const checkbox = event.currentTarget;
+    const clickedDiv = event.clickedDiv;
     if (checkbox.checked) {
       this.deselectOtherOptions(checkbox);
+      clickedDiv.classList.add("selected");
     } else {
-      // Re-check the checkbox because at least one checkbox should always be checked
-      checkbox.checked = true;
+      checkbox.checked = true; // Re-check because one checkbox should always be selected
+      clickedDiv.classList.remove("selected");
     }
   }
 
-  // Deselect other checkboxes except the currently clicked one
   deselectOtherOptions(selectedCheckbox) {
     this.checkboxTargets.forEach((cb) => {
       if (cb !== selectedCheckbox) {
         cb.checked = false;
+        cb.parentElement.parentElement.classList.remove("selected"); // Remove the "selected" class from the parent .table-view div
       }
     });
   }
 
-  // Ensure that only the first checkbox is selected initially
   allowSingleSelection() {
     this.checkboxTargets.forEach((checkbox, index) => {
       checkbox.checked = index === 0;
+      if (index === 0) {
+        checkbox.parentElement.parentElement.classList.add("selected"); // Add the "selected" class to the first .table-view div
+      }
     });
   }
 }

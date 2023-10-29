@@ -1,6 +1,7 @@
 .img-show {
   width: 100%;
   object-fit: cover;
+  margin: 10px 0px;
 }
 
 .table-view {
@@ -11,9 +12,13 @@
   border-bottom: 1px solid #ccc;
   color: grey;
   cursor: pointer;
+}
 
-    &:hover,
-    &:active {
-    color: black;
-  }
+.table-view:hover,
+.table-view:active {
+  color: black;
+}
+
+.table-view.selected {
+  color: black;
 }

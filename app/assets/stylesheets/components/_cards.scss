@@ -16,3 +16,16 @@
   text-decoration: none;
   color: black;
 }
+
+.transcribed-text {
+  width: 100%;
+  border: none;
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.2s ease-out;
+}
+
+.transcribed-text.show {
+  max-height: 400px;
+}
+
