@@ -43,4 +43,12 @@ export default class extends Controller {
       }
     });
   }
+
+  confirmSelection(event) {
+    const selectedOptionIndex = event.currentTarget.getAttribute("data-selected-option-index");
+    const itemPath = event.currentTarget.getAttribute("data-items-url");
+    const redirectPath = `/cart_items/display_cart_items?selected_option_index=${selectedOptionIndex}`;
+
+    window.location.href = redirectPath;
+  }
 }
