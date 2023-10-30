@@ -1,13 +1,11 @@
-<nav class="footer navbar-expand-sm justify-content-center">
-  <div class="footer-nav">
-    <%= link_to root_path, class: "nav-item nav-link active" do %>
-      <i class="fas fa-house fa-lg fa-2x"></i>
-    <% end %>
-    <%= link_to orders_path, class: "nav-item nav-link active" do %>
-      <i class="fas fa-user fa-lg fa-2x"></i>
-    <% end %>
-    <%= link_to display_cart_items_cart_items_path, class: "nav-item nav-link active" do %>
-      <i class="fas fa-shopping-cart fa-lg fa-2x"></i>
-    <% end %>
-  </div>
+<nav class="footer space-between white">
+  <%= link_to root_path, class: "nav-link active" do %>
+    <i class="icon-sm center-content fas fa-house fa-lg fa-2x"></i>
+  <% end %>
+  <%= link_to orders_path, class: "nav-link active" do %>
+    <i class="icon-sm center-content fas fa-user fa-lg fa-2x"></i>
+  <% end %>
+  <%= link_to display_cart_items_cart_items_path, class: "nav-link active" do %>
+    <i class="icon-sm center-content fas fa-shopping-cart fa-lg fa-2x"></i>
+  <% end %>
 </nav>

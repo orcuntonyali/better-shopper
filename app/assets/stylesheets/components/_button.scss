@@ -1,78 +1,46 @@
-.quantity-button {
+.button {
   display: flex;
-  align-items: center;
-  padding: 1px;
-  margin-left: 3px;
-  margin: 1px;
+  color: white;
+  border-radius: 8px;
+  border-style: none;
+  outline: none;
+  overflow: hidden;
+  min-width: 120px;
   text-align: center;
-  text-decoration: none;
   display: inline-block;
-  font-size: 16px;
+  font-size: 14px;
+  padding: 8px;
+  margin: 8px 0px;
+  text-decoration: none;
   cursor: pointer;
+}
+
+.button-quantity {
+  align-items: center;
+  text-align: center;
   background-color: white;
-  color: black;
   border: 1.9px solid #6200EE;
   border-radius: 30px;
-  width: 70px !important; /* Set a fixed width */
-  height: 30px; /* Set a fixed height */
+  width: 70px;
+  height: 30px;
+  font-size: 14px;
+  padding: 8px;
+  margin: 8px 0px;
+  text-decoration: none;
+  cursor: pointer;
 
   &:hover {
     background-color: #6200EE;
     color: white;
-
-    .minus-plus {
-      color: white;
-    }
   }
 }
 
-.minus-plus {
-  border: none;
-  background: none;
-}
-
-.button-container {
-  display: flex;
-  justify-content: space-between;
-}
-
-.violet-button {
-  display: flex;
-  padding: 6px;
-  margin: 20px;
-  color: white;
+.violet {
   background-color: #6200EE;
-  border-radius: 6px;
-  border-style: none;
-  outline: none;
-  overflow: hidden;
-  width: 120px;
-  text-align: center;
-  font-size: 14px;
-  text-decoration: none;
-  display: inline-block;
-  cursor: pointer;
 }
 
-.centered-button {
-  display: flex;
-  justify-content: center;
+.gray {
+  background-color: grey;
 }
 
-.violet-button-confirm-selection {
-  display: flex;
-  padding: 6px;
-  margin: 20px;
-  color: white;
-  background-color: #6200EE;
-  border-radius: 6px;
-  border-style: none;
-  outline: none;
-  overflow: hidden;
-  width: auto;
-  text-align: center;
-  font-size: 14px;
-  text-decoration: none;
-  display: inline-block;
-  cursor: pointer;
-}
+

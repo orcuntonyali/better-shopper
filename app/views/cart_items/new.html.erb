@@ -1,24 +1,25 @@
-<% @navbar_text = "Taking your order" %>
-<%= render "shared/navbar" %>
+<% @ribbon_text = "Taking your order" %>
+<%= render "shared/ribbon" %>
 
-<h1>Let's talk groceries!</h1>
-<p>Speak, text, edit as you like! Shoot it when you're ready!</p>
-
-<div data-controller="audio-input">
-  <button data-action="click->audio-input#startRecording">Touch to speak</button>
-  <button data-action="click->audio-input#stopRecording" disabled>Touch when done</button>
-  <br>
-  <br>
-
-  <!-- Textbox for order editing -->
-  <textarea data-audio-input-target="transcribedText" id="transcribedText" style="width: 100%; height: 200px;"></textarea>
-
-  <!-- Button to submit the reviewed order -->
-  <button id="submitReview" data-action="click->audio-input#submitReviewedText">I'm ready, prepare my groceries!</button>
+<div class="bg-white flex-column" style="padding: 0 15px;">
+  <div class="flex-column center-content center-text">
+    <turbo-frame id="instructionFrame">
+      <h1>Tap to speak your grocery</h1>
+    </turbo-frame>
+  </div>
+  <div class="flex-column center-content" data-controller="audio-input">
+    <i class="icon-lg center-content fa fa-microphone"
+      data-action="click->audio-input#toggleRecording"
+      data-audio-input-target="recordButton"></i>
+    <turbo-frame id="textAreaFrame">
+      <!-- Initially empty -->
+    </turbo-frame>
+    <%# <button id="submitReview" data-action="click->audio-input#submitReviewedText">I'm ready, prepare my groceries!</button> %>
+  </div>
 </div>
 
-<div class="max-distance-box" data-controller="buttons">
-    <label for="max_distance">Max Search Distance (km): </label>
-    <input type="number" id="max_distance" name="max_distance" min="1" max="100" data-buttons-target="maxDistance">
-    <button data-action="click->buttons#setMaxDistance">Set Search Distance</button>
-</div>
+  <%# <div class="max-distance-box" data-controller="buttons">
+      <label for="max_distance">Max Search Distance (km): </label>
+      <input type="number" id="max_distance" name="max_distance" min="1" max="100" data-buttons-target="maxDistance">
+      <button data-action="click->buttons#setMaxDistance">Set Search Distance</button>
+  </div> %>

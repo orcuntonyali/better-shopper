@@ -15,13 +15,13 @@
     <%= javascript_importmap_tags %>
   </head>
 
-  <body>
-    <div class="d-flex justify-content-center align-items-center" style="min-height: 100vh;">
-      <div class="col-12" style="position: relative; width: 360px; height: 800px; overflow-y: hidden; overflow-x: hidden;">
+  <body class="center-content">
+    <div class="main-container">
+      <div class="hide content-div">
         <%= render "shared/flashes" %>
         <%= yield %>
-        <%= render "shared/footer" %>
       </div>
+      <%= render "shared/footer" %>
     </div>
   </body>
 </html>

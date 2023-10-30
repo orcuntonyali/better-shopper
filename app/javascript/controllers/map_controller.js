@@ -7,27 +7,27 @@ export default class extends Controller {
     markers: Array
   }
   connect() {
+    const userLatitude = parseFloat(this.element.dataset.userLatitude);
+    const userLongitude = parseFloat(this.element.dataset.userLongitude);
+
     mapboxgl.accessToken = this.apiKeyValue
     this.map = new mapboxgl.Map({
       container: this.element,
-      style: "mapbox://styles/o-t-/clnxgq6xg008o01pf0kdy7vqk"
+      style: "mapbox://styles/o-t-/clnxgq6xg008o01pf0kdy7vqk",
+      center: [userLongitude, userLatitude],
+      zoom: 12
     })
     this.#addMarkersToMap()
-    this.#fitMapToMarkers()
   }
   #addMarkersToMap() {
     this.markersValue.forEach((marker) => {
-      const popup = new mapboxgl.Popup().setHTML(marker.info_window_html) // Add this
-      new mapboxgl.Marker()
+      const popup = new mapboxgl.Popup().setHTML(marker.info_window_html);
+      const color = marker.marker_color
+      new mapboxgl.Marker({ color: color })
         .setLngLat([ marker.lng, marker.lat ])
         .setPopup(popup)
-        .addTo(this.map)
-    })
-  }
-  #fitMapToMarkers() {
-    const bounds = new mapboxgl.LngLatBounds()
-    this.markersValue.forEach(marker => bounds.extend([ marker.lng, marker.lat ]))
-    this.map.fitBounds(bounds, { padding: 70, maxZoom: 15, duration: 0 })
+        .addTo(this.map);
+    });
   }
   showMapboxSearchBox() {
     this.map.addControl(new MapboxGeocoder({ accessToken: mapboxgl.accessToken,

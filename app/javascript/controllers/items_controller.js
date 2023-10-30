@@ -1,59 +1,46 @@
 import { Controller } from "@hotwired/stimulus"
 
 export default class extends Controller {
-  static targets = ["image", "item", "checkbox"]
+  static targets = ["checkbox"]
 
-  // Called when the controller is connected to the DOM
   connect() {
     this.allowSingleSelection();
   }
 
-  // Change the image when a data attribute is set
-  changeImage() {
-    this.imageTarget.src = this.data.get("image-url");
+  toggleCheckbox(event) {
+    const clickedDiv = event.currentTarget;
+    const checkbox = clickedDiv.querySelector('input[type="checkbox"]');
+    checkbox.checked = !checkbox.checked;
+    this.selectOption({ currentTarget: checkbox, clickedDiv: clickedDiv });
   }
 
-  // Handle selection of checkboxes
   selectOption(event) {
     const checkbox = event.currentTarget;
+    const clickedDiv = event.clickedDiv;
     if (checkbox.checked) {
       this.deselectOtherOptions(checkbox);
-      const optionIndex = this.checkboxTargets.indexOf(checkbox);
-      this.toggleOptionSelection(optionIndex, true);
+      clickedDiv.classList.add("selected");
+    } else {
+      checkbox.checked = true; // Re-check because one checkbox should always be selected
+      clickedDiv.classList.remove("selected");
     }
   }
 
-  // Deselect other checkboxes except the first one
   deselectOtherOptions(selectedCheckbox) {
-    this.checkboxTargets.forEach((cb, index) => {
+    this.checkboxTargets.forEach((cb) => {
       if (cb !== selectedCheckbox) {
         cb.checked = false;
-        this.toggleOptionSelection(index, false);
+        cb.parentElement.parentElement.classList.remove("selected"); // Remove the "selected" class from the parent .table-view div
       }
     });
   }
 
-  // Apply single selection logic
   allowSingleSelection() {
     this.checkboxTargets.forEach((checkbox, index) => {
-      if (checkbox.checked && index !== 0) {
-        checkbox.checked = false;
-        this.toggleOptionSelection(index, false);
+      checkbox.checked = index === 0;
+      if (index === 0) {
+        checkbox.parentElement.parentElement.classList.add("selected"); // Add the "selected" class to the first .table-view div
       }
     });
   }
-
-  // Toggle the selected state for a purchase option
-  toggleOptionSelection(optionIndex, selected) {
-    this.checkboxTargets[optionIndex].checked = selected;
-    this.element.querySelectorAll(".purchase-option").forEach((purchaseOption, index) => {
-      if (index === optionIndex) {
-        purchaseOption.classList.toggle("selected", selected);
-      } else {
-        purchaseOption.classList.remove("selected");
-      }
-    });
-  }
-
-
 }

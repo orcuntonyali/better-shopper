@@ -1,9 +1,11 @@
 import { Controller } from "@hotwired/stimulus"
 
 export default class extends Controller {
-  static targets = ["transcribedText"];
+  static targets = ["transcribedText", "recordButton"];
+
   connect() {
     console.log("Stimulus controller connected");
+    this.isRecording = false;
     this.mediaRecorder = null;
     this.audioChunks = [];
 
@@ -16,16 +18,24 @@ export default class extends Controller {
       .catch(err => console.error("Error initializing media recorder:", err));
   }
 
+  toggleRecording() {
+    this.isRecording = !this.isRecording;
+    this.updateInstruction();
+    this.isRecording ? this.startRecording() : this.stopRecording();
+  }
+
   startRecording() {
     console.log("Start recording triggered");
     this.audioChunks = [];
     this.mediaRecorder.start();
-    this.element.querySelector("[data-action='click->audio-input#stopRecording']").disabled = false;
+    this.recordButtonTarget.classList.remove("fa-microphone");
+    this.recordButtonTarget.classList.add("fa-stop");
   }
 
   stopRecording() {
     this.mediaRecorder.stop();
-    this.element.querySelector("[data-action='click->audio-input#stopRecording']").disabled = true;
+    this.recordButtonTarget.classList.remove("fa-stop");
+    this.recordButtonTarget.classList.add("fa-microphone");
   }
 
   handleDataAvailable(event) {
@@ -56,6 +66,19 @@ export default class extends Controller {
     .catch(error => {
       console.log("Audio upload failed:", error);
     });
+  }
+
+  updateInstruction() {
+    let frame = document.getElementById('instructionFrame');
+    let newInstruction = this.isRecording ? "Tap when you're done speaking" : "Tap to speak your grocery";
+    frame.innerHTML = `<h1>${newInstruction}</h1>`;
+  }
+
+  showTextArea() {
+    let frame = document.getElementById('textAreaFrame');
+    frame.innerHTML = '<textarea class="transcribed-text" data-audio-input-target="transcribedText" id="transcribedText"></textarea>';
+    let textarea = frame.querySelector('.transcribed-text');
+    setTimeout(() => { textarea.classList.add('show'); }, 0);
   }
 
   submitReviewedText() {

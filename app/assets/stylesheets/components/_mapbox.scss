@@ -1,0 +1,37 @@
+#map {
+  width: 90%;
+  height: 300px;
+  margin: 20px auto;
+}
+
+.updating-your-address {
+  display: none;
+  width: 80%;
+  height: 200px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+/* Style the search input field */
+.search-box input[type="text"] {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-size: 16px;
+  background-color: #f8f8f8;
+}
+
+/* Style the search button */
+.search-box input[type="submit"] {
+  display: none; /* Hide the search button */
+}
+
+.mapboxgl-popup {
+  max-width: 150px;
+}
+
+.mapboxgl-popup-content {
+  text-align: center;
+  font-family: "Open Sans", sans-serif;
+}

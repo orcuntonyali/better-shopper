@@ -1,36 +1,15 @@
+<script src="https://unpkg.com/@dotlottie/player-component@latest/dist/dotlottie-player.mjs" type="module"></script>
 
-  <div class="app-content">
-    <div class="welcome-box">
-      <h1 data-controller="welcome" data-welcome-target="messageContent">
-        Welcome <%= user_signed_in? ? 'back,' : 'to' %><br>
-        <span data-welcome-target="welcomeBox.userName"><%= user_signed_in? ? current_user.name : '' %></span>
-      </h1>
-    </div>
-
-    <div class="updating-your-address"
-    data-controller="welcome" data-target="messageContent" style="display: none">
-                Updating your Address...
-    </div>
-
-    <div id='map'
-      data-controller="map"
-      data-map-markers-value="<%= @markers.to_json %>"
-      data-map-api-key-value="<%= ENV['MAPBOX_API_KEY'] %>">
-    </div>
-
-    <div class="user-details" data-user-address="<%= @user_address %>">
-      <p data-target="userAddress.address">
-        <%= @user_address %>
-      </p>
-    </div>
-
-    <div class="buttons" data-controller="buttons">
-      <a href="#" data-action="click->buttons#changeAddress" data-button-type="change-address"
-        class="change-address-button">CHANGE ADDRESS</a>
-      <a href="#" data-action="click->buttons#lookingGood" data-button-type="looking-good"
-        class="looking-good-button">LOOKING GOOD</a>
-      <a href="#" data-action="click->buttons#nowLookingGood" data-button-type="now-looking-good"
-        class="now-looking-good-button" style="display: none">NOW LOOKING GOOD</a>
-    </div>
-
+<div class="bg-blue center-content flex-column">
+  <div>
+    <dotlottie-player src="https://lottie.host/9debb8ff-b5c2-427d-a7ea-22a69122761a/wGneHfmL9S.json" background="transparent"
+                      speed="1" style="width: 300px; height: 300px;" loop autoplay></dotlottie-player>
   </div>
+  <div>
+    <h1>Welcome back, <%= current_user.name %>!</h1>
+  </div>
+  <div>
+    <%= link_to "LET'S GO!", setup_path, class: "button violet" %>
+  </div>
+  <%= button_to "Are you not '#{current_user.name}'?", destroy_user_session_path, method: :delete, class: "gray button" %>
+</div>

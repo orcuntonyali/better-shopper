@@ -1,30 +1,28 @@
-<%# app/views/items/show.html.erb %>
-<% @navbar_text = "#{@item.name.capitalize} - Purchase options" %>
-<%= render "shared/navbar" %>
+<% @ribbon_text = "#{@item.name.capitalize} prices near you" %>
+<%= render "shared/ribbon" %>
 
-<div class="container">
-  <div class="item-details" data-controller="items">
-    <div class="image-container" data-action="click->items#changeImage" data-image-url="<%= @item.image_url %>" data-items-target="image">
-      <% if @item.image_url.present? %>
-        <img src="<%= @item.image_url %>" alt="<%= @item.name %>" />
-      <% else %>
-        <!-- Display a placeholder image or message when no image is available -->
-        <p data-items-target="item">No image available</p>
-      <% end %>
-    </div>
-
-    <% @purchase_options.each_with_index do |option, index| %>
-      <div class="purchase-option" data-items-target="option<%= index %>">
-        <div class="store-data"><%= option.store.name %></div>
-        <div class="unit-price"><%= option.unit_price %>€</div>
-        <div class="select-option">
+<div class="bg-white" style="padding: 0 15px;">
+  <div data-controller="items">
+    <% if @item.image_url.present? %>
+      <img class="img-show" src="<%= @item.image_url %>" alt="<%= @item.name %>" />
+    <% else %>
+      <p data-items-target="item">No image available</p>
+    <% end %>
+    <div style="margin: 10px 0px;">
+      <% @purchase_options.each_with_index do |option, index| %>
+      <div class="table-view <%='selected' if index == 0 %>" data-items-target="option<%= index %>" data-action="click->items#toggleCheckbox">
+        <div>
+          <%= option.store.name %>
+        </div>
+        <div class="space-between">
+          <div style="margin: 0px 5px;"><%= option.unit_price %>€</div>
           <input type="checkbox" data-action="change->items#selectOption" data-items-target="checkbox" data-option-index="<%= index %>" <%= 'checked' if index == 0 %> />
         </div>
       </div>
-    <% end %>
+      <% end %>
+    </div>
   </div>
-
-<div class="centered-button">
-    <button class="violet-button-confirm-selection" data-action="click->buttons#confirmSelection" data-items-url="<%= item_path %>">CONFIRM SELECTION</button>
+  <div class="center-content justify-content-end">
+    <button class="violet button" data-action="click->buttons#confirmSelection" data-items-url="<%= item_path %>">CONFIRM MY SELECTION</button>
   </div>
 </div>

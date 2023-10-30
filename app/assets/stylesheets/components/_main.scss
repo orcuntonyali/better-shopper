@@ -1,0 +1,101 @@
+.ribbon {
+  position: sticky;
+  top: 0;
+  width: 100%;
+  height: 60px;
+  color: #FFFFFF;
+  font-size: 17px;
+  font-weight: bold;
+  text-align: left;
+  padding: 0 20px;
+  line-height: 60px;
+}
+
+// layouts
+
+.space-between {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.center-content {
+  display: flex;
+  align-items: center;
+}
+
+.center-text {
+  text-align: center;
+}
+
+// colors
+
+.violet {
+  background-color: #6200EE;
+}
+
+.white {
+  background-color: #FFFFFF;
+}
+
+// background fill colors
+
+.bg-blue {
+  background-color: #bfe4ff;
+  position: relative;
+  height: 100%;
+}
+
+.bg-white {
+  background-color: #FFFFFF;
+  position: relative;
+  height: 100%;
+}
+
+// hide scrollbar
+
+.hide {
+  scrollbar-width: none; /* For Firefox */
+}
+
+.hide::-webkit-scrollbar {
+  display: none; /* For Chrome, Safari and Opera */
+}
+
+// layouts/application.html.erb
+
+body {
+  font-family: 'Roboto', sans-serif;
+  justify-content: center;
+}
+
+.main-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  height: 800px;
+  width: 360px;
+}
+
+.content-div {
+  overflow-y: scroll;
+  flex-grow: 1;
+  width: 100%;
+}
+
+p {
+  color: #555555;
+  font-size: 0.9rem;
+  margin: 3px 0px;
+  // margin-bottom: 0rem;
+}
+
+h1 {
+  font-size: 24px;
+  line-height: 1.2;
+  margin: 6px 0px;
+}
+
+// h5 to be added
+// h6 to be added

@@ -1,95 +1,24 @@
+.img-show {
+  width: 100%;
+  object-fit: cover;
+  margin: 10px 0px;
+}
 
-
-body {
-  font-family: Arial, sans-serif;
-  margin: 0;
-  padding: 0;
-  background-color: #f5f5f5;
+.table-view {
   display: flex;
-  justify-content: center;
+  justify-content: space-between;
   align-items: center;
-  min-height: 100vh;
-}
-
-.col-12 {
-  background-color: white;
-  position: relative;
-  width: 360px;
-  max-width: 400px;
-  height: 800px;
-  overflow-y: hidden;
-  overflow-x: hidden;
-  border-radius: 10px;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-}
-
-.item-details {
-  text-align: center;
-  margin-bottom: 20px;
-
-  h1 {
-    font-size: 1.3rem;
-    background-color: #0074cc;
-    color: white;
-    padding: 10px;
-    margin-top: 5px;
-    border-radius: 10px 10px 0 0;
-  }
-
-  .image-container {
-    img {
-      max-width: 100%;
-      max-height: 300px;
-      border: none;
-      box-shadow: none;
-      margin-top: 5px;
-    }
-  }
-
-  .purchase-options {
-    display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
-    gap: 10px;
-  }
-
-  .purchase-option {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 10px;
-    border-bottom: 1px solid #ccc;
-      color: grey;
+  padding: 10px;
+  border-bottom: 1px solid #ccc;
+  color: grey;
   cursor: pointer;
-
-  &:hover {
-    color: black;
-  }
 }
 
-  .purchase-option.selected {
-    color: black;
-  }
+.table-view:hover,
+.table-view:active {
+  color: black;
+}
 
-
-  .store-data {
-    flex: 1;
-    text-align: left; /* Left-align store name */
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-  }
-
-  .unit-price {
-    text-align: right;
-  }
-
-  .select-option {
-    text-align: right;
-    margin-left: 10px; /* Add spacing between price and checkbox */
-  }
-
-  .centered-button {
-    text-align: center;
-    margin-top: 20px;
-  }
+.table-view.selected {
+  color: black;
 }
