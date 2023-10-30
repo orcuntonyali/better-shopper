@@ -1,4 +1,7 @@
 Rails.application.routes.draw do
+  get 'orders/show'
+  get 'orders/create'
+  get 'orders/delivery'
   devise_for :users, controllers: { registrations: 'users/registrations' }
   post 'set_max_distance', to: 'users/registrations#set_max_distance'
   root "pages#home"
