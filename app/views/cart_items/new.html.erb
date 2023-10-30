@@ -1,20 +1,28 @@
 <% @ribbon_text = "Taking your order" %>
 <%= render "shared/ribbon" %>
 
-<div class="bg-white flex-column" style="padding: 0 15px;">
+<div class="bg-white flex-column" style="padding: 0 15px;" data-controller="audio-input">
   <div class="flex-column center-content center-text">
-    <turbo-frame id="instructionFrame">
-      <h1>Tap to speak your grocery</h1>
-    </turbo-frame>
+    <p>Choose how you like to place your order</p>
   </div>
-  <div class="flex-column center-content" data-controller="audio-input">
-    <i class="icon-lg center-content fa fa-microphone"
-      data-action="click->audio-input#toggleRecording"
-      data-audio-input-target="recordButton"></i>
-    <turbo-frame id="textAreaFrame">
-      <!-- Initially empty -->
-    </turbo-frame>
-    <%# <button id="submitReview" data-action="click->audio-input#submitReviewedText">I'm ready, prepare my groceries!</button> %>
+  <div class="center-content space-between">
+    <button class="button violet" data-action="click->audio-input#toggleRecording" data-audio-input-target="recordButton">
+      <i class="fa fa-microphone record-icon"></i>
+      <i class="fa fa-stop stop-icon hidden"></i>
+      <span class="record-text">Record</span>
+      <span class="stop-text hidden">Stop</span>
+    </button>
+    <h5> OR </h5>
+    <button class="button violet" data-action="click->audio-input#showTextArea">
+      <i class="fa fa-pencil-alt"></i>
+      <span>Write</span>
+    </button>
+  </div>
+  <div class="flex-column justify-content-stretch" id="textAreaFrame">
+    <!-- Initially empty -->
+  </div>
+  <div class="flex-column center-content">
+    <button class="button violet" data-action="click->audio-input#submitReviewedText">I'm ready, prepare my groceries!</button>
   </div>
 </div>
 

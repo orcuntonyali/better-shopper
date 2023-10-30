@@ -18,14 +18,14 @@
 }
 
 .transcribed-text {
+  box-sizing: border-box;
   width: 100%;
-  border: none;
   max-height: 0;
   overflow: hidden;
-  transition: max-height 0.2s ease-out;
+  transition: max-height 0.5s ease-out;
+  align-self: stretch;
 }
 
 .transcribed-text.show {
-  max-height: 400px;
+  min-height: 400px;
 }
-
