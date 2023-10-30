@@ -20,7 +20,6 @@ export default class extends Controller {
 
   toggleRecording() {
     this.isRecording = !this.isRecording;
-    this.updateInstruction();
     this.isRecording ? this.startRecording() : this.stopRecording();
   }
 
@@ -28,14 +27,30 @@ export default class extends Controller {
     console.log("Start recording triggered");
     this.audioChunks = [];
     this.mediaRecorder.start();
-    this.recordButtonTarget.classList.remove("fa-microphone");
-    this.recordButtonTarget.classList.add("fa-stop");
+
+    // Toggle visibility of icons and text
+    this.recordButtonTarget.querySelector('.record-icon').classList.add('hidden');
+    this.recordButtonTarget.querySelector('.stop-icon').classList.remove('hidden');
+    this.recordButtonTarget.querySelector('.record-text').classList.add('hidden');
+    this.recordButtonTarget.querySelector('.stop-text').classList.remove('hidden');
+
+    // Change button color
+    this.recordButtonTarget.classList.remove("violet");
+    this.recordButtonTarget.classList.add("gray");
   }
 
   stopRecording() {
     this.mediaRecorder.stop();
-    this.recordButtonTarget.classList.remove("fa-stop");
-    this.recordButtonTarget.classList.add("fa-microphone");
+
+    // Toggle visibility back
+    this.recordButtonTarget.querySelector('.record-icon').classList.remove('hidden');
+    this.recordButtonTarget.querySelector('.stop-icon').classList.add('hidden');
+    this.recordButtonTarget.querySelector('.record-text').classList.remove('hidden');
+    this.recordButtonTarget.querySelector('.stop-text').classList.add('hidden');
+
+    // Change button color back
+    this.recordButtonTarget.classList.remove("gray");
+    this.recordButtonTarget.classList.add("violet");
   }
 
   handleDataAvailable(event) {
@@ -59,8 +74,9 @@ export default class extends Controller {
     })
     .then(response => response.json())
     .then(data => {
+      console.log("Received data:", data);
       if (data.status === "success") {
-        this.transcribedTextTarget.value = data.transcribed_text;
+        this.showTextArea(data.transcribed_text);  // Pass the transcribed text here
       }
     })
     .catch(error => {
@@ -68,17 +84,28 @@ export default class extends Controller {
     });
   }
 
-  updateInstruction() {
-    let frame = document.getElementById('instructionFrame');
-    let newInstruction = this.isRecording ? "Tap when you're done speaking" : "Tap to speak your grocery";
-    frame.innerHTML = `<h1>${newInstruction}</h1>`;
-  }
+  showTextArea(preExistingText = '') {
+    // Check if preExistingText is an object (PointerEvent, in this case)
+    if (typeof preExistingText === 'object') {
+      preExistingText = '';
+    }
 
-  showTextArea() {
     let frame = document.getElementById('textAreaFrame');
-    frame.innerHTML = '<textarea class="transcribed-text" data-audio-input-target="transcribedText" id="transcribedText"></textarea>';
     let textarea = frame.querySelector('.transcribed-text');
-    setTimeout(() => { textarea.classList.add('show'); }, 0);
+
+    // If textarea doesn't exist, create it
+    if (!textarea) {
+      textarea = document.createElement('textarea');
+      textarea.className = 'transcribed-text';
+      textarea.id = 'transcribedText';
+      textarea.setAttribute('data-audio-input-target', 'transcribedText');
+      frame.appendChild(textarea);
+    }
+
+    // Update textarea value and display it
+    textarea.value = preExistingText;
+    textarea.style.display = 'block';
+    textarea.classList.add('show');
   }
 
   submitReviewedText() {
