@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-  get 'orders/show'
+  get 'orders/show', to: 'orders#show' 
   get 'orders/create'
   get 'orders/delivery'
   devise_for :users, controllers: { registrations: 'users/registrations' }
@@ -10,7 +10,7 @@ Rails.application.routes.draw do
   # RESTful routes for resources
   resources :stores, only: [:index]
   resources :items
-  resources :orders
+  resources :orders, only: [:show]
 
   resources :cart_items, only: [:new, :show, :create, :update, :destroy] do
     collection do

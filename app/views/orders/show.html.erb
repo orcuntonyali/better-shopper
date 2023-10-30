@@ -1,4 +1,16 @@
-<% @navbar_text = "Checkout" %>
-<%= render "shared/navbar" %>
+<% @ribbon_text = "Checkout" %>
+<%= render "shared/ribbon" %>
 
-<p>orders show </p>
+<h2>Items:</h2>
+<% @items.each do |item| %>
+  <p><%= item.name.capitalize %></p>
+  <p> €<%= item.price %></p>
+<% end %>
+
+<hr style="border-color: #6200EE; border-width: 2px; margin-left: 10px; margin-right: 10px;">
+
+<h5>Subtotal</h5><p>: €<%= @total_price %></p>
+
+<hr style="border-color: #6200EE; border-width: 2px; margin-left: 10px; margin-right: 10px;">
+
+<h5>Deliver to my address</h5> 
