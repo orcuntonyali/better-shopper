@@ -3,11 +3,15 @@
     <%= link_to root_path, class: "nav-item nav-link active" do %>
       <i class="fas fa-house fa-lg fa-2x"></i>
     <% end %>
-    <%= link_to orders_path, class: "nav-item nav-link active" do %>
-      <i class="fas fa-user fa-lg fa-2x"></i>
+    <%# change the route %>
+    <%= link_to display_cart_items_cart_items_path, class: "nav-item nav-link active" do %>
+      <i class="fas fa-location-dot fa-lg fa-2x"></i> 
     <% end %>
     <%= link_to display_cart_items_cart_items_path, class: "nav-item nav-link active" do %>
       <i class="fas fa-shopping-cart fa-lg fa-2x"></i>
+    <% end %>
+    <%= link_to orders_show_path, class: "nav-item nav-link active" do %>
+      <i class="fas fa-list-ul fa-lg fa-2x"></i>
     <% end %>
   </div>
 </nav>

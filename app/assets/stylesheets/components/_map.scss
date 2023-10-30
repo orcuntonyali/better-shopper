@@ -2,6 +2,7 @@
    background-color: #bfe4ff;
    position: relative;
    height: 100%;
+   padding-top: 40px;
 }
 
 .welcome-box {
@@ -21,7 +22,7 @@ h1 {
 
 [data-welcome-target="welcomeBox.userName"] {
   font-weight: bold;
-  font-size: 20px;
+  font-size: 25px;
   display: block;
 }
 
