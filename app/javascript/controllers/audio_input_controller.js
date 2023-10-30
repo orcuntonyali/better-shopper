@@ -60,12 +60,7 @@ export default class extends Controller {
     .then(response => response.json())
     .then(data => {
       if (data.status === "success") {
-        const textAreaElement = document.getElementById("transcribedText");
-        if (textAreaElement !== null) {
-          textAreaElement.value = data.transcribed_text;
-        } else {
-          console.log("Textarea not yet available in the DOM.");
-        }
+        this.transcribedTextTarget.value = data.transcribed_text;
       }
     })
     .catch(error => {
