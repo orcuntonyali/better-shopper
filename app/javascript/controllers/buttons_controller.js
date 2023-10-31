@@ -69,5 +69,25 @@ export default class extends Controller {
       return element ? element.content : null;
     }
   }
-}
 
+
+// delivery toggle button in orders/show
+  static targets = [ "toggle", "slider" ];
+
+  connect() {
+    this.toggleTarget.checked = false; // Initialize the toggle to OFF
+    this.toggleTarget.addEventListener('change', this.toggleDelivery.bind(this));
+  }
+
+  toggleDelivery() {
+    if (this.toggleTarget.checked) {
+      this.sliderTarget.style.transform = 'translateX(26px)';
+      // Delivery is ON
+      console.log('Delivery is ON');
+    } else {
+      this.sliderTarget.style.transform = 'translateX(0)';
+      // Delivery is OFF
+      console.log('Delivery is OFF');
+    }
+  }
+}

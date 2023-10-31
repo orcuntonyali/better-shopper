@@ -36,8 +36,11 @@ class CartItemsController < ApplicationController
     @not_found_message = service_result['not_found_message']
   end
 
-  def create
-  end
+  # def create
+  #   item = Item.find(params[:id])
+  #   order = current_user.orders.find_or_create_by(status: 'cart')
+  #   order.cart_items.create(item: item, quantity: params[:quantity])
+  # end
 
   def update
   end

@@ -1,16 +1,36 @@
 <% @ribbon_text = "Checkout" %>
 <%= render "shared/ribbon" %>
 
-<h2>Items:</h2>
-<% @items.each do |item| %>
-  <p><%= item.name.capitalize %></p>
-  <p> €<%= item.price %></p>
-<% end %>
+<div class="bg-white" style="padding: 0 15px;">
+  <h2>Items:</h2>
+  <% if @cart_items.present? %>
+    <% @cart_items.each do |cart_item| %>
+      <p><%= cart_item.item.name.capitalize %></p>
+      <p><%= cart_item.price %></p>
+      <p><%= cart_item.quantity %></p>
+      <p><%= cart_item.price * cart_item.quantity %></p>
+    <% end %>
+  <% else %>
+    <p>Your cart is empty</p>
+  <% end %>
 
-<hr style="border-color: #6200EE; border-width: 2px; margin-left: 10px; margin-right: 10px;">
+  <hr style="border-color: #6200EE; border-width: 2px; margin-left: 15px; margin-right: 15px;">
 
-<h5>Subtotal</h5><p>: €<%= @total_price %></p>
+  <div style="display: flex; align-items: center;"">
+    <h5>Subtotal:</h5>
+    <h5 style="margin-left: auto;"> € <%= @total_price %></h5> 
+  </div>
 
-<hr style="border-color: #6200EE; border-width: 2px; margin-left: 10px; margin-right: 10px;">
+  <hr style="border-color: #6200EE; border-width: 2px; margin-left: 15px; margin-right: 15px;">
 
-<h5>Deliver to my address</h5> 
+  <div data-controller="delivery-toggle" style="display: flex; align-items: center;">
+    <h5>Deliver to my address</h5>
+    <label class="switch" style="margin-left: auto;">
+      <input type="checkbox" data-target="delivery-toggle.toggle">
+      <span class="slider round" data-target="delivery-toggle.slider"></span>
+    </label>
+  </div>
+
+  <hr style="border-color: #6200EE; border-width: 2px; margin-left: 15px; margin-right: 15px;">
+
+</div>
