@@ -19,7 +19,7 @@ class CartItemsController < ApplicationController
     render json: { status: "success", processed_order: }
   end
 
-  def display_cart_items
+  def your_cart
     user = User.find(current_user.id)
     latitude = user.latitude
     longitude = user.longitude

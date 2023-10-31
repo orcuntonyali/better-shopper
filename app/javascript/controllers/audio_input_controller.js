@@ -1,13 +1,14 @@
 import { Controller } from "@hotwired/stimulus"
 
 export default class extends Controller {
-  static targets = ["transcribedText", "recordButton"];
+  static targets = ["transcribedText", "recordButton", "textAreaFrame", "submitButton"];
 
   connect() {
     console.log("Stimulus controller connected");
     this.isRecording = false;
     this.mediaRecorder = null;
     this.audioChunks = [];
+    this.loadTextAreaContent();
 
     navigator.mediaDevices.getUserMedia({ audio: true })
       .then(stream => {
@@ -16,6 +17,13 @@ export default class extends Controller {
         this.mediaRecorder.onstop = this.handleStop.bind(this);
       })
       .catch(err => console.error("Error initializing media recorder:", err));
+  }
+
+  loadTextAreaContent() {
+    const savedText = localStorage.getItem('transcribedText');
+    if (savedText) {
+      this.showTextArea(savedText);
+    }
   }
 
   toggleRecording() {
@@ -76,7 +84,7 @@ export default class extends Controller {
     .then(data => {
       console.log("Received data:", data);
       if (data.status === "success") {
-        this.showTextArea(data.transcribed_text);  // Pass the transcribed text here
+        this.showTextArea(data.transcribed_text);
       }
     })
     .catch(error => {
@@ -84,28 +92,34 @@ export default class extends Controller {
     });
   }
 
-  showTextArea(preExistingText = '') {
-    // Check if preExistingText is an object (PointerEvent, in this case)
-    if (typeof preExistingText === 'object') {
-      preExistingText = '';
+  showTextArea(newText = '') {
+    if (typeof newText === 'object') {
+      newText = '';
     }
 
-    let frame = document.getElementById('textAreaFrame');
-    let textarea = frame.querySelector('.transcribed-text');
+    let textarea = this.textAreaFrameTarget.querySelector('.transcribed-text');
 
-    // If textarea doesn't exist, create it
     if (!textarea) {
       textarea = document.createElement('textarea');
       textarea.className = 'transcribed-text';
       textarea.id = 'transcribedText';
       textarea.setAttribute('data-audio-input-target', 'transcribedText');
-      frame.appendChild(textarea);
+      this.textAreaFrameTarget.appendChild(textarea);
     }
 
-    // Update textarea value and display it
-    textarea.value = preExistingText;
-    textarea.style.display = 'block';
-    textarea.classList.add('show');
+    // Append new text to existing content
+    if (textarea.value) {
+      textarea.value += "\n" + newText;
+    } else {
+      textarea.value = newText;
+    }
+    this.submitButtonTarget.classList.toggle('hidden', !textarea.value);
+    localStorage.setItem('transcribedText', textarea.value);
+
+    textarea.addEventListener('input', () => {
+      this.submitButtonTarget.classList.toggle('hidden', !textarea.value);
+      localStorage.setItem('transcribedText', textarea.value);
+    });
   }
 
   submitReviewedText() {
@@ -122,7 +136,7 @@ export default class extends Controller {
     .then(data => {
       if (data.processed_order && Array.isArray(data.processed_order)) {
         // Redirect to cart item creation page, assuming you store processed_order in the session or send it through params
-        window.location.href = "/cart_items/display_cart_items";
+        window.location.href = "/cart_items/your_cart";
       } else {
         console.log('Error processing items.');
       }
