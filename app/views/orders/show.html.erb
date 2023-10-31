@@ -2,17 +2,23 @@
 <%= render "shared/ribbon" %>
 
 <div class="bg-white" style="padding: 0 15px;">
-  <h2>Items:</h2>
-  <% if @cart_items.present? %>
-    <% @cart_items.each do |cart_item| %>
-      <p><%= cart_item.item.name.capitalize %></p>
-      <p><%= cart_item.price %></p>
-      <p><%= cart_item.quantity %></p>
-      <p><%= cart_item.price * cart_item.quantity %></p>
+  <h4>Items:</h4>
+    <table style="width: 100%;">
+    <tr>
+      <th class="text-center" style="width: 25%">Name</th>
+      <th class="text-center" style="width: 25%">Price</th>
+      <th class="text-center" style="width: 25%">Quantity</th>
+      <th class="text-center" style="width: 25%">Total</th>
+    </tr>
+    <% @items.each do |item| %>
+      <tr>
+        <td class="text-left"><%= item.item.name.capitalize %></td>
+        <td class="text-center"><%= item.item.unit_price %>€</td>
+        <td class="text-center"><%= item.quantity %></td>
+        <td class="text-center"><%= item.item.unit_price * item.quantity %>€</td>
+      </tr>
     <% end %>
-  <% else %>
-    <p>Your cart is empty</p>
-  <% end %>
+  </table>
 
   <hr style="border-color: #6200EE; border-width: 2px; margin-left: 15px; margin-right: 15px;">
 

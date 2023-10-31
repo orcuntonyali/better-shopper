@@ -10,7 +10,7 @@ Rails.application.routes.draw do
   # RESTful routes for resources
   resources :stores, only: [:index]
   resources :items
-  resources :orders, only: [:show]
+  resources :orders, only: [:create, :show]
 
   resources :cart_items, only: [:new, :show, :create, :update, :destroy] do
     collection do
