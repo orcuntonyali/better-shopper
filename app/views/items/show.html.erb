@@ -1,7 +1,4 @@
 <% @ribbon_text = "#{@item.name.capitalize} prices near you" %>
-
-
-
   <div class="bg-white" style="padding: 0 15px;">
       <div data-controller="items">
         <% if @item.image_url.present? %>
@@ -23,6 +20,7 @@
                         data-action="change->items#selectOption"
                         data-items-target="checkbox"
                         data-option-index="<%= index %>"
+                        data-option-id="<%= option.id %>"
                         <%= 'checked' if index == 0 %> />
                       </div>
                   </div>

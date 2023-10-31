@@ -14,19 +14,18 @@ class CartItemsController < ApplicationController
   def process_order
     order_input = params[:order_input]
     processed_order = OpenaiService.process_order(order_input)
-    Rails.logger.debug "Debugging processed_order: #{processed_order.inspect}"
     session[:processed_order] = processed_order
     render json: { status: "success", processed_order: }
   end
 
   def your_cart
+    # These can be obtained from other controllers?
     user = User.find(current_user.id)
     latitude = user.latitude
     longitude = user.longitude
     max_distance = user.max_distance
 
     processed_order = session[:processed_order]
-
     # Initialize CartService with the user's latitude and longitude
     cart_service = CartService.new(latitude:, longitude:)
 
@@ -34,6 +33,10 @@ class CartItemsController < ApplicationController
     service_result = cart_service.process_order(processed_order, max_distance)
     @processed_items = service_result['cheapest_items']
     @not_found_message = service_result['not_found_message']
+  end
+
+  def update_cart
+    raise
   end
 
   def create
