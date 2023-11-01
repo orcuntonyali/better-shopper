@@ -7,11 +7,22 @@ class PagesController < ApplicationController
   end
 
   def setup
-    add_user_marker
+    if !params.nil? && !params[:new_address].nil? && !params[:new_address][:title].nil? && !Geocoder.search(params[:new_address][:title]).empty?
+      @user_address = params[:new_address][:title]
+      @user_address_lat = Geocoder.search(@user_address).first.latitude
+      @user_address_lng = Geocoder.search(@user_address).first.longitude
+      @markers << {
+        lat: @user_address_lat,
+        lng: @user_address_lng,
+        marker_color: 'blue'
+      }
+    else
+      add_user_marker
+    end
     add_nearby_stores_markers
-    @user_address = current_user.address if current_user
   end
 
+  
   private
 
   def initialize_markers

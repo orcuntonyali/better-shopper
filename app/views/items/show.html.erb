@@ -1,28 +1,41 @@
 <% @ribbon_text = "#{@item.name.capitalize} prices near you" %>
-<%= render "shared/ribbon" %>
 
-<div class="bg-white" style="padding: 0 15px;">
-  <div data-controller="items">
-    <% if @item.image_url.present? %>
-      <img class="img-show" src="<%= @item.image_url %>" alt="<%= @item.name %>" />
-    <% else %>
-      <p data-items-target="item">No image available</p>
-    <% end %>
-    <div style="margin: 10px 0px;">
-      <% @purchase_options.each_with_index do |option, index| %>
-      <div class="table-view <%='selected' if index == 0 %>" data-items-target="option<%= index %>" data-action="click->items#toggleCheckbox">
-        <div>
-          <%= option.store.name %>
-        </div>
-        <div class="space-between">
-          <div style="margin: 0px 5px;"><%= option.unit_price %>€</div>
-          <input type="checkbox" data-action="change->items#selectOption" data-items-target="checkbox" data-option-index="<%= index %>" <%= 'checked' if index == 0 %> />
-        </div>
+
+
+  <div class="bg-white" style="padding: 0 15px;">
+      <div data-controller="items">
+        <% if @item.image_url.present? %>
+          <img class="img-show" src="<%= @item.image_url %>" alt="<%= @item.name %>" />
+        <% else %>
+          <p data-items-target="item">No image available</p>
+        <% end %>
+            <div style="margin: 10px 0px;">
+                <% @purchase_options.each_with_index do |option, index| %>
+                  <div class="table-view <%='selected' if index == 0 %>"
+                    data-items-target="option<%= index %>"
+                    data-action="click->items#toggleCheckbox">
+                    <div>
+                      <%= option.store.name %>
+                    </div>
+                    <div class="space-between">
+                      <div style="margin: 0px 5px;"><%= option.unit_price %>€</div>
+                      <input type="checkbox"
+                        data-action="change->items#selectOption"
+                        data-items-target="checkbox"
+                        data-option-index="<%= index %>"
+                        <%= 'checked' if index == 0 %> />
+                      </div>
+                  </div>
+                <% end %>
+            </div>
+
+            <div class="center-content justify-content-end">
+                <button class="violet button"
+                  data-action="click->items#confirmSelection"
+                  data-items-url="<%= cart_items_url %>"
+                  data-selected-option-index="0">
+                  CONFIRM MY SELECTION
+                </button>
+            </div>
       </div>
-      <% end %>
-    </div>
   </div>
-  <div class="center-content justify-content-end">
-    <button class="violet button" data-action="click->buttons#confirmSelection" data-items-url="<%= item_path %>">CONFIRM MY SELECTION</button>
-  </div>
-</div>

@@ -5,23 +5,27 @@ export default class extends Controller {
     mapController: String
   }
   connect() {
+    this.address = null;
     this.element.addEventListener("click", (event) => {
       event.preventDefault();
-       });
+    });
   }
   changeAddress() {
-    // const searchbox = document.querySelector(".search-box");
-    // searchbox.style.display = "block";
-    const changeAddressButton = this.element.querySelector(".change-address-button");
-    changeAddressButton.style.display = "none";
-    const userAddress = document.querySelector(".user-details");
-    userAddress.style.display = "none";
+    const changeAddressButton = this.target;
+    if (changeAddressButton) {
+      changeAddressButton.style.display = "none";
+    }
+    const userAddress = this.target;
+    if (userAddress) {
+      userAddress.style.display = "none";
+    }
     const mapController = this.application.getControllerForElementAndIdentifier(
       document.getElementById('map'),
       "map"
     );
-    if (mapController) {
+    if (mapController && !document.querySelector('.mapboxgl-ctrl-geocoder--input')) {
       mapController.showMapboxSearchBox();
+      console.log("I am working")
     }
   }
   lookingGood() {
@@ -39,7 +43,6 @@ export default class extends Controller {
       alert("Please provide a max distance value");
       return;
     }
-
     // Make an AJAX request to send the maxDistanceValue to the server
     fetch('/set_max_distance', {
       method: 'POST',
@@ -49,21 +52,21 @@ export default class extends Controller {
       },
       body: JSON.stringify({ max_distance: maxDistanceValue })
     })
-    .then(response => response.json())
-    .then(data => {
-      if (data.status === 'success') {
-        // Handle successful update of max distance
-        alert("Max distance has been updated.");
-        console.log(`Max Distance is: ${value}`);
-      } else {
-        // Handle failure to update max distance
-        alert("An error occurred. Could not update max distance.");
-      }
-    })
-    .catch(error => {
-      // Handle any other errors
-      console.error('Error:', error);
-    });
+      .then(response => response.json())
+      .then(data => {
+        if (data.status === 'success') {
+          // Handle successful update of max distance
+          alert("Max distance has been updated.");
+          console.log(`Max Distance is: ${value}`);
+        } else {
+          // Handle failure to update max distance
+          alert("An error occurred. Could not update max distance.");
+        }
+      })
+      .catch(error => {
+        // Handle any other errors
+        console.error('Error:', error);
+      });
     function getMetaContent(name) {
       const element = document.head.querySelector(`meta[name="${name}"]`);
       return element ? element.content : null;

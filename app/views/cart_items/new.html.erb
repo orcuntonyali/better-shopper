@@ -1,28 +1,30 @@
 <% @ribbon_text = "Taking your order" %>
-<%= render "shared/ribbon" %>
 
-<div class="bg-white flex-column" style="padding: 0 15px;" data-controller="audio-input">
-  <div class="flex-column center-content center-text">
+<div class="bg-white d-flex flex-column justify-content-between" style="padding: 0 15px;" data-controller="audio-input">
+  <div class="flex-column center-text">
     <p>Choose how you like to place your order</p>
   </div>
-  <div class="center-content space-between">
-    <button class="button violet" data-action="click->audio-input#toggleRecording" data-audio-input-target="recordButton">
-      <i class="fa fa-microphone record-icon"></i>
-      <i class="fa fa-stop stop-icon hidden"></i>
-      <span class="record-text">Record</span>
-      <span class="stop-text hidden">Stop</span>
-    </button>
-    <h5> OR </h5>
-    <button class="button violet" data-action="click->audio-input#showTextArea">
-      <i class="fa fa-pencil-alt"></i>
-      <span>Write</span>
-    </button>
-  </div>
-  <div class="flex-column justify-content-stretch" id="textAreaFrame">
-    <!-- Initially empty -->
-  </div>
-  <div class="flex-column center-content">
-    <button class="button violet" data-action="click->audio-input#submitReviewedText">I'm ready, prepare my groceries!</button>
+  <div class="flex-column justify-content-between" >
+    <div class="flex-column justify-content-stretch mt-3" id="textAreaFrame" data-audio-input-target="textAreaFrame">
+      <!-- Initially empty -->
+    </div>
+    <div class="space-between">
+      <button class="button violet" data-action="click->audio-input#showTextArea">
+        <i class="fa fa-pencil-alt"></i>
+        <span></span>
+      </button>
+      <button class="button violet" data-action="click->audio-input#toggleRecording" data-audio-input-target="recordButton">
+        <i class="fa fa-microphone record-icon"></i>
+        <i class="fa fa-stop stop-icon hidden"></i>
+        <span class="record-text"></span>
+        <span class="stop-text hidden"></span>
+      </button>
+    </div>
+    <div class="d-flex justify-content-end">
+      <button class="button violet hidden" data-action="click->audio-input#submitReviewedText" data-audio-input-target="submitButton">
+        Find my groceries!
+      </button>
+    </div>
   </div>
 </div>
 
