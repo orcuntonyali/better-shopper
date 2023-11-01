@@ -26,6 +26,11 @@ class OpenaiService
     structured_response = api_response["choices"][0]["message"]["content"] if api_response["choices"]
     Rails.logger.debug "Structured response: #{structured_response.inspect}"
     parse_cart_items(structured_response) || { error: 'Unexpected response' }
+    # Structured response: "{"cart_items\":
+    # [{\"name\": \"potato\", \"quantity\": 2},
+    # {\"name\": \"tomato\", \"quantity\": 1},
+    # {\"name\": \"onion\", \"quantity\": 1}]
+    # }"
   end
 
   def self.parse_cart_items(structured_response)

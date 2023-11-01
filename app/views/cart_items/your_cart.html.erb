@@ -2,23 +2,24 @@
 <div class="d-flex flex-column justify-content-between h--100 px-2">
   <div class="flex-column">
     <% if @processed_items && @processed_items.any? %>
-      <% @processed_items.each do |item| %>
-        <div class="item-card space-between">
-          <a href="<%= item_path(id: item['id']) %>" class="space-between no-decoration">
-            <img src="<%= item['image_url'] %>" alt="<%= item['name'] %> image" width="90">
-            <div class="item-card-text">
-              <h5><%= item['name'].capitalize %></h5>
-              <p>From <%= item['store'] %></p>
-              <p> €<%= item['price'] %></p>
-            </div>
-          </a>
-          <div class="space-between button-quantity" data-controller="minus-plus">
-            <div data-action="click->minus-plus#decrement" data-item-id="<%= item['id'] %>">-</div>
-            <div id="quantity_<%= item['id'] %>" data-minus-plus-target="quantity"><%= item['quantity'] %></div>
-            <div data-action="click->minus-plus#increment" data-item-id="<%= item['id'] %>">+</div>
-          </div>
+  <% @processed_items.each do |cart_item| %>
+    <% item = cart_item.item %>
+    <div class="item-card space-between">
+      <a href="<%= item_path(id: item.id) %>" class="space-between no-decoration">
+        <img src="<%= item.image_url %>" alt="<%= item.name %> image" width="90">
+        <div class="item-card-text">
+          <h5><%= item.name.capitalize %></h5>
+          <p>From <%= item.store.name %></p>
+          <p>€<%= item.unit_price %></p>
         </div>
-      <% end %>
+      </a>
+      <div class="space-between button-quantity" data-controller="minus-plus">
+        <div data-action="click->minus-plus#decrement" data-item-id="<%= item.id %>">-</div>
+        <div id="quantity_<%= item.id %>" data-minus-plus-target="quantity"><%= cart_item.quantity %></div>
+        <div data-action="click->minus-plus#increment" data-item-id="<%= item.id %>">+</div>
+      </div>
+    </div>
+  <% end %>
     <% elsif @not_found_message %>
       <div>
         <h1>Items Not Found</h1>
