@@ -1,7 +1,6 @@
   <% @ribbon_text = "WELCOME TO BETTERSHOPPER" %>
 
-  <div class="bg-white center-content flex-column">
-
+<div class="d-flex bg-white flex-column justify-content-between" >
     <div id='map'
       data-controller="map"
       data-map-markers-value="<%= @markers.to_json %>"
@@ -13,9 +12,7 @@
         data-user-latitude="<%= current_user.latitude %>"
         data-user-longitude="<%= current_user.longitude %>"
       <% end %> >
-
-
-    <div id='map' data-map-target="map">
+     <div data-map-target="map"></div>
     </div>
 
 
@@ -34,9 +31,13 @@
       <%= f.hidden_field :title, :value => "some value", data: {map_target: "hidden"} %>
       <% end %>
 
-
-    <div data-controller="buttons">
-    <button data-action="click->map#showMapboxSearchBox" data-button-type="change-address" class="button gray">CHANGE</button>
-    <button data-action="click->buttons#lookingGood" data-button-type="looking-good" class="button violet">LOOKS GOOD</button>      <!-- # change to button later -->
+  <div class="flex-column">
+    <div class="space-between">
+      <div data-controller="buttons">
+          <button data-action="click->map#showMapboxSearchBox" data-button-type="change-address" class="button gray" data-target="buttons.changeAddressButton">CHANGE</button>
+          <button data-action="click->buttons#lookingGood" data-button-type="looking-good" class="button violet" data-target="buttons.lookingGoodButton">LOOKS GOOD</button>
+          <button data-action="click->buttons#setNewAddress" data-button-type="set-new-address" class="button violet" data-target="buttons.setNewAddressButton" style="display: none;">SET NEW ADDRESS</button>
+      </div>
     </div>
   </div>
+</div>

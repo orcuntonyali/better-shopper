@@ -1,0 +1,70 @@
+  <% @ribbon_text = "WELCOME TO BETTERSHOPPER" %>
+
+  <div class="bg-white center-content flex-column">
+
+    <div id='map'
+      data-controller="map"
+      data-map-markers-value="<%= @markers.to_json %>"
+      data-map-api-key-value="<%= ENV['MAPBOX_API_KEY'] %>"
+      <% if @user_address %>
+        data-user-latitude="<%= @user_address_lat %>"
+        data-user-longitude="<%= @user_address_lng %>"
+      <% else %>
+        data-user-latitude="<%= current_user.latitude %>"
+        data-user-longitude="<%= current_user.longitude %>"
+      <% end %> >
+
+
+    <div id='map' data-map-target="map">
+
+
+
+
+    <div class="text-center">
+      <p>Your current address is</p>
+      <% if @user_address %>
+        <p><%= @user_address %></p>
+      <% else %>
+      <p><%= current_user.address %></p>
+      <% end %>
+    </div>
+
+    <%= simple_form_for :new_address, url: setup_path, method: :get do |f| %>
+      <%= f.submit "Set new address", data: {action: "click->map#send"}, style:"display: none;", class: "set-address-btn" %>
+      <%= f.hidden_field :title, :value => "some value", data: {map_target: "hidden"} %>
+      <% end %>
+
+
+    <div data-controller="buttons">
+    <button data-action="click->map#showMapboxSearchBox" data-button-type="change-address" class="button gray">CHANGE</button>
+    <button data-action="click->buttons#lookingGood" data-button-type="looking-good" class="button violet">LOOKS GOOD</button>      <!-- # change to button later -->
+    </div>
+  </div>
+
+
+
+
+
+
+
+<div class="bg-white center-content flex-column">
+  <div id='map' data-controller="map" data-map-markers-value="<%= @markers.to_json %>" data-map-api-key-value="<%= ENV['MAPBOX_API_KEY'] %>">
+    <div id='map' data-map-target="map"></div>
+    <div class="text-center">
+      <p>Your current address is</p>
+      <% if @user_address %>
+        <p><%= @user_address %></p>
+      <% else %>
+        <p><%= current_user.address %></p>
+      <% end %>
+    </div>
+    <%= simple_form_for :new_address, url: setup_path, method: :get do |f| %>
+      <%= f.submit "Set New Address", data: { action: "click->buttons#setNewAddress" }, style: "display: none;", class: "set-address-btn" %>
+      <%= f.hidden_field :title, value: "some value", data: { map_target: "hidden" } %>
+    <% end %>
+    <div data-controller="buttons">
+      <button data-action="click->buttons#changeAddress" data-button-type="change-address" class="button gray">CHANGE</button>
+      <button data-action="click->buttons#lookingGood" data-button-type="looking-good" class="button violet">LOOKS GOOD</button>
+    </div>
+  </div>
+</div>
