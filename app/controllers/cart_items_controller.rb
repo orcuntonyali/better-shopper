@@ -28,9 +28,8 @@ class CartItemsController < ApplicationController
   end
 
   def your_cart
-    @processed_items = CartItem.all
-    # @order = current_user.orders.last
-    # @cart_items = @order.cart_items # Assuming CartItem has an `order_id` foreign key
+    @order = current_user.orders.last
+    @processed_items = @order.cart_items # Assuming CartItem has an `order_id` foreign key
     # @not_found_message = @order.not_found_message  # You may need to store this message in the Order model
   end
 
