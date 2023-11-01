@@ -10,11 +10,6 @@
   justify-content: space-between;
 }
 
-.center-content {
-  display: flex;
-  align-items: center;
-}
-
 .center-text {
   text-align: center;
 }
@@ -22,11 +17,11 @@
 // colors
 
 .violet {
-  background-color: #6200EE;
+  background-color: #6200ee;
 }
 
 .white {
-  background-color: #FFFFFF;
+  background-color: #ffffff;
 }
 
 // background fill colors
@@ -38,9 +33,7 @@
 }
 
 .bg-white {
-  background-color: #FFFFFF;
-  position: relative;
-  height: 100%;
+  background-color: #ffffff;
 }
 
 // hide scrollbar
@@ -56,19 +49,8 @@
 // layouts/application.html.erb
 
 body {
-  font-family: 'Roboto', sans-serif;
-  justify-content: center;
+  font-family: "Roboto", sans-serif;
 }
-
-.main-container {
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  align-items: center;
-  height: 740px;
-  width: 360px;
-}
-
 .content-div {
   overflow-y: scroll;
   flex-grow: 1;

@@ -1,7 +1,5 @@
-<script src="https://unpkg.com/@dotlottie/player-component@latest/dist/dotlottie-player.mjs" type="module"></script>
 <% @ribbon_text = "WELCOME TO BETTERSHOPPER" %>
-
-<div class="bg-white flex-column center-content justify-content-between">
+<div class="home--container d-flex flex-column align-items-center h--100">
   <div class="flex-column-reverse center-content mt-2">
     <%= button_to "Not '#{current_user.name} #{current_user.surname}'?", destroy_user_session_path, method: :delete, class: "gray button" %>
   </div>
@@ -13,8 +11,6 @@
       <dotlottie-player src="https://lottie.host/9debb8ff-b5c2-427d-a7ea-22a69122761a/wGneHfmL9S.json" background="transparent"
                         speed="1" style="width: 300px; height: 300px;" loop autoplay></dotlottie-player>
     </div>
-    <div>
-      <%= link_to "LET'S GO!", setup_path, class: "button violet" %>
-    </div>
   </div>
+  <%= link_to "LET'S GO!", setup_path, class: "button violet" %>
 </div>
