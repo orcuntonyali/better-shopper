@@ -19,7 +19,6 @@ class CartItemsController < ApplicationController
   end
 
   def your_cart
-    # These can be obtained from other controllers?
     user = User.find(current_user.id)
     latitude = user.latitude
     longitude = user.longitude
@@ -36,7 +35,6 @@ class CartItemsController < ApplicationController
   end
 
   def update_cart
-    raise
   end
 
   def create
