@@ -20,17 +20,9 @@ class OpenaiService
   # process_order
   def self.process_order(order_input)
     api_payload_messages = build_api_payload_messages(order_input)
-    Rails.logger.debug "Order_input: #{order_input.inspect}"
     api_response = call_openai_api(api_payload_messages)
-    Rails.logger.debug "API response: #{api_response.inspect}"
     structured_response = api_response["choices"][0]["message"]["content"] if api_response["choices"]
-    Rails.logger.debug "Structured response: #{structured_response.inspect}"
     parse_cart_items(structured_response) || { error: 'Unexpected response' }
-    # Structured response: "{"cart_items\":
-    # [{\"name\": \"potato\", \"quantity\": 2},
-    # {\"name\": \"tomato\", \"quantity\": 1},
-    # {\"name\": \"onion\", \"quantity\": 1}]
-    # }"
   end
 
   def self.parse_cart_items(structured_response)

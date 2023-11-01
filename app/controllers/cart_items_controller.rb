@@ -20,8 +20,7 @@ class CartItemsController < ApplicationController
 
     # Create a new order for the user
     order = Order.create(user: current_user, delivery_option: :pickup, status: :pending)
-    Rails.logger.debug "Order: #{order.inspect}"
-    puts order.errors.full_messages
+
     # Initialize CartService
     cart_service = CartService.new(latitude: @latitude, longitude: @longitude)
     cart_service.process_order(processed_order, @max_distance, order)
@@ -29,14 +28,8 @@ class CartItemsController < ApplicationController
 
   def your_cart
     @order = current_user.orders.last
-    @processed_items = @order.cart_items # Assuming CartItem has an `order_id` foreign key
+    @processed_items = @order.cart_items
     # @not_found_message = @order.not_found_message  # You may need to store this message in the Order model
-  end
-
-  def create
-  end
-
-  def update
   end
 
   private
