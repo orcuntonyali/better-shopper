@@ -97,6 +97,7 @@ export default class extends Controller {
       totalElement.innerText = (currentTotal + deliveryFee).toFixed(2) + ' €';
     } else {
       this.sliderTarget.style.transform = 'translateX(0)';
+
       // Delivery is OFF
       console.log('Delivery is OFF');
 

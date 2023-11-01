@@ -1,7 +1,7 @@
 <script src="https://unpkg.com/@dotlottie/player-component@latest/dist/dotlottie-player.mjs" type="module"></script>
 <% @ribbon_text = "WELCOME TO BETTERSHOPPER" %>
 
-<div class="bg-white flex-column center-content justify-content-between">
+<div class="bg-white flex-column center-content">
   <div class="flex-column-reverse center-content mt-2">
     <%= button_to "Not '#{current_user.name} #{current_user.surname}'?", destroy_user_session_path, method: :delete, class: "gray button" %>
   </div>
