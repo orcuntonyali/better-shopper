@@ -1,15 +1,22 @@
 AllCops:
   NewCops: enable
   Exclude:
-    - 'bin/**/*'
-    - 'db/**/*'
-    - 'config/**/*'
-    - 'node_modules/**/*'
-    - 'script/**/*'
-    - 'support/**/*'
-    - 'tmp/**/*'
-    - 'test/**/*'
-
+    - "vendor/bundle/**/*"
+    - "vendor/*"
+    - "bin/**/*"
+    - "db/**/*"
+    - "config/**/*"
+    - "node_modules/**/*"
+    - "script/**/*"
+    - "support/**/*"
+    - "tmp/**/*"
+    - "test/**/*"
+    - "db/seeds.rb"
+    - "db/schema.rb"
+    - "db/migrate/*"
+    - "app/helpers/helpers.rb"
+    - "bin/bundle"
+    - "config/initializers/simple_form.rb"
 Style/ConditionalAssignment:
   Enabled: false
 Style/StringLiterals:
@@ -36,7 +43,17 @@ Style/FrozenStringLiteralComment:
   Enabled: false
 Layout/LineLength:
   Max: 120
+  Exclude:
+    - "config/initializers/devise.rb"
 Style/EmptyMethod:
   Enabled: false
 Bundler/OrderedGems:
   Enabled: false
+Metrics/MethodLength:
+  Max: 15
+Metrics/BlockLength:
+  Max: 45
+  AllowedMethods: ["describe", "context"]
+  Exclude:
+    - "spec/*/*"
+    - "spec/factories.rb"

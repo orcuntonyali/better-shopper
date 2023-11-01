@@ -7,6 +7,7 @@
       <p data-items-target="item">No image available</p>
     <% end %>
     <div>
+      <% raise %>
       <% @purchase_options.each_with_index do |option, index| %>
         <div class="table-view <%='selected' if index == 0 %>"
                     data-items-target="option<%= index %>"

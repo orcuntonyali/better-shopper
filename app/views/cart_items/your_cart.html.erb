@@ -4,18 +4,18 @@
     <% if @processed_items && @processed_items.any? %>
       <% @processed_items.each do |item| %>
         <div class="item-card space-between">
-          <a href="<%= item_path(id: item['id']) %>" class="space-between no-decoration">
-            <img src="<%= item['image_url'] %>" alt="<%= item['name'] %> image" width="90">
+          <a href="<%= item_path(id: item['selected_item']['id']) %>" class="space-between no-decoration">
+            <img src="<%= item['selected_item']['image_url'] %>" alt="<%= item['selected_item']['name'] %> image" width="90">
             <div class="item-card-text">
-              <h5><%= item['name'].capitalize %></h5>
-              <p>From <%= item['store'] %></p>
-              <p> €<%= item['price'] %></p>
+              <h5><%= item['selected_item']['name'].capitalize %></h5>
+              <p>From <%= item['selected_item'].store.name %></p>
+              <p> €<%= item['selected_item']["unit_price"] %></p>
             </div>
           </a>
           <div class="space-between button-quantity" data-controller="minus-plus">
-            <div data-action="click->minus-plus#decrement" data-item-id="<%= item['id'] %>">-</div>
-            <div id="quantity_<%= item['id'] %>" data-minus-plus-target="quantity"><%= item['quantity'] %></div>
-            <div data-action="click->minus-plus#increment" data-item-id="<%= item['id'] %>">+</div>
+            <div data-action="click->minus-plus#decrement" data-item-id="<%= item['selected_item']['id'] %>">-</div>
+            <div id="quantity_<%= item['selected_item']['id'] %>" data-minus-plus-target="quantity"><%= item['quantity'] %></div>
+            <div data-action="click->minus-plus#increment" data-item-id="<%= item['selected_item']['id'] %>">+</div>
           </div>
         </div>
       <% end %>
