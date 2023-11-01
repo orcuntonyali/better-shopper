@@ -32,10 +32,8 @@
       </div>
     <% end %>
   </div>
-  <div class="flex-column">
-    <div class="space-between">
-      <%= link_to '+ ADD ITEMS', new_cart_item_path, class: 'button violet' %>
-      <button class="button violet">CHECKOUT</button>
-    </div>
+  <div class="space-between">
+    <%= link_to '+ ADD ITEMS', new_cart_item_path, class: 'button violet' %>
+    <%= link_to 'CHECKOUT', orders_path(processed_items: @processed_items), class: 'button violet', data: { turbo_method: :post} %>
   </div>
 </div>

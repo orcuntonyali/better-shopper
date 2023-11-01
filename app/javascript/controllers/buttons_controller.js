@@ -1,6 +1,6 @@
 import { Controller } from "@hotwired/stimulus";
 export default class extends Controller {
-  static targets = ["address", "maxDistance"];
+  static targets = ["address", "maxDistance", "toggle", "slider"];
   static values = {
     mapController: String
   }
@@ -73,24 +73,40 @@ export default class extends Controller {
     }
   }
 
-
 // delivery toggle button in orders/show
-  static targets = [ "toggle", "slider" ];
-
   connect() {
     this.toggleTarget.checked = false; // Initialize the toggle to OFF
     this.toggleTarget.addEventListener('change', this.toggleDelivery.bind(this));
+    console.log("Controller connected to Orders/Show");
   }
 
   toggleDelivery() {
+    const deliveryFee = 5;
+
     if (this.toggleTarget.checked) {
-      this.sliderTarget.style.transform = 'translateX(26px)';
+      this.sliderTarget.style.transform = 'translateX(0px)';
       // Delivery is ON
       console.log('Delivery is ON');
+
+      // Show delivery fee
+      document.querySelector('.delivery-fee').style.display = 'flex';
+
+      // Update total with delivery fee
+      const totalElement = document.querySelector('.total-price');
+      const currentTotal = parseFloat(totalElement.innerText);
+      totalElement.innerText = (currentTotal + deliveryFee).toFixed(2) + ' €';
     } else {
       this.sliderTarget.style.transform = 'translateX(0)';
       // Delivery is OFF
       console.log('Delivery is OFF');
+
+      // Hide delivery fee
+      document.querySelector('.delivery-fee').style.display = 'none';
+
+      // Update total without delivery fee
+      const totalElement = document.querySelector('.total-price');
+      const currentTotal = parseFloat(totalElement.innerText);
+      totalElement.innerText = (currentTotal - deliveryFee).toFixed(2) + ' €';
     }
   }
 }

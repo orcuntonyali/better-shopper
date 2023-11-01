@@ -1,5 +1,4 @@
 <% @ribbon_text = "Checkout" %>
-<%= render "shared/ribbon" %>
 
 <div class="bg-white" style="padding: 0 15px;">
   <h4>Items:</h4>
@@ -22,21 +21,44 @@
 
   <hr style="border-color: #6200EE; border-width: 2px; margin-left: 15px; margin-right: 15px;">
 
-  <div style="display: flex; align-items: center;"">
-    <h5>Subtotal:</h5>
-    <h5 style="margin-left: auto;"> € <%= @total_price %></h5> 
+  <!-- Subtotal and Service fee section -->
+  <div>
+    <div style="display: flex; align-items: center;">
+      <h5>Subtotal:</h5>
+      <h5 style="margin-left: auto;"><%= @total_price %> €</h5>
+    </div>
+    <div style="display: flex; align-items: center;">
+      <h5>Service fee:</h5>
+      <h5 style="margin-left: auto;">5.00 €</h5> 
+    </div>
+    <!-- Delivery fee section (initially hidden) -->
+    <div class="delivery-fee" style="display: none; align-items: center;">
+      <h5>Delivery fee:</h5>
+      <h5 style="margin-left: auto;">5.00 €</h5> 
+    </div>
   </div>
 
   <hr style="border-color: #6200EE; border-width: 2px; margin-left: 15px; margin-right: 15px;">
 
-  <div data-controller="delivery-toggle" style="display: flex; align-items: center;">
+  <!-- Toggle button for delivery -->
+  <div data-controller= "buttons" style="display: flex; align-items: center;">
     <h5>Deliver to my address</h5>
     <label class="switch" style="margin-left: auto;">
-      <input type="checkbox" data-target="delivery-toggle.toggle">
-      <span class="slider round" data-target="delivery-toggle.slider"></span>
+      <input type="checkbox" data-buttons-target="toggle"">
+      <span class="slider round" data-buttons-target="slider"></span>
     </label>
   </div>
 
   <hr style="border-color: #6200EE; border-width: 2px; margin-left: 15px; margin-right: 15px;">
 
+  <!-- Total section -->
+  <div style="display: flex; align-items: center;">
+    <h5>Total:</h5>
+    <h5 style="margin-left: auto;" class="total-price"><%= @total_price + 5 %> €</h5> <!-- +5 is Service fee -->
+  </div>
+
 </div>
+
+
+
+
