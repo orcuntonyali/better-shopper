@@ -50,16 +50,7 @@ export default class extends Controller {
     });
   }
   }
-  hideMapboxSearchBox() {
-    this.buttonsOutlet.changeAddressTarget.classList.remove("d-none");
-    this.buttonsOutlet.lookingGoodTarget.classList.remove("d-none");
-    const geocoder = document.querySelector('.mapboxgl-ctrl-geocoder');
-    if (geocoder) {
-      geocoder.remove();
-    }
-  }
   send(e){
     this.hiddenTarget.value = this.updateAddress
-    this.hideMapboxSearchBox();
   }
 }
