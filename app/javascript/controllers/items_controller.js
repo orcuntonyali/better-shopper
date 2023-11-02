@@ -63,7 +63,7 @@ export default class extends Controller {
       } catch(error) {
         console.log('itemsController#selectOption', error)
       }
-    const redirectPath = `/cart_items/your_cart`;
+    const redirectPath = `/cart_items/my_cart`;
     window.location.href = redirectPath;
   }
 }

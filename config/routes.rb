@@ -14,7 +14,7 @@ Rails.application.routes.draw do
       post 'process_audio'
       post 'process_order'
       post'update_cart'
-      get 'your_cart'
+      get 'my_cart'
     end
   end
 end

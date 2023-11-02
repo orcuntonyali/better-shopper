@@ -13,11 +13,17 @@
           <p>€<%= item.unit_price %></p>
         </div>
       </a>
-      <div class="space-between button-quantity" data-controller="minus-plus">
-        <div data-action="click->minus-plus#decrement" data-item-id="<%= item.id %>">-</div>
-        <div id="quantity_<%= item.id %>" data-minus-plus-target="quantity"><%= cart_item.quantity %></div>
-        <div data-action="click->minus-plus#increment" data-item-id="<%= item.id %>">+</div>
-      </div>
+      <form action="/cart_items/update_cart" method="post" id="updateCartForm">
+        <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
+        <input type="hidden" name="id" value="<%= cart_item.id %>" />
+        <input type="hidden" name="quantity" value="<%= cart_item.quantity %>" id="quantityInput" />
+
+        <div class="space-between button-quantity" data-controller="quantity">
+          <button type="button" class="no--button" data-action="quantity#decrement">-</button>
+          <span data-quantity-target="display"><%= cart_item.quantity %></span>
+          <button type="button" class="no--button" data-action="quantity#increment">+</button>
+        </div>
+      </form>
     </div>
   <% end %>
     <% elsif @not_found_message %>

@@ -1,5 +1,5 @@
 class CartItemsController < ApplicationController
-  before_action :set_cart_service_variables, only: [:process_order, :your_cart]
+  before_action :set_cart_service_variables, only: [:process_order, :my_cart]
 
   def new
   end
@@ -26,10 +26,16 @@ class CartItemsController < ApplicationController
     cart_service.process_order(processed_order, @max_distance, order)
   end
 
-  def your_cart
+  def my_cart
     @order = current_user.orders.last
     @processed_items = @order.cart_items
     # @not_found_message = @order.not_found_message  # You may need to store this message in the Order model
+  end
+
+  def update_cart
+    cart_item = CartItem.find(params[:id])
+    cart_item.update(quantity: params[:quantity])
+    redirect_to my_cart_cart_items_path
   end
 
   private

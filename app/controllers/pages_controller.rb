@@ -7,13 +7,12 @@ class PagesController < ApplicationController
   end
 
   def setup
-    if !params.nil? && !params[:new_address].nil? && !params[:new_address][:title].nil? && !Geocoder.search(params[:new_address][:title]).empty?
-      @user_address = params[:new_address][:title]
-      @user_address_lat = Geocoder.search(@user_address).first.latitude
-      @user_address_lng = Geocoder.search(@user_address).first.longitude
+    if params && params[:new_address]
+      current_user.address = params[:new_address][:title]
+      current_user.save
       @markers << {
-        lat: @user_address_lat,
-        lng: @user_address_lng,
+        lat: current_user.latitude,
+        lng: current_user.longitude,
         marker_color: 'blue'
       }
     else

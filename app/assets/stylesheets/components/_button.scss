@@ -31,8 +31,19 @@
 
   &:hover {
     background-color: #6200EE;
-    color: white;
+
+  /* Direct child combinator to only select direct children */
+    & > .no--button, & > span {
+      color: white;
+    }
   }
+}
+
+.no--button {
+  background: none;
+  border: none;
+  font-size: 1em;
+  cursor: pointer;
 }
 
 .violet {
