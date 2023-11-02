@@ -1,32 +1,11 @@
 import { Controller } from "@hotwired/stimulus";
 export default class extends Controller {
-  static targets = ["address", "maxDistance"];
+  static targets = ["changeAddress", "lookingGood", "setNewAddress", "maxDistance", "toggle", "slider"];
   static values = {
     mapController: String
   }
   connect() {
-    this.address = null;
-    this.element.addEventListener("click", (event) => {
-      event.preventDefault();
-    });
-  }
-  changeAddress() {
-    const changeAddressButton = this.target;
-    if (changeAddressButton) {
-      changeAddressButton.style.display = "none";
-    }
-    const userAddress = this.target;
-    if (userAddress) {
-      userAddress.style.display = "none";
-    }
-    const mapController = this.application.getControllerForElementAndIdentifier(
-      document.getElementById('map'),
-      "map"
-    );
-    if (mapController && !document.querySelector('.mapboxgl-ctrl-geocoder--input')) {
-      mapController.showMapboxSearchBox();
-      console.log("I am working")
-    }
+    console.log("Buttons Controller connected")
   }
   lookingGood() {
     if (confirm("Proceed to cart_items/new?")) {
@@ -70,6 +49,43 @@ export default class extends Controller {
     function getMetaContent(name) {
       const element = document.head.querySelector(`meta[name="${name}"]`);
       return element ? element.content : null;
+    }
+  }
+
+  // delivery toggle button in orders/show
+  connect() {
+    this.toggleTarget.checked = false; // Initialize the toggle to OFF
+    this.toggleTarget.addEventListener('change', this.toggleDelivery.bind(this));
+    console.log("Controller connected to Orders/Show");
+  }
+  toggleDelivery() {
+    const deliveryFee = 5;
+
+    if (this.toggleTarget.checked) {
+      this.sliderTarget.style.transform = 'translateX(0px)';
+      // Delivery is ON
+      console.log('Delivery is ON');
+
+      // Show delivery fee
+      document.querySelector('.delivery-fee').style.display = 'flex';
+
+      // Update total with delivery fee
+      const totalElement = document.querySelector('.total-price');
+      const currentTotal = parseFloat(totalElement.innerText);
+      totalElement.innerText = (currentTotal + deliveryFee).toFixed(2) + ' €';
+    } else {
+      this.sliderTarget.style.transform = 'translateX(0)';
+
+      // Delivery is OFF
+      console.log('Delivery is OFF');
+
+      // Hide delivery fee
+      document.querySelector('.delivery-fee').style.display = 'none';
+
+      // Update total without delivery fee
+      const totalElement = document.querySelector('.total-price');
+      const currentTotal = parseFloat(totalElement.innerText);
+      totalElement.innerText = (currentTotal - deliveryFee).toFixed(2) + ' €';
     }
   }
 }

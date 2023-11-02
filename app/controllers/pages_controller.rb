@@ -22,7 +22,6 @@ class PagesController < ApplicationController
     add_nearby_stores_markers
   end
 
-  
   private
 
   def initialize_markers

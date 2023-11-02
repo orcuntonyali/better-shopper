@@ -35,7 +35,7 @@
   <div class="flex-column">
     <div class="space-between">
       <%= link_to '+ ADD ITEMS', new_cart_item_path, class: 'button violet' %>
-      <button class="button violet">CHECKOUT</button>
+      <%= link_to 'CHECKOUT', order_path(@order), class: 'button violet' %>
     </div>
   </div>
 </div>
