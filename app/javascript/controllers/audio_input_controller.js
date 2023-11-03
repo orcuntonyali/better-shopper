@@ -136,7 +136,7 @@ export default class extends Controller {
     .then(data => {
       if (data.processed_order && Array.isArray(data.processed_order)) {
         // Redirect to cart item creation page, assuming you store processed_order in the session or send it through params
-        window.location.href = "/cart_items/your_cart";
+        window.location.href = "/cart_items/my_cart";
       } else {
         console.log('Error processing items.');
       }

@@ -1,5 +1,4 @@
-<div class="bg-blue" style="padding: 20px;">
-
+<div class="bg-blue"">
   <%= simple_form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
     <div class="form-inputs">
       <%= f.input :email,
@@ -10,7 +9,6 @@
                   required: false,
                   input_html: { autocomplete: "current-password" } %>
     </div>
-
     <div class="form-actions button text-center">
       <%= f.button :submit, "Log in", class: "button violet" %>
     </div>

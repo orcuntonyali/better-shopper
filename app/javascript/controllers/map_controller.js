@@ -3,6 +3,7 @@ import mapboxgl from 'mapbox-gl'
 import MapboxGeocoder from "@mapbox/mapbox-gl-geocoder"
 export default class extends Controller {
   static targets  = ["map", "hidden"]
+  static outlets = ["buttons"]
   static values = {
     apiKey: String,
     markers: Array
@@ -34,6 +35,8 @@ export default class extends Controller {
     });
   }
   showMapboxSearchBox() {
+    this.buttonsOutlet.changeAddressTarget.classList.add("d-none")
+    this.buttonsOutlet.lookingGoodTarget.classList.add("d-none")
     if (!document.querySelector('.mapboxgl-ctrl-geocoder--input')) {
     const geocoder = new MapboxGeocoder({
       accessToken: mapboxgl.accessToken,
@@ -43,10 +46,10 @@ export default class extends Controller {
     geocoder.on('result', (e) => {
       const address = e.result.place_name;
       this.updateAddress = address;
-      document.querySelector('.set-address-btn').style.display = "block";
+      this.buttonsOutlet.setNewAddressTarget.classList.remove("d-none")
     });
   }
-}
+  }
   send(e){
     this.hiddenTarget.value = this.updateAddress
   }

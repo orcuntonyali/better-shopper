@@ -1,6 +1,7 @@
 class CartItemsController < ApplicationController
+  before_action :set_cart_service_variables, only: [:process_order, :my_cart]
+
   def new
-    @cart_items = []
   end
 
   def process_audio
@@ -13,32 +14,40 @@ class CartItemsController < ApplicationController
 
   def process_order
     order_input = params[:order_input]
+    # Initialize OpenaiService
     processed_order = OpenaiService.process_order(order_input)
-    Rails.logger.debug "Debugging processed_order: #{processed_order.inspect}"
-    session[:processed_order] = processed_order
     render json: { status: "success", processed_order: }
+
+    # Create a new order for the user
+    order = Order.create(user: current_user, delivery_option: :pickup, status: :pending)
+
+    # Initialize CartService
+    cart_service = CartService.new(latitude: @latitude, longitude: @longitude)
+    cart_service.process_order(processed_order, @max_distance, order)
   end
 
-  def your_cart
+  def my_cart
+    @order = current_user.orders.last
+    @processed_items = @order.cart_items
+    # @not_found_message = @order.not_found_message  # You may need to store this message in the Order model
+  end
+
+  def update_cart
+    # Find the cart item by ID from the form submission
+    cart_item = CartItem.find(params[:id])
+    # Update the quantity of the cart item
+    cart_item.update(quantity: params[:quantity])
+
+    # Redirect back to the cart overview
+    redirect_to my_cart_cart_items_path
+  end
+
+  private
+
+  def set_cart_service_variables
     user = User.find(current_user.id)
-    latitude = user.latitude
-    longitude = user.longitude
-    max_distance = user.max_distance
-
-    processed_order = session[:processed_order]
-
-    # Initialize CartService with the user's latitude and longitude
-    cart_service = CartService.new(latitude:, longitude:)
-
-    # Pass max_distance and processed_order to the service
-    service_result = cart_service.process_order(processed_order, max_distance)
-    @processed_items = service_result['cheapest_items']
-    @not_found_message = service_result['not_found_message']
-  end
-
-  def create
-  end
-
-  def update
+    @latitude = user.latitude
+    @longitude = user.longitude
+    @max_distance = user.max_distance
   end
 end

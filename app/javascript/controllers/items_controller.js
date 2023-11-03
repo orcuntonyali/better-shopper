@@ -2,6 +2,8 @@ import { Controller } from "@hotwired/stimulus"
 
 export default class extends Controller {
   static targets = ["checkbox"]
+  csrfToken = document.querySelector("meta[name=csrf-token]").content;
+  selectedindex = 0;
 
   connect() {
     this.allowSingleSelection();
@@ -19,10 +21,11 @@ export default class extends Controller {
     const clickedDiv = event.clickedDiv;
     if (checkbox.checked) {
       this.deselectOtherOptions(checkbox);
-      clickedDiv.classList.add("selected");
+      this.selectedindex = Number(event.currentTarget.dataset.optionIndex);
+      event.currentTarget.classList.add("selected");
     } else {
       checkbox.checked = true; // Re-check because one checkbox should always be selected
-      clickedDiv.classList.remove("selected");
+      event.currentTarget.classList.remove("selected");
     }
   }
 
@@ -44,11 +47,23 @@ export default class extends Controller {
     });
   }
 
-  confirmSelection(event) {
+  async confirmSelection(event) {
     const selectedOptionIndex = event.currentTarget.getAttribute("data-selected-option-index");
     const itemPath = event.currentTarget.getAttribute("data-items-url");
-    const redirectPath = `/cart_items/display_cart_items?selected_option_index=${selectedOptionIndex}`;
-
+    try {
+        const response = await fetch('/cart_items/update_cart', {
+          method: 'POST',
+          headers: {
+            'X-CSRF-Token': this.csrfToken,
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({ item_id: event.currentTarget.dataset.optionId })
+        });
+        // debugger;
+      } catch(error) {
+        console.log('itemsController#selectOption', error)
+      }
+    const redirectPath = `/cart_items/my_cart`;
     window.location.href = redirectPath;
   }
 }

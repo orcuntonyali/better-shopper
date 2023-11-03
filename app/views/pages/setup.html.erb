@@ -1,26 +1,20 @@
-  <% @ribbon_text = "WELCOME TO BETTERSHOPPER" %>
-
-  <div class="bg-white center-content flex-column">
-
-    <div id='map'
+<% @ribbon_text = "WELCOME TO BETTERSHOPPER" %>
+<div class="d-flex flex-column justify-content-between h--100 px-2"
       data-controller="map"
+      data-map-buttons-outlet="#buttons"
       data-map-markers-value="<%= @markers.to_json %>"
       data-map-api-key-value="<%= ENV['MAPBOX_API_KEY'] %>"
-      <% if @user_address %>
-        data-user-latitude="<%= @user_address_lat %>"
-        data-user-longitude="<%= @user_address_lng %>"
-      <% else %>
-        data-user-latitude="<%= current_user.latitude %>"
-        data-user-longitude="<%= current_user.longitude %>"
-      <% end %> >
-
-
-    <div id='map' data-map-target="map">
-    </div>
-
-
-
-    <div class="text-center">
+  <% if @user_address %>
+    data-user-latitude="<%= @user_address_lat %>"
+    data-user-longitude="<%= @user_address_lng %>"
+  <% else %>
+    data-user-latitude="<%= current_user.latitude %>"
+    data-user-longitude="<%= current_user.longitude %>"
+  <% end %>>
+  <div id='map' data-map-target="map">
+  </div>
+  <div class="d-flex flex-column flex-grow-1 justify-content-between">
+    <div class="flex-column text-center">
       <p>Your current address is</p>
       <% if @user_address %>
         <p><%= @user_address %></p>
@@ -28,15 +22,17 @@
       <p><%= current_user.address %></p>
       <% end %>
     </div>
-
-    <%= simple_form_for :new_address, url: setup_path, method: :get do |f| %>
-      <%= f.submit "Set new address", data: {action: "click->map#send"}, style:"display: none;", class: "set-address-btn" %>
-      <%= f.hidden_field :title, :value => "some value", data: {map_target: "hidden"} %>
-      <% end %>
-
-
-    <div data-controller="buttons">
-    <button data-action="click->map#showMapboxSearchBox" data-button-type="change-address" class="button gray">CHANGE</button>
-    <button data-action="click->buttons#lookingGood" data-button-type="looking-good" class="button violet">LOOKS GOOD</button>      <!-- # change to button later -->
+    <div class="flex-column" id="buttons" data-controller="buttons">
+      <div class="d-flex space-between">
+        <button class="button gray" data-action="click->map#showMapboxSearchBox" data-buttons-target="changeAddress">CHANGE</button>
+        <button class="button violet" data-action="click->buttons#lookingGood" data-buttons-target="lookingGood">LOOKS GOOD</button>
+      </div>
+      <div class="d-flex justify-content-end">
+        <%= simple_form_for :new_address, url: setup_path, method: :get do |f| %>
+          <%= f.submit "SET NEW ADDRESS", data: {action: "click->map#send", buttons_target: "setNewAddress"}, class: "button violet d-none" %>
+          <%= f.hidden_field :title, :value => "some value", data: {map_target: "hidden"} %>
+        <% end %>
+      </div>
     </div>
   </div>
+</div>
