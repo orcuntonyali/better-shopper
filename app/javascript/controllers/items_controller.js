@@ -59,7 +59,7 @@ export default class extends Controller {
           },
           body: JSON.stringify({ item_id: event.currentTarget.dataset.optionId })
         });
-        debugger;
+        // debugger;
       } catch(error) {
         console.log('itemsController#selectOption', error)
       }
