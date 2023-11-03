@@ -13,8 +13,10 @@ Rails.application.routes.draw do
     collection do
       post 'process_audio'
       post 'process_order'
-      post'update_cart'
       get 'my_cart'
+    end
+    member do
+      post'update_cart'
     end
   end
 end

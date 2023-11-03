@@ -33,13 +33,16 @@ class CartItemsController < ApplicationController
   end
 
   def update_cart
+
     # Find the cart item by ID from the form submission
     cart_item = CartItem.find(params[:id])
     # Update the quantity of the cart item
-    cart_item.update(quantity: params[:quantity])
-
-    # Redirect back to the cart overview
-    redirect_to my_cart_cart_items_path
+    quantity = cart_item.quantity + params[:change].to_i
+    if cart_item.update(quantity:)
+      render json: { status: "success" }
+    else
+      render json: { status: "error" }
+    end
   end
 
   private
