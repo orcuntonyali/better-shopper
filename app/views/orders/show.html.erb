@@ -25,16 +25,16 @@
   <div>
     <div style="display: flex; align-items: center;">
       <h5>Subtotal:</h5>
-      <h5 style="margin-left: auto;"><%= number_with_precision(@total_price, precision: 2) %> €</h5>
+      <h5 style="margin-left: auto;"><%= @total_price %> €</h5>
     </div>
     <div style="display: flex; align-items: center;">
       <h5>Service fee:</h5>
-      <h5 style="margin-left: auto;">5.00 €</h5> <!-- If you update Service fee, update manually Total section! -->
+      <h5 style="margin-left: auto;"><%= number_to_currency(@service_fee, unit: '€', format: '%n %u') %></h5>
     </div>
     <!-- Delivery fee section (initially hidden) -->
     <div class="delivery-fee" style="display: none; align-items: center;">
       <h5>Delivery fee:</h5>
-      <h5 style="margin-left: auto;">5.00 €</h5>
+      <h5 style="margin-left: auto;"><%= number_to_currency(@delivery_fee, unit: '€', format: '%n %u') %></h5> 
     </div>
   </div>
 
@@ -54,10 +54,6 @@
   <!-- Total section -->
   <div style="display: flex; align-items: center;">
     <h5>Total:</h5>
-    <h5 style="margin-left: auto;" class="total-price"><%= number_with_precision(@total_price + 5, precision: 2) %> €</h5> <!-- +5 is for Service fee -->
-  </div>
-
-  <div class="row justify-content-center text-center display:inline">
-    <dotlottie-player src="https://lottie.host/a1c43db2-dd05-401e-a57b-841d89db865b/0rCNUnWDaP.json" background="transparent" speed="1" style="width: 270px;" loop autoplay></dotlottie-player>
+    <h5 style="margin-left: auto;" class="total-price"><%= @total_price + @service_fee %> €</h5>
   </div>
 </div>

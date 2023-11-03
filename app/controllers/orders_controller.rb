@@ -13,7 +13,9 @@ class OrdersController < ApplicationController
     end
     @items = @order.cart_items
     @total_price = @items.map { |item| item.item.unit_price * item.quantity }.sum
-    # @delivery_toggle = @order.delivery_option
+    @delivery_toggle = @order.delivery_option
+    @service_fee = 5.00
+    @delivery_fee = 5.00
   end
 
   # def create
