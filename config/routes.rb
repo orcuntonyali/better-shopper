@@ -7,7 +7,11 @@ Rails.application.routes.draw do
   # RESTful routes for resources
   resources :stores, only: [:index]
   resources :items
-  resources :orders
+  resources :orders do
+  member do
+    get 'pickup_locations'
+  end
+end
 
   resources :cart_items, only: [:new, :show, :create, :update, :destroy] do
     collection do

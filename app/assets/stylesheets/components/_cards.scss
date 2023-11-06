@@ -20,14 +20,15 @@
 .transcribed-text {
   box-sizing: border-box;
   width: 100%;
-  min-height: 450px;
+  flex-grow: 1;
+  // min-height: 450px;
   overflow: hidden;
   transition: max-height 0.5s ease-out;
   align-items: stretch;
 }
 
-.transcribed-text.show {
-  align-items: stretch;
+.flex-grow-1 {
+  flex-grow: 1;
 }
 
 .order-card {

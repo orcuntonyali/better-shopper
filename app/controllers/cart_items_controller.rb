@@ -30,6 +30,8 @@ class CartItemsController < ApplicationController
     @order = current_user.orders.last
     @processed_items = @order.cart_items
     # @not_found_message = @order.not_found_message  # You may need to store this message in the Order model
+    # cart_item = CartItem.find(params[:id])
+    # name = cart_item.name
   end
 
   def update_cart
@@ -52,5 +54,6 @@ class CartItemsController < ApplicationController
     @latitude = user.latitude
     @longitude = user.longitude
     @max_distance = user.max_distance
+    @stores = Store.near([@latitude, @longitude], @max_distance, units: :km).to_a
   end
 end
