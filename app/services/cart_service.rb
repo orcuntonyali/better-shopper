@@ -1,74 +1,59 @@
 class CartService
-  def initialize(latitude:, longitude:)
-    @latitude = latitude
-    @longitude = longitude
+  def initialize(stores_within_distance:)
+    @stores_within_distance = stores_within_distance
+    @cheapest_items = []
+    @not_found_items = []
   end
 
-  def process_order(processed_order, max_distance, order)
-    cheapest_items = []
-    not_found_items = []
-    stores_within_distance = find_stores_within_distance(max_distance)
+  def process_order(processed_order, order)
+    prepare_list(processed_order)
 
-    processed_order&.each do |order_item|
-      process_order_item(order_item, cheapest_items, not_found_items, stores_within_distance, order)
-    end
-
-    not_found_message = not_found_message(not_found_items)
-
-    # order.update(not_found_message: not_found_message)  # You may need to add a `not_found_message` column to the Order model
+    create_cart_items(@cheapest_items, order) if @cheapest_items.present?
 
     {
-      'cheapest_items' => cheapest_items,
-      'not_found_message' => not_found_message
+      'cheapest_items' => @cheapest_items,
+      'not_found_message' => not_found_message(@not_found_items)
     }
   end
 
   private
 
-  def process_order_item(order_item, cheapest_items, not_found_items, stores_within_distance, order)
-    cheapest_item, item_name = find_cheapest_item(order_item, stores_within_distance)
+  def prepare_list(processed_order)
+    processed_order&.each do |order_item|
+      item_name = order_item['name']
+      cheapest_item = search_for_cheapest_item(item_name)
 
-    if cheapest_item
-      cart_item = CartItem.create(
-        order: order,
-        item: cheapest_item,
-        quantity: order_item['quantity']
-      )
-      cheapest_items << cart_item
-    else
-      not_found_items << item_name
+      if cheapest_item
+        @cheapest_items << { item: cheapest_item, quantity: order_item['quantity'] }
+      else
+        @not_found_items << item_name
+      end
     end
   end
 
-  def find_stores_within_distance(max_distance)
-    Store.near([@latitude, @longitude], max_distance, units: :km).to_a
+  def create_cart_items(cheapest_items, order)
+    ActiveRecord::Base.transaction do
+      cheapest_items.each do |cheapest_item|
+        CartItem.create!(
+          order: order,
+          item: cheapest_item[:item],
+          quantity: cheapest_item[:quantity]
+        )
+      end
+    end
   end
 
-  def find_cheapest_item(order_item, stores_within_distance)
-    return [nil, order_item['name']] if stores_within_distance.empty?
-
-    item_name = order_item['name']
-    cheapest_items = Item.where(store: stores_within_distance).search_by_name(item_name).order(:unit_price).limit(1).to_a
-
-    return [nil, item_name] if cheapest_items.empty?
-
-    [cheapest_items.first, item_name]
-  end
-
-  def format_cheapest_item(cheapest_item, item_quantity)
-    {
-      'id' => cheapest_item.id,
-      'name' => cheapest_item.name,
-      'price' => cheapest_item.unit_price.to_f,
-      'quantity' => item_quantity,
-      'store' => cheapest_item.store.name,
-      'image_url' => cheapest_item.image_url
-    }
+  def search_for_cheapest_item(item_name)
+    Item.joins(:store)
+        .where(stores: { id: @stores_within_distance.map(&:id) })
+        .search_by_name(item_name)
+        .order(:unit_price)
+        .last
   end
 
   def not_found_message(not_found_items)
-    return unless not_found_items.any?
+    return if not_found_items.empty?
 
-    "The following items couldn't be found:\n* #{not_found_items.join(",\n* ")}"
+    "The following items couldn't be found:\n* #{not_found_items.join("\n* ")}"
   end
 end

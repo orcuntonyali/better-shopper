@@ -18,27 +18,24 @@ class CartItemsController < ApplicationController
     processed_order = OpenaiService.process_order(order_input)
     render json: { status: "success", processed_order: }
 
-    # Create a new order for the user
+    # Create order for the user
     order = Order.create(user: current_user, delivery_option: :pickup, status: :pending)
 
-    # Initialize CartService
-    cart_service = CartService.new(latitude: @latitude, longitude: @longitude)
-    cart_service.process_order(processed_order, @max_distance, order)
+    # Initialize cart_service.rb
+    cart_service = CartService.new(stores_within_distance: @stores_within_distance)
+    cart_service.process_order(processed_order, order)
   end
 
   def my_cart
     @order = current_user.orders.last
     @processed_items = @order.cart_items
-    # @not_found_message = @order.not_found_message  # You may need to store this message in the Order model
-    # cart_item = CartItem.find(params[:id])
-    # name = cart_item.name
+    # replace_cart_item
   end
 
   def update_cart
-
-    # Find the cart item by ID from the form submission
+    # Find cart item by ID from the form submission
     cart_item = CartItem.find(params[:id])
-    # Update the quantity of the cart item
+    # Update quantity of the cart item on the fly
     quantity = cart_item.quantity + params[:change].to_i
     if cart_item.update(quantity:)
       render json: { status: "success" }
@@ -47,13 +44,22 @@ class CartItemsController < ApplicationController
     end
   end
 
+  def replace_cart_item
+  end
+
   private
 
   def set_cart_service_variables
     user = User.find(current_user.id)
     @latitude = user.latitude
     @longitude = user.longitude
-    @max_distance = user.max_distance
-    @stores = Store.near([@latitude, @longitude], @max_distance, units: :km).to_a
+    @max_distance = 100 # change this to user.max_distance later
+    @stores_within_distance = Store.near([@latitude, @longitude], @max_distance, units: :km).to_a
+    # raise
   end
 end
+
+
+# @not_found_message = @order.not_found_message  # You may need to store this message in the Order model
+# cart_item = CartItem.find(params[:id])
+# name = cart_item.name
