@@ -26,7 +26,7 @@ class CartItemsController < ApplicationController
 
     # Respond with the processed order data and redirect URL for successful AJAX request
     if result['cheapest_items'].present?
-      render json: { status: "success", processed_order: processed_order, redirect_url: my_cart_cart_items_path }
+      render json: { status: "success", processed_order:, redirect_url: my_cart_cart_items_path }
     else
       render json: { status: "error", message: result['not_found_message'] }
     end
@@ -34,7 +34,7 @@ class CartItemsController < ApplicationController
 
   def my_cart
     @order = current_user.orders.last
-    @processed_items = @order.cart_items.includes(:item)
+    @cart_items = @order.cart_items
     # replace_cart_item
   end
 
