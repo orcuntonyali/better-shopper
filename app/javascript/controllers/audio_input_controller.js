@@ -27,38 +27,50 @@ export default class extends Controller {
   }
 
   toggleRecording() {
-    this.isRecording = !this.isRecording;
-    this.isRecording ? this.startRecording() : this.stopRecording();
+    if (!this.isInitialized) {
+      this.initializeTextArea();
+      return; // Early return to avoid starting recording immediately
+    }
+
+    if (!this.isRecording) {
+      this.startRecording();
+    } else {
+      this.stopRecording();
+    }
   }
 
   startRecording() {
-    console.log("Start recording triggered");
-    this.audioChunks = [];
-    this.mediaRecorder.start();
+    if (this.mediaRecorder.state === "inactive") {
+      console.log("Start recording triggered");
+      this.audioChunks = [];
+      this.mediaRecorder.start();
+      this.isRecording = true; // Set the recording state to true
 
-    // Toggle visibility of icons and text
-    this.recordButtonTarget.querySelector('.record-icon').classList.add('hidden');
-    this.recordButtonTarget.querySelector('.stop-icon').classList.remove('hidden');
-    this.recordButtonTarget.querySelector('.record-text').classList.add('hidden');
-    this.recordButtonTarget.querySelector('.stop-text').classList.remove('hidden');
-
-    // Change button color
-    this.recordButtonTarget.classList.remove("violet");
-    this.recordButtonTarget.classList.add("gray");
+      const recordText = this.recordButtonTarget.querySelector('.record-text');
+      if (recordText) {
+        recordText.textContent = "Recording...";
+        this.recordButtonTarget.classList.remove("violet");
+        this.recordButtonTarget.classList.add("gray");
+      } else {
+        console.error('The record-text element does not exist!');
+      }
+    }
   }
 
   stopRecording() {
-    this.mediaRecorder.stop();
+    if (this.mediaRecorder && this.mediaRecorder.state === "recording") {
+      this.mediaRecorder.stop();
+      this.isRecording = false; // Set the recording state to false
 
-    // Toggle visibility back
-    this.recordButtonTarget.querySelector('.record-icon').classList.remove('hidden');
-    this.recordButtonTarget.querySelector('.stop-icon').classList.add('hidden');
-    this.recordButtonTarget.querySelector('.record-text').classList.remove('hidden');
-    this.recordButtonTarget.querySelector('.stop-text').classList.add('hidden');
-
-    // Change button color back
-    this.recordButtonTarget.classList.remove("gray");
-    this.recordButtonTarget.classList.add("violet");
+      const recordText = this.recordButtonTarget.querySelector('.record-text');
+      if (recordText) {
+        recordText.textContent = "Tap to Speak";
+        this.recordButtonTarget.classList.remove("gray");
+        this.recordButtonTarget.classList.add("violet");
+      } else {
+        console.error('The record-text element does not exist!');
+      }
+    }
   }
 
   handleDataAvailable(event) {
@@ -92,7 +104,30 @@ export default class extends Controller {
     });
   }
 
+  initializeTextArea() {
+    this.hideQuickTips();
+    this.showTextArea();
+
+    // Hide 'TAP TO START' button
+    const tapToStartButton = this.element.querySelector('[data-action="click->audio-input#initializeTextArea"]');
+    tapToStartButton.classList.add('hidden');
+
+    // Reveal and initialize the record button for recording actions
+    this.recordButtonTarget.classList.remove('hidden');
+
+    const recordText = this.recordButtonTarget.querySelector('.record-text');
+    if (recordText) {
+      recordText.textContent = "Tap to Speak";
+    } else {
+      console.error('The record-text element does not exist!');
+    }
+    this.isInitialized = true;
+  }
+
   showTextArea(newText = '') {
+    const quickTips = "Quick Tips:\n1. Speak or Type\n2. Edit\n3. Press 'Find groceries'";
+
+    // Check if newText is an event object and reset it if so
     if (typeof newText === 'object') {
       newText = '';
     }
@@ -100,26 +135,39 @@ export default class extends Controller {
     let textarea = this.textAreaFrameTarget.querySelector('.transcribed-text');
 
     if (!textarea) {
+      // If textarea doesn't exist, create it and set the placeholder
       textarea = document.createElement('textarea');
       textarea.className = 'transcribed-text h--100';
       textarea.id = 'transcribedText';
       textarea.setAttribute('data-audio-input-target', 'transcribedText');
+      textarea.placeholder = quickTips; // Set the placeholder text
       this.textAreaFrameTarget.appendChild(textarea);
     }
 
-    // Append new text to existing content
-    if (textarea.value) {
-      textarea.value += "\n" + newText;
+    // If there's newText, add it to the textarea and show the submit button
+    if (newText) {
+      textarea.value = newText; // Set new text if provided
+      this.submitButtonTarget.classList.remove('hidden');
     } else {
-      textarea.value = newText;
+      // If there's saved text in localStorage, use it, otherwise show placeholder
+      const savedText = localStorage.getItem('transcribedText');
+      textarea.value = savedText ? savedText : '';
+      this.submitButtonTarget.classList.toggle('hidden', !savedText);
     }
-    this.submitButtonTarget.classList.toggle('hidden', !textarea.value);
-    localStorage.setItem('transcribedText', textarea.value);
 
+    // Update localStorage when textarea content changes
     textarea.addEventListener('input', () => {
-      this.submitButtonTarget.classList.toggle('hidden', !textarea.value);
-      localStorage.setItem('transcribedText', textarea.value);
+      const textValue = textarea.value;
+      this.submitButtonTarget.classList.toggle('hidden', !textValue.trim()); // Hide submit button if textarea is empty
+      localStorage.setItem('transcribedText', textValue);
     });
+  }
+
+  hideQuickTips() {
+    const quickTips = this.element.querySelector('.quick-tips');
+    if (quickTips) {
+      quickTips.classList.add('hidden');
+    }
   }
 
   submitReviewedText() {

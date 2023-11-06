@@ -3,31 +3,23 @@
   <div class="flex-column flex-grow-1 mt-3" id="textAreaFrame" data-audio-input-target="textAreaFrame">
     <!-- Initially empty -->
   </div>
-  <div class="flex-column">
-    <p><strong>Quick Tips</strong></p>
-    <p>1. Speak or Type</p>
-    <p>2. Edit</p>
-    <p>3. Press "Find groceries"</p>
+  <div class="d-flex justify-content-end">
+    <button class="button violet" data-action="click->audio-input#initializeTextArea">
+      TAP TO START
+    </button>
+    <button class="button violet hidden" data-action="click->audio-input#toggleRecording" data-audio-input-target="recordButton">
+      <i class="fa fa-microphone record-icon"></i>
+      <span class="record-text">Tap to Speak</span>
+    </button>
   </div>
-  <div class="flex-column">
-    <div class="space-between">
-      <button class="button violet" data-action="click->audio-input#showTextArea">
-        <i class="fa fa-pencil-alt"></i>
-        <span></span>
-      </button>
-      <button class="button violet" data-action="click->audio-input#toggleRecording" data-audio-input-target="recordButton">
-        <i class="fa fa-microphone record-icon"></i>
-        <i class="fa fa-stop stop-icon hidden"></i>
-        <span class="record-text">TAP TO START</span>
-        <span class="stop-text hidden"></span>
-      </button>
-    </div>
-  </div>
-  <div class="flex-column">
-    <div class="justify-content-end">
-      <button class="button violet hidden" data-action="click->audio-input#submitReviewedText" data-audio-input-target="submitButton">
-        Find groceries!
-      </button>
-    </div>
+  <div class="d-flex justify-content-end">
+    <button class="button violet hidden" data-action="click->audio-input#submitReviewedText" data-audio-input-target="submitButton">
+      Find groceries!
+    </button>
   </div>
 </div>
+
+<%# <button class="button violet" data-action="click->audio-input#showTextArea">
+  <i class="fa fa-pencil-alt"></i>
+  <span></span>
+</button> %>
