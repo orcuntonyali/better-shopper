@@ -30,4 +30,20 @@ class OrdersController < ApplicationController
   def delivery_option
     # manipulate delivery option
   end
+
+  def pickup_locations
+    @user = current_user
+    @cart_items = CartItem.where(order: @user.orders)
+    @items = Item.where(id: @cart_items.pluck(:item_id))
+    @stores = Store.where(id: @items.pluck(:store_id))
+    # You can also set the user's latitude and longitude here, similar to your homepage.
+    @user_address_lat = current_user.latitude
+    @user_address_lng = current_user.longitude
+    @markers = @stores.geocoded.map do |store|
+      {
+        lat: store.latitude,
+        lng:store.longitude
+      }
+  end
+  end
 end
