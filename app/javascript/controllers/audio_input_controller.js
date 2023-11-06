@@ -101,7 +101,7 @@ export default class extends Controller {
 
     if (!textarea) {
       textarea = document.createElement('textarea');
-      textarea.className = 'transcribed-text';
+      textarea.className = 'transcribed-text h--100';
       textarea.id = 'transcribedText';
       textarea.setAttribute('data-audio-input-target', 'transcribedText');
       this.textAreaFrameTarget.appendChild(textarea);

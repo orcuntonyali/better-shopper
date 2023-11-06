@@ -8,9 +8,7 @@ export default class extends Controller {
     console.log("Buttons Controller connected")
   }
   lookingGood() {
-    if (confirm("Proceed to cart_items/new?")) {
-      window.location.href = "/cart_items/new";
-    }
+    window.location.href = "/cart_items/new";
   }
   confirmSelection() {
     window.location.href = "<%= items_path %>";

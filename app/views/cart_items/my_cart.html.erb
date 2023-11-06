@@ -2,36 +2,28 @@
 <div class="d-flex flex-column justify-content-between h--100 px-2">
   <div class="flex-column">
     <% if @processed_items && @processed_items.any? %>
-  <% @processed_items.each do |cart_item| %>
-    <% item = cart_item.item %>
-    <div class="item-card space-between">
-      <a href="<%= item_path(id: item.id) %>" class="space-between no-decoration">
-        <img src="<%= item.image_url %>" alt="<%= item.name %> image" width="90">
-        <div class="item-card-text">
-          <h5><%= item.name.capitalize %></h5>
-          <p>From <%= item.store.name %></p>
-          <p>€<%= item.unit_price %></p>
+      <% @processed_items.each do |cart_item| %>
+      <% item = cart_item.item %>
+      <div class="item-card space-between">
+        <a href="<%= item_path(id: item.id) %>" class="space-between no-decoration">
+          <img src="<%= item.image_url %>" alt="<%= item.name %> image" width="90">
+          <div class="item-card-text">
+            <h5><%= item.name.capitalize %></h5>
+            <p>From <%= item.store.name %></p>
+            <p>€<%= item.unit_price %></p>
+          </div>
+        </a>
+        <div class="space-between button-quantity" data-controller="quantity">
+          <%= button_to update_cart_cart_item_path(cart_item), {form: { data: { action: "submit->quantity#decrement" }}, class: "no--button"} do %>
+            -
+          <% end %>
+            <span data-quantity-target="display"><%= cart_item.quantity %></span>
+          <%= button_to update_cart_cart_item_path(cart_item), {form: { data: { action: "submit->quantity#increment" }}, class: "no--button"} do %>
+            +
+          <% end %>
         </div>
-      </a>
-
-      <div class="space-between button-quantity" data-controller="quantity">
-        <%= button_to update_cart_cart_item_path(cart_item), {form: { data: { action: "submit->quantity#decrement" }}, class: "no--button"} do %>
-          -
-        <% end %>
-          <span data-quantity-target="display"><%= cart_item.quantity %></span>
-        <%= button_to update_cart_cart_item_path(cart_item), {form: { data: { action: "submit->quantity#increment" }}, class: "no--button"} do %>
-          +
-        <% end %>
       </div>
-
-      <!--
-      <form action="/cart_items/<%= cart_item.id %>/update_cart" method="post" id="updateCartForm" data-controller="quantity">
-        <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
-        <input type="hidden" name="quantity" value="<%= cart_item.quantity %>" id="quantityInput">
-      </form>
-      -->
-    </div>
-  <% end %>
+    <% end %>
     <% elsif @not_found_message %>
       <div>
         <h1>Items Not Found</h1>
@@ -51,3 +43,10 @@
     </div>
   </div>
 </div>
+
+
+<%# <div class="max-distance-box" data-controller="buttons">
+  <label for="max_distance">Max Search Distance (km): </label>
+  <input type="number" id="max_distance" name="max_distance" min="1" max="100" data-buttons-target="maxDistance">
+  <button data-action="click->buttons#setMaxDistance">Set Search Distance</button>
+</div> %>
