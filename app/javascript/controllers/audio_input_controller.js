@@ -17,6 +17,7 @@ export default class extends Controller {
     } else {
       localStorage.removeItem('transcribedText'); // Clear whitespace or empty strings
       this.submitButtonTarget.classList.add('hidden');
+      this.transcribedTextTarget.value = "";
     }
 
     // Listen to changes in the textarea and update localStorage and button visibility
