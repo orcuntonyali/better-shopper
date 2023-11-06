@@ -29,6 +29,12 @@ class OrdersController < ApplicationController
   #   redirect_to order_path(@order)
   # end
 
+  def destroy
+    @order = Order.find(params[:id])
+    @order.destroy
+    redirect_to orders_path, notice: 'Order was successfully cancelled.'
+  end
+
   def delivery_option
     # manipulate delivery option
   end
