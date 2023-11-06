@@ -1,15 +1,40 @@
 import { Controller } from "@hotwired/stimulus"
 
 export default class extends Controller {
-  static targets = ["transcribedText", "recordButton", "textAreaFrame", "submitButton"];
+  static targets = ["transcribedText", "recordButton", "submitButton"];
 
   connect() {
     console.log("Stimulus controller connected");
     this.isRecording = false;
     this.mediaRecorder = null;
     this.audioChunks = [];
-    this.loadTextAreaContent();
 
+    // Retrieve and set the textarea content from localStorage if available and not just whitespace
+    const savedText = localStorage.getItem('transcribedText');
+    if (savedText && savedText.trim().length > 0 && this.hasTranscribedTextTarget) {
+      this.transcribedTextTarget.value = savedText.trim();
+      this.submitButtonTarget.classList.remove('hidden');
+    } else {
+      localStorage.removeItem('transcribedText'); // Clear whitespace or empty strings
+      this.submitButtonTarget.classList.add('hidden');
+      this.transcribedTextTarget.value = "";
+    }
+
+    // Listen to changes in the textarea and update localStorage and button visibility
+    if (this.hasTranscribedTextTarget) {
+      this.transcribedTextTarget.addEventListener('input', () => {
+        const textValue = this.transcribedTextTarget.value;
+        if (textValue.trim().length > 0) {
+          localStorage.setItem('transcribedText', textValue);
+          this.submitButtonTarget.classList.remove('hidden');
+        } else {
+          localStorage.removeItem('transcribedText');
+          this.submitButtonTarget.classList.add('hidden');
+        }
+      });
+    }
+
+    // Initialize media recorder
     navigator.mediaDevices.getUserMedia({ audio: true })
       .then(stream => {
         this.mediaRecorder = new MediaRecorder(stream);
@@ -19,46 +44,34 @@ export default class extends Controller {
       .catch(err => console.error("Error initializing media recorder:", err));
   }
 
-  loadTextAreaContent() {
-    const savedText = localStorage.getItem('transcribedText');
-    if (savedText) {
-      this.showTextArea(savedText);
+  toggleRecording() {
+    if (!this.isRecording) {
+      this.startRecording();
+    } else {
+      this.stopRecording();
     }
   }
 
-  toggleRecording() {
-    this.isRecording = !this.isRecording;
-    this.isRecording ? this.startRecording() : this.stopRecording();
-  }
-
   startRecording() {
-    console.log("Start recording triggered");
-    this.audioChunks = [];
-    this.mediaRecorder.start();
-
-    // Toggle visibility of icons and text
-    this.recordButtonTarget.querySelector('.record-icon').classList.add('hidden');
-    this.recordButtonTarget.querySelector('.stop-icon').classList.remove('hidden');
-    this.recordButtonTarget.querySelector('.record-text').classList.add('hidden');
-    this.recordButtonTarget.querySelector('.stop-text').classList.remove('hidden');
-
-    // Change button color
-    this.recordButtonTarget.classList.remove("violet");
-    this.recordButtonTarget.classList.add("gray");
+    if (this.mediaRecorder && this.mediaRecorder.state === "inactive") {
+      this.mediaRecorder.start();
+      this.isRecording = true; // Update recording state
+      // Update UI for recording state
+      this.recordButtonTarget.classList.add("gray");
+      this.recordButtonTarget.querySelector('.record-icon').classList.add('active');
+      this.recordButtonTarget.querySelector('.record-text').textContent = "Recording...";
+    }
   }
 
   stopRecording() {
-    this.mediaRecorder.stop();
-
-    // Toggle visibility back
-    this.recordButtonTarget.querySelector('.record-icon').classList.remove('hidden');
-    this.recordButtonTarget.querySelector('.stop-icon').classList.add('hidden');
-    this.recordButtonTarget.querySelector('.record-text').classList.remove('hidden');
-    this.recordButtonTarget.querySelector('.stop-text').classList.add('hidden');
-
-    // Change button color back
-    this.recordButtonTarget.classList.remove("gray");
-    this.recordButtonTarget.classList.add("violet");
+    if (this.mediaRecorder && this.mediaRecorder.state === "recording") {
+      this.mediaRecorder.stop();
+      this.isRecording = false; // Update recording state
+      // Update UI for not recording state
+      this.recordButtonTarget.classList.remove("gray");
+      this.recordButtonTarget.querySelector('.record-icon').classList.remove('active');
+      this.recordButtonTarget.querySelector('.record-text').textContent = "Tap to Speak";
+    }
   }
 
   handleDataAvailable(event) {
@@ -92,34 +105,12 @@ export default class extends Controller {
     });
   }
 
-  showTextArea(newText = '') {
-    if (typeof newText === 'object') {
-      newText = '';
+  showTextArea(transcribedText) {
+    if (this.hasTranscribedTextTarget) {
+      this.transcribedTextTarget.value = transcribedText;
+      this.submitButtonTarget.classList.remove('hidden');
+      localStorage.setItem('transcribedText', transcribedText);
     }
-
-    let textarea = this.textAreaFrameTarget.querySelector('.transcribed-text');
-
-    if (!textarea) {
-      textarea = document.createElement('textarea');
-      textarea.className = 'transcribed-text';
-      textarea.id = 'transcribedText';
-      textarea.setAttribute('data-audio-input-target', 'transcribedText');
-      this.textAreaFrameTarget.appendChild(textarea);
-    }
-
-    // Append new text to existing content
-    if (textarea.value) {
-      textarea.value += "\n" + newText;
-    } else {
-      textarea.value = newText;
-    }
-    this.submitButtonTarget.classList.toggle('hidden', !textarea.value);
-    localStorage.setItem('transcribedText', textarea.value);
-
-    textarea.addEventListener('input', () => {
-      this.submitButtonTarget.classList.toggle('hidden', !textarea.value);
-      localStorage.setItem('transcribedText', textarea.value);
-    });
   }
 
   submitReviewedText() {
@@ -145,5 +136,4 @@ export default class extends Controller {
       console.log("Order processing failed:", error);
     });
   }
-
 }
