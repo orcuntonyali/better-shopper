@@ -35,7 +35,6 @@ class CartItemsController < ApplicationController
   end
 
   def update_cart
-
     # Find the cart item by ID from the form submission
     cart_item = CartItem.find(params[:id])
     # Update the quantity of the cart item

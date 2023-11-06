@@ -48,6 +48,7 @@ export default class extends Controller {
   }
 
   async confirmSelection(event) {
+    console.log('itemsController#confirmSelection')
     const selectedOptionIndex = event.currentTarget.getAttribute("data-selected-option-index");
     const itemPath = event.currentTarget.getAttribute("data-items-url");
     try {
@@ -63,7 +64,5 @@ export default class extends Controller {
       } catch(error) {
         console.log('itemsController#selectOption', error)
       }
-    const redirectPath = `/cart_items/my_cart`;
-    window.location.href = redirectPath;
   }
 }

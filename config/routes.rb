@@ -20,7 +20,7 @@ end
       get 'my_cart'
     end
     member do
-      post'update_cart'
+      post 'update_cart'
     end
   end
 end
