@@ -3,20 +3,35 @@ import { Controller } from "@hotwired/stimulus";
 export default class extends Controller {
   static targets = ["display"];
 
-  increment() {
-    this.updateQuantity(1);
+  increment(event) {
+    event.preventDefault();
+    this.updateQuantity(event, 1);
   }
 
-  decrement() {
-    this.updateQuantity(-1);
+  decrement(event) {
+    event.preventDefault();
+    this.updateQuantity(event, -1);
   }
 
-  updateQuantity(change) {
-    let quantity = parseInt(this.displayTarget.innerText) + change;
+  async updateQuantity(event, change) {
+    const csrfToken = document.querySelector("meta[name=csrf-token]").content;
+    const quantity = parseInt(this.displayTarget.innerText) + change;
     if (quantity > 0) {
-      this.displayTarget.innerText = quantity;
-      document.getElementById('quantityInput').value = quantity; // Update the hidden field
-      document.getElementById('updateCartForm').submit(); // Automatically submit the form after updating the quantity
+      const action = event.currentTarget.action;
+      try {
+        const response = await fetch(`/${action.split("/").slice(3).join("/")}`, {
+          method: 'POST',
+          headers: {
+            'X-CSRF-Token': csrfToken,
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({ change: change })
+        });
+        const data = await response.json();
+        if(data.status == "success") this.displayTarget.innerText = quantity;
+      } catch (error) {
+        console.log(error);
+      }
     }
   }
 }
