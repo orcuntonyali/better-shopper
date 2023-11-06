@@ -125,15 +125,15 @@ export default class extends Controller {
     })
     .then(response => response.json())
     .then(data => {
-      if (data.processed_order && Array.isArray(data.processed_order)) {
-        // Redirect to cart item creation page, assuming you store processed_order in the session or send it through params
-        window.location.href = "/cart_items/my_cart";
+      if (data.status === "success" && data.redirect_url) {
+        window.location.href = data.redirect_url;
       } else {
-        console.log('Error processing items.');
+        console.log('Error processing items:', data.message);
       }
     })
     .catch(error => {
       console.log("Order processing failed:", error);
     });
   }
+
 }

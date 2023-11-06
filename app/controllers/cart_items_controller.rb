@@ -16,19 +16,25 @@ class CartItemsController < ApplicationController
     order_input = params[:order_input]
     # Initialize OpenaiService
     processed_order = OpenaiService.process_order(order_input)
-    render json: { status: "success", processed_order: }
 
     # Create order for the user
     order = Order.create(user: current_user, delivery_option: :pickup, status: :pending)
 
     # Initialize cart_service.rb
     cart_service = CartService.new(stores_within_distance: @stores_within_distance)
-    cart_service.process_order(processed_order, order)
+    result = cart_service.process_order(processed_order, order)
+
+    # Respond with the processed order data and redirect URL for successful AJAX request
+    if result['cheapest_items'].present?
+      render json: { status: "success", processed_order: processed_order, redirect_url: my_cart_cart_items_path }
+    else
+      render json: { status: "error", message: result['not_found_message'] }
+    end
   end
 
   def my_cart
     @order = current_user.orders.last
-    @processed_items = @order.cart_items
+    @processed_items = @order.cart_items.includes(:item)
     # replace_cart_item
   end
 
@@ -53,7 +59,7 @@ class CartItemsController < ApplicationController
     user = User.find(current_user.id)
     @latitude = user.latitude
     @longitude = user.longitude
-    @max_distance = 100 # change this to user.max_distance later
+    @max_distance = 2 # change this to user.max_distance later
     @stores_within_distance = Store.near([@latitude, @longitude], @max_distance, units: :km).to_a
     # raise
   end
