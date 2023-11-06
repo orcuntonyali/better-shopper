@@ -46,11 +46,6 @@
   display: none; /* For Chrome, Safari and Opera */
 }
 
-// layouts/application.html.erb
-
-body {
-  font-family: "Roboto", sans-serif;
-}
 .content-div {
   overflow-y: scroll;
   flex-grow: 1;
@@ -71,14 +66,13 @@ h1 {
 }
 
 h5 {
-  font-family: "Roboto", sans-serif;
   font-size: 17px;
   line-height: 1.2;
   margin: 3px 0px;
 }
 
 td { // grid text
-  font-size: 15px;
+  font-size: 17px;
   margin: 4px 0px;
 }
 

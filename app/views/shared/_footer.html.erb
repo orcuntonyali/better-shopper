@@ -1,14 +1,15 @@
-<nav class="footer space-between white">
-  <%= link_to root_path, class: "nav-link active" do %>
-    <i class="icon-sm fas fa-house fa-lg fa-2x"></i>
+<nav class="footer space-between white" >
+  <%= link_to root_path, class: "nav-link", id: "home-link" do %>
+    <i class="icon-sm fas fa-house fa-lg fa-2x <%= "icon_active" if current_page?(root_path) %>"></i>
   <% end %>
-  <%= link_to setup_path, class: "nav-link active" do %>
-    <i class="icon-sm fas fa-location-dot fa-lg fa-2x"></i>
+  <%= link_to setup_path, class: "nav-link", id: "setup-link" do %>
+    <i class="icon-sm fas fa-location-dot fa-lg fa-2x <%= "icon_active" if current_page?(setup_path) %>"></i>
   <% end %>
-  <%= link_to new_cart_item_path, class: "nav-link active" do %>
-    <i class="icon-sm fas fa-shopping-cart fa-lg fa-2x"></i>
+  <%= link_to new_cart_item_path, class: "nav-link", id: "cart-link" do %>
+    <i class="icon-sm fas fa-shopping-cart fa-lg fa-2x <%= "icon_active" if current_page?(new_cart_item_path) %>"></i>
   <% end %>
-  <%= link_to orders_path, class: "nav-link active" do %>
-    <i class="icon-sm fas fa-list-ul fa-lg fa-2x"></i>
+  <%= link_to orders_path, class: "nav-link", id: "orders-link" do %>
+    <i class="icon-sm fas fa-list-ul fa-lg fa-2x <%= "icon_active" if current_page?(orders_path) %>"></i>
   <% end %>
 </nav>
+
