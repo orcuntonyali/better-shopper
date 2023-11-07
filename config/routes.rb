@@ -13,7 +13,7 @@ Rails.application.routes.draw do
   end
 end
 
-  resources :cart_items, only: [:new, :show, :create, :update, :destroy] do
+  resources :cart_items, only: [:new, :show, :create, :edit, :update, :destroy] do
     collection do
       post 'process_audio'
       post 'process_order'

@@ -51,10 +51,23 @@ class CartItemsController < ApplicationController
     end
   end
 
-  def replace_cart_item
+  def edit
+    @cart_item = CartItem.find(params[:id])
+    @item = @cart_item.item
+    @purchase_options = Item.where(name: @item.name).order(unit_price: :asc).limit(5)
+  end
+
+  def update
+    @cart_item = CartItem.find(params[:id])
+    @cart_item.update(cart_item_params)
+    redirect_to my_cart_cart_items_path
   end
 
   private
+
+  def cart_item_params
+    params.require(:cart_item).permit(:item_id)
+  end
 
   def set_cart_service_variables
     user = User.find(current_user.id)
@@ -62,11 +75,5 @@ class CartItemsController < ApplicationController
     @longitude = user.longitude
     @max_distance = 2 # change this to user.max_distance later
     @stores_within_distance = Store.near([@latitude, @longitude], @max_distance, units: :km).to_a
-    # raise
   end
 end
-
-
-# @not_found_message = @order.not_found_message  # You may need to store this message in the Order model
-# cart_item = CartItem.find(params[:id])
-# name = cart_item.name
