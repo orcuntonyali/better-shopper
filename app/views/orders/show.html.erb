@@ -24,7 +24,7 @@
   <div>
     <div style="display: flex; align-items: center;">
       <h5>Subtotal:</h5>
-      <h5 style="margin-left: auto;"><%= @total_price %> €</h5>
+      <h5 style="margin-left: auto;"><%= @order.total_price %> €</h5>
     </div>
     <div style="display: flex; align-items: center;">
       <h5>Service fee:</h5>
@@ -53,10 +53,10 @@
   <!-- Total section -->
   <div style="display: flex; align-items: center;">
     <h5>Total:</h5>
-    <h5 style="margin-left: auto;" class="total-price"><%= @total_price + @service_fee %> €</h5>
+    <h5 style="margin-left: auto;" class="total-price"><%= @order.total_price + @service_fee %> €</h5>
   </div>
   <div class="d-flex justify-content-center text-center">
-    <h5>You saved <%= (@total_price * 0.22).round(2) %> € 🥳</h5>
+    <h5>You saved <%= (@order.total_price * 0.22).round(2) %> € 🥳</h5>
   </div>
 
   <div class="d-flex justify-content-center margin-top: 25px, margin-bottom: 25px;">
