@@ -16,6 +16,7 @@ class CartItemsController < ApplicationController
     order_input = params[:order_input]
     # Initialize OpenaiService
     processed_order = OpenaiService.process_order(order_input)
+    p processed_order
 
     # Create order for the user
     order = Order.create(user: current_user, delivery_option: :pickup, status: :pending)

@@ -33,7 +33,7 @@
     <!-- Delivery fee section (initially hidden) -->
     <div class="delivery-fee" style="display: none; align-items: center;">
       <h5>Delivery fee:</h5>
-      <h5 style="margin-left: auto;"><%= number_to_currency(@delivery_fee, unit: '€', format: '%n %u') %></h5> 
+      <h5 style="margin-left: auto;"><%= number_to_currency(@delivery_fee, unit: '€', format: '%n %u') %></h5>
     </div>
   </div>
 
@@ -64,7 +64,11 @@
   </div>
 
   <div class="d-flex justify-content-center">
-    <%= link_to 'ORDER NOW', pickup_locations_order_path, class: 'button violet' %>
-  </div>  
+    <% if @order.pending? %>
+      <%= link_to 'ORDER NOW', pickup_locations_order_path, class: 'button violet' %>
+    <% else %>
+      <%= link_to 'SEE PICKUP DIRECTIONS', pickup_locations_order_path, class: 'button violet' %>
+    <% end %>
+  </div>
 
 </div>
