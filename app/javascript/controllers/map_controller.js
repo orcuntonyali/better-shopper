@@ -52,7 +52,10 @@ export default class extends Controller {
   .then(response => response.json())
   .then(data => {
     console.log(data)
-    this.distanceTarget.innerText = data.routes[0].distance/1000
+    const distanceInKilometers = data.routes[0].distance / 1000;
+    const formattedDistance = distanceInKilometers.toFixed(3);
+    this.distanceTarget.innerText = `${formattedDistance}`;
+
     // Get the route geometry coordinates from the API response
     const routeCoordinates = data.routes[0].geometry;
 
