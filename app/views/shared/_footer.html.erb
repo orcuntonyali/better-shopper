@@ -6,7 +6,10 @@
     <i class="icon-sm fas fa-location-dot fa-lg fa-2x <%= "icon_active" if current_page?(setup_path) %>"></i>
   <% end %>
   <%= link_to new_cart_item_path, class: "nav-link", id: "cart-link" do %>
-    <i class="icon-sm fas fa-shopping-cart fa-lg fa-2x <%= "icon_active" if current_page?(new_cart_item_path) %>"></i>
+    <i class="icon-sm fas fa-plus fa-lg fa-2x <%= "icon_active" if current_page?(new_cart_item_path) %>"></i>
+  <% end %>
+    <%= link_to my_cart_cart_items_path, class: "nav-link", id: "order-link" do %>
+      <i class="icon-sm fas fa-shopping-cart fa-lg fa-2x <%= "icon_active" if current_page?(my_cart_cart_items_path) %>"></i>
   <% end %>
   <%= link_to orders_path, class: "nav-link", id: "orders-link" do %>
     <i class="icon-sm fas fa-list-ul fa-lg fa-2x <%= "icon_active" if current_page?(orders_path) %>"></i>
