@@ -127,11 +127,12 @@ export default class extends Controller {
     .then(data => {
       if (data.status === "success" && data.redirect_url) {
         window.location.href = data.redirect_url;
+        console.log(data); // For debugging
       } else {
         console.log('Error processing items:', data.message);
       }
     })
-    .catch(error => {
+  .catch(error => {
       console.log("Order processing failed:", error);
     });
   }

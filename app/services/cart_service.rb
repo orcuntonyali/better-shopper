@@ -10,7 +10,7 @@ class CartService
 
     create_cart_items(@cheapest_items, order) if @cheapest_items.present?
 
-    {
+    return {
       'cheapest_items' => @cheapest_items,
       'not_found_message' => not_found_message(@not_found_items)
     }
@@ -44,11 +44,11 @@ class CartService
   end
 
   def search_for_cheapest_item(item_name)
-    Item.joins(:store)
-        .where(stores: { id: @stores_within_distance.map(&:id) })
-        .search_by_name(item_name)
+    item = Item.joins(:store)
+        .where(stores: { id: @stores_within_distance.pluck(:id) })
+        .where("items.name ILIKE ?", "%#{item_name}%")
         .order(:unit_price)
-        .last
+        .first
   end
 
   def not_found_message(not_found_items)

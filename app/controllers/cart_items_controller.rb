@@ -19,6 +19,7 @@ class CartItemsController < ApplicationController
 
     # Create order for the user
     order = Order.create(user: current_user, delivery_option: :pickup, status: :pending)
+    puts order # This is just to see the order in the console
 
     # Initialize cart_service.rb
     cart_service = CartService.new(stores_within_distance: @stores_within_distance)
