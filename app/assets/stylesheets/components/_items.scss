@@ -6,12 +6,11 @@
 
 .table-view {
   display: flex;
+  flex-grow: 1;
   justify-content: space-between;
   align-items: center;
-  padding: 10px;
-  border-bottom: 1px solid #ccc;
-  color: grey;
   cursor: pointer;
+  color: grey;
 }
 
 .table-view:hover,
@@ -21,4 +20,20 @@
 
 .table-view.selected {
   color: black;
+}
+
+.option-container {
+  display: flex;
+  padding: 10px;
+  border-bottom: 1px solid #ccc;
+}
+
+.store-name {
+  flex: 1; /* Allows this element to grow and take up space */
+  padding-right: 10px; /* Adds some space between the name and the price */
+  padding-left: 10px;
+}
+
+.price {
+  white-space: nowrap; /* Ensures the price doesn't wrap onto a new line */
 }

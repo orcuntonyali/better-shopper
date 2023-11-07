@@ -12,14 +12,12 @@
   <div class="d-flex flex-column flex-grow-1 justify-content-between">
   <div data-map-target="stores" data-map-markers="<%= @stores.to_json %>">
     <h5>Stores to pickup:</h5>
-    <p>Total distance: <span data-map-target="distance"><%= @stores.first[:distance] %></span> km</p>
-    <% @stores.each do |store| %>
+    <p>Total distance: <span id="total-distance"></span></p>
+    <% @stores.each_with_index do |store, index| %>
       <div class="order-card" data-map-target="marker" data-map-lng-value="<%= store[:lng] %>" data-map-lat-value="<%= store[:lat] %>">
         <p><strong>Store:</strong> <%= store[:name] %></p>
         <p><strong>Address:</strong> <%= store[:address] %></p>
       </div>
     <% end %>
   </div>
-</div>
-
 </div>

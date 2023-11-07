@@ -33,53 +33,54 @@ export default class extends Controller {
     }
   }
   #showDirections() {
-    let url = "https://api.mapbox.com/directions/v5/mapbox/driving/"
-    url += this.userLongitude
-    url += ","
-    url += this.userLatitude
-    url += ";"
+    // Start with the user's location
+    let coordinatesArray = [[this.userLongitude, this.userLatitude]];
+
+    // Add each store's coordinates to the array
     this.markersValue.forEach((marker) => {
-      url += marker.lng
-      url += ","
-      url += marker.lat
-      url += ";"
-    })
-    url = url.substring(0, url.length - 1)  // remove last semicolon
-    url += "?geometries=geojson&access_token="
-    url += this.apiKeyValue
-    console.log(url)
-    fetch(url)
-  .then(response => response.json())
-  .then(data => {
-    console.log(data)
-    const distanceInKilometers = data.routes[0].distance / 1000;
-    const formattedDistance = distanceInKilometers.toFixed(3);
-    this.distanceTarget.innerText = `${formattedDistance}`;
-
-    // Get the route geometry coordinates from the API response
-    const routeCoordinates = data.routes[0].geometry;
-
-    // Format the route coordinates as a GeoJSON LineString feature
-    const lineString = {
-      type: 'Feature',
-      geometry: routeCoordinates
-    };
-    console.log(lineString)
-    // Add the line to the map
-    this.map.addLayer({
-      id: 'route',
-      type: 'line',
-      source: {
-        type: 'geojson',
-        data: lineString
-      },
-      paint: {
-        'line-color': '#3867d6',
-        'line-width': 3
-      }
+      coordinatesArray.push([marker.lng, marker.lat]);
     });
-  });
-    }
+
+    // Construct the URL for the Mapbox API call
+    let url = `https://api.mapbox.com/directions/v5/mapbox/driving/${coordinatesArray.join(';')}?geometries=geojson&access_token=${this.apiKeyValue}`;
+
+    fetch(url)
+      .then(response => response.json())
+      .then(data => {
+        console.log(data);
+        const routes = data.routes[0];
+
+        // Calculate the total distance of the route
+        const totalDistanceInKilometers = routes.distance / 1000;
+        document.querySelector('#total-distance').innerText = `${totalDistanceInKilometers.toFixed(2)} km`;
+
+        // Update distances for individual stores if needed here
+
+        // Add the complete route to the map
+        const routeCoordinates = routes.geometry;
+        if (!this.map.getSource('route')) {
+          this.map.addSource('route', {
+            type: 'geojson',
+            data: routeCoordinates
+          });
+
+          this.map.addLayer({
+            id: 'route',
+            type: 'line',
+            source: 'route',
+            layout: {},
+            paint: {
+              'line-color': '#3867d6',
+              'line-width': 5
+            }
+          });
+        } else {
+          this.map.getSource('route').setData(routeCoordinates);
+        }
+      })
+      .catch(error => console.error('Error fetching directions:', error));
+  }
+
   #addMarkersToMap() {
     this.markersValue.forEach((marker) => {
       const popup = new mapboxgl.Popup().setHTML(marker.info_window_html);

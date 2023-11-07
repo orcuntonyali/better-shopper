@@ -5,10 +5,10 @@
     <div class="d-flex justify-content-between order-card">
       <div class="flex-column">
         <%= link_to order_path(order), style: 'text-decoration: none; color: black' do %>
-          <h5>Order n. <%= order.id %></h5>
-          <p>Placed at: <%= order.created_at.strftime("%B %d, %Y") %></p>
-          <p>Order status: <%= order.status %></p>
-          <p>Order sum: <%= order.total_price + 5 %> </p>
+          <h5>#<%= order.order_identifier %></h5>
+          <p><strong> Order date: </strong><%= order.created_at.strftime("%d.%m.%Y @%H:%M") %></p>
+          <p><strong>Delivery method: </strong><%= order.delivery_option.capitalize %></p>
+          <p><strong>Total: </strong><%= number_with_precision(order.total_price + 5, precision: 2) %> €</p>
         <% end %>
       </div>
       <div>
