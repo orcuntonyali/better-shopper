@@ -1,4 +1,4 @@
-<% @ribbon_text = "PICKUP LOCATIONS" %>
+<% @ribbon_text = "Pickup locations" %>
 
 <div class="d-flex flex-column justify-content-between h-100 px-2"
   data-controller="map"
@@ -7,7 +7,7 @@
   data-map-show-directions-value="true"
   data-user-latitude="<%= @user_address_lat %>"
   data-user-longitude="<%= @user_address_lng %>">
-  <div data-map-target="map" style="height: 400px;"></div>
+  <div data-map-target="map" style="height: 400px; margin-top: 20px; margin-bottom: 20px;"></div>
 
   <div class="d-flex flex-column flex-grow-1 justify-content-between">
      <div data-map-target="stores" data-map-markers="<%= @stores.to_json %>">
