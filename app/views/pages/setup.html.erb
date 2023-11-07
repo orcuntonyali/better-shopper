@@ -1,5 +1,5 @@
 <% @ribbon_text = "WELCOME TO BETTERSHOPPER" %>
-<div class="d-flex flex-column justify-content-between h--100 px-2"
+<div class="d-flex flex-grow-1 flex-column justify-content-between h--100 px-2"
       data-controller="map"
       data-map-buttons-outlet="#buttons"
       data-map-markers-value="<%= @markers.to_json %>"
@@ -11,9 +11,9 @@
     data-user-latitude="<%= current_user.latitude %>"
     data-user-longitude="<%= current_user.longitude %>"
   <% end %>>
-  <div id='map' data-map-target="map">
+  <div id='map' class="flex-grow-1" data-map-target="map">
   </div>
-  <div class="d-flex flex-column flex-grow-1 justify-content-between">
+  <div class="d-flex flex-column justify-content-between">
     <div class="flex-column text-center">
       <p>Your current address is</p>
       <% if @user_address %>

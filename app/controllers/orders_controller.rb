@@ -12,22 +12,10 @@ class OrdersController < ApplicationController
       # redirect_to new_cart_items_path
     end
     @items = @order.cart_items
-    @total_price = @items.map { |item| item.item.unit_price * item.quantity }.sum
     @delivery_toggle = @order.delivery_option
     @service_fee = 5.00
     @delivery_fee = 5.00
   end
-
-  # def create
-  #   @order = Order.new(user_id: current_user.id, status: :pending, delivery_option: false)
-  #   params[:processed_items].each do |item|
-  #     @cart_item = CartItem.new(order_id: @order.id, item_id: item[:id], quantity: item[:quantity])
-  #     @cart_item.save
-  #     @order.cart_items << @cart_item
-  #   end
-  #   @order.save
-  #   redirect_to order_path(@order)
-  # end
 
   def destroy
     @order = Order.find(params[:id])

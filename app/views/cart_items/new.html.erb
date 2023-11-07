@@ -9,13 +9,13 @@
     </textarea>
   </div>
   <div class="d-flex justify-content-end">
-    <button class="button violet" data-action="click->audio-input#toggleRecording" data-audio-input-target="recordButton">
+    <button class="button violet button--mic" data-action="click->audio-input#toggleRecording" data-audio-input-target="recordButton">
       <i class="fa fa-microphone record-icon"></i>
-      <span class="record-text">Tap to Speak</span>
+      <%# <span class="record-text">Tap to Speak</span> %>
     </button>
   </div>
   <div class="d-flex justify-content-end">
-    <button class="button violet hidden" data-action="click->audio-input#submitReviewedText" data-audio-input-target="submitButton">
+    <button class="button violet" disabled data-action="click->audio-input#submitReviewedText" data-audio-input-target="submitButton">
       Find groceries!
     </button>
   </div>
