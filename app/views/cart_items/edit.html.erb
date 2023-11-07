@@ -1,0 +1,26 @@
+<% @ribbon_text = "#{@item.name.capitalize} prices near you" %>
+<div class="bg-white">
+  <div data-controller="items">
+    <% if @item.image_url.present? %>
+      <img class="img-show" src="<%= @item.image_url %>" alt="<%= @item.name %>" />
+    <% else %>
+      <p data-items-target="item">No image available</p>
+    <% end %>
+    <div>
+
+    </div>
+    <%= simple_form_for @cart_item do |f| %>
+      <%= f.collection_radio_buttons :item_id, @purchase_options, :id, :name do |input| %>
+        <div>
+          <%= input.label do %>
+            <% item = input.object %>
+            <%= item.store.name %>
+            <%= item.unit_price %>
+            <%= input.radio_button %>
+          <% end %>
+        </div>
+      <% end %>
+      <%= f.submit %>
+    <% end %>
+  </div>
+</div>

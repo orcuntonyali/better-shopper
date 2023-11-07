@@ -1,11 +1,11 @@
 <% @ribbon_text = "Taking your order" %>
 <div class="d-flex flex-column justify-content-between h--100 px-2">
   <div class="flex-column">
-    <% if @processed_items && @processed_items.any? %>
-      <% @processed_items.each do |cart_item| %>
+    <% if @cart_items && @cart_items.any? %>
+      <% @cart_items.each do |cart_item| %>
       <% item = cart_item.item %>
       <div class="item-card space-between">
-        <a href="<%= item_path(id: item.id) %>" class="space-between no-decoration">
+        <a href="<%= edit_cart_item_path(id: cart_item.id) %>" class="space-between no-decoration">
           <img src="<%= item.image_url %>" alt="<%= item.name %> image" width="90">
           <div class="item-card-text">
             <h5><%= item.name.capitalize %></h5>
