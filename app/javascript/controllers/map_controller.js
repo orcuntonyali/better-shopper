@@ -77,7 +77,6 @@ export default class extends Controller {
     });
   });
     }
-
   #addMarkersToMap() {
     this.markersValue.forEach((marker) => {
       const popup = new mapboxgl.Popup().setHTML(marker.info_window_html);
@@ -88,14 +87,12 @@ export default class extends Controller {
         .addTo(this.map);
     });
   }
-
   #fitMapToMarkers() {
     const bounds = new mapboxgl.LngLatBounds()
     this.markersValue.forEach(marker => bounds.extend([ marker.lng, marker.lat ]))
     bounds.extend([ this.userLongitude, this.userLatitude])
     this.map.fitBounds(bounds, { padding: 70, maxZoom: 15, duration: 0 })
   }
-
   showMapboxSearchBox() {
     this.buttonsOutlet.changeAddressTarget.classList.add("d-none")
     this.buttonsOutlet.lookingGoodTarget.classList.add("d-none")
@@ -115,7 +112,6 @@ export default class extends Controller {
   send(e){
     this.hiddenTarget.value = this.updateAddress
   }
-
   addUserLocationAndNearbyStoresToMap() {
 
     const userLatitude = parseFloat(this.element.dataset.userLatitude);
@@ -142,5 +138,4 @@ export default class extends Controller {
         .addTo(this.map);
     });
   }
-
 }

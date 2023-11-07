@@ -44,6 +44,6 @@ class OrdersController < ApplicationController
         lat: store.latitude,
         lng:store.longitude
       }
-  end
+    end
   end
 end
