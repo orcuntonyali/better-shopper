@@ -1,19 +1,21 @@
 <% @ribbon_text = "My orders" %>
-<div class="d-flex flex-column h--100 px-2">
-  <table>
-    <thead>
-      <tr>
-        <th>Order ID</th>
-        <th>Order Date</th>
-      </tr>
-    </thead>
-    <tbody>
-      <% @orders.each do |order| %>
-        <tr>
-          <td><%= order.id %></td>
-          <td><%= order.created_at.strftime("%B %d, %Y") %></td>
-        </tr>
-      <% end %>
-    </tbody>
-  </table>
+
+<div style="margin: 15px;">
+  <% @orders.each do |order| %>
+    <div class="d-flex justify-content-between order-card">
+      <div class="flex-column">
+        <%= link_to order_path(order), style: 'text-decoration: none; color: black' do %>
+          <h5>Order n. <%= order.id %></h5>
+          <p>Placed at: <%= order.created_at.strftime("%B %d, %Y") %></p>
+          <p>Order status: <%= order.status %></p>
+        <% end %>
+      </div>
+      <div>
+        <%= form_for order, method: :delete, data: { confirm: 'Are you sure?' } do |f| %>
+          <%= f.button raw('<i class="fas fa-times-circle"></i>'), class: 'delete-button' %>
+        <% end %>
+      </div>
+    </div>  
+  <% end %>
 </div>
+

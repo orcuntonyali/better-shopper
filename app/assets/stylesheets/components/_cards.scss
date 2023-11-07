@@ -5,7 +5,7 @@
 
 .item-card-text {
   padding: 0px 0.75rem;
-  width: 130px;
+  width: 100%;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: inherit;
@@ -24,9 +24,22 @@
   // min-height: 450px;
   overflow: hidden;
   transition: max-height 0.5s ease-out;
+  align-items: stretch;
 }
 
 .flex-grow-1 {
   flex-grow: 1;
 }
 
+.order-card {
+  width: 100%;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  padding: 10px;
+  border: grey 1.5px solid;
+
+  &:hover {
+    // background-color: #c3c3c366;
+    border: #6200EE 2px solid;
+  }
+}

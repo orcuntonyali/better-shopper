@@ -107,9 +107,9 @@ export default class extends Controller {
 
   showTextArea(transcribedText) {
     if (this.hasTranscribedTextTarget) {
-      this.transcribedTextTarget.value = transcribedText;
+      this.transcribedTextTarget.value += transcribedText;
       this.submitButtonTarget.classList.remove('hidden');
-      localStorage.setItem('transcribedText', transcribedText);
+      localStorage.setItem('transcribedText', this.transcribedTextTarget.value);
     }
   }
 

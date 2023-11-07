@@ -55,7 +55,6 @@
 }
 
 // delivery toggle button
-
 .switch {
   position: relative;
   display: inline-block;
@@ -107,4 +106,12 @@
       border-radius: 50%;
     }
   }
+}
+
+.delete-button {
+  background: none;
+  border: none;
+  color: red;
+  font-size: 1em;
+  cursor: pointer;
 }

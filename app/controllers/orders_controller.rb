@@ -2,7 +2,7 @@ class OrdersController < ApplicationController
   before_action :authenticate_user!
 
   def index
-    @orders = Order.where(user_id: current_user.id)
+    @orders = Order.where(user_id: current_user.id).order(created_at: :desc).ordered
   end
 
   def show
@@ -13,7 +13,9 @@ class OrdersController < ApplicationController
     end
     @items = @order.cart_items
     @total_price = @items.map { |item| item.item.unit_price * item.quantity }.sum
-    # @delivery_toggle = @order.delivery_option
+    @delivery_toggle = @order.delivery_option
+    @service_fee = 5.00
+    @delivery_fee = 5.00
   end
 
   # def create
@@ -27,11 +29,19 @@ class OrdersController < ApplicationController
   #   redirect_to order_path(@order)
   # end
 
+  def destroy
+    @order = Order.find(params[:id])
+    @order.destroy
+    redirect_to orders_path, notice: 'Order was successfully cancelled.'
+  end
+
   def delivery_option
     # manipulate delivery option
   end
 
   def pickup_locations
+    @order = Order.find(params[:id])
+    @order.ordered!
     @user = current_user
     @cart_items = CartItem.where(order: @user.orders)
     @items = Item.where(id: @cart_items.pluck(:item_id))
