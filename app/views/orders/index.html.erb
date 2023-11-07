@@ -7,7 +7,7 @@
         <%= link_to order_path(order), style: 'text-decoration: none; color: black' do %>
           <h5>Order n. <%= order.id %></h5>
           <p>Placed at: <%= order.created_at.strftime("%B %d, %Y") %></p>
-          <p>Status: <%= order.delivery_option %></p>
+          <p>Order status: <%= order.status %></p>
         <% end %>
       </div>
       <div>
