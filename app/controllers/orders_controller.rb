@@ -31,7 +31,7 @@ class OrdersController < ApplicationController
     @order = Order.find(params[:id])
     @order.ordered!
     @user = current_user
-    @cart_items = CartItem.where(order: @user.orders)
+    @cart_items = CartItem.where(order: @order)
     @items = Item.where(id: @cart_items.pluck(:item_id))
     @stores = Store.where(id: @items.pluck(:store_id))
     # You can also set the user's latitude and longitude here, similar to your homepage.

@@ -5,7 +5,7 @@
 
 .item-card-text {
   padding: 0px 0.75rem;
-  width: 100%;
+  width: 150px;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: inherit;
@@ -39,7 +39,6 @@
   border: grey 1.5px solid;
 
   &:hover {
-    // background-color: #c3c3c366;
     border: #6200EE 2px solid;
   }
 }

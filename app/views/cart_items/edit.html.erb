@@ -4,23 +4,32 @@
     <% if @item.image_url.present? %>
       <img class="img-show" src="<%= @item.image_url %>" alt="<%= @item.name %>" />
     <% else %>
-      <p data-items-target="item">No image available</p>
+      <p>No image available</p>
     <% end %>
-    <div>
-
-    </div>
     <%= simple_form_for @cart_item do |f| %>
-      <%= f.collection_radio_buttons :item_id, @purchase_options, :id, :name do |input| %>
-        <div>
-          <%= input.label do %>
-            <% item = input.object %>
-            <%= item.store.name %>
-            <%= item.unit_price %>
-            <%= input.radio_button %>
-          <% end %>
+      <% @purchase_options.each_with_index do |option, index| %>
+        <div class="option-container">
+          <label class="table-view <%= 'selected' if option.id == f.object.item_id %>" onclick="updateSelection(this)">
+            <%= f.radio_button :item_id, option.id, id: "option_#{index}" %>
+            <span class="store-name"><%= option.store.name %></span>
+            <span class="price"><%= number_to_currency(option.unit_price, unit: '€') %></span>
+          </label>
         </div>
       <% end %>
-      <%= f.submit %>
+      <div class="center-content justify-content-end">
+        <%= f.submit "CONFIRM SELECTION", class: "violet button" %>
+      </div>
     <% end %>
   </div>
 </div>
+
+<script>
+  function updateSelection(clickedLabel) {
+    // Remove the 'selected' class from all labels
+    document.querySelectorAll('.table-view').forEach(label => {
+      label.classList.remove('selected');
+    });
+    // Add the 'selected' class to the clicked label
+    clickedLabel.classList.add('selected');
+  }
+</script>

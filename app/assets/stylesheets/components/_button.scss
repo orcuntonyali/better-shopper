@@ -1,13 +1,12 @@
 .button {
-  display: flex;
+  display: flex; /* 'display' should only be set once, 'inline-block' removed */
+  justify-content: center; /* Center content horizontally */
+  align-items: center; /* Center content vertically */
   color: white;
   border-radius: 8px;
   border-style: none;
   outline: none;
-  overflow: hidden;
   min-width: 120px;
-  text-align: center;
-  display: inline-block;
   font-size: 14px;
   padding: 8px;
   margin: 8px 0px;
@@ -27,41 +26,41 @@
   font-size: 30px;
   width: 60px;
   height: 60px;
-  line-height: 0;
-  min-width: 0;
   border-radius: 100%;
 }
 
 .button-quantity {
-  align-items: center;
-  text-align: center;
   background-color: white;
   border: 1.9px solid #6200EE;
-  border-radius: 30px;
-  width: 70px;
-  height: 30px;
-  font-size: 14px;
-  padding: 8px;
-  margin: 8px 0px;
-  text-decoration: none;
-  cursor: pointer;
-
-  &:hover {
-    background-color: #6200EE;
-
-  /* Direct child combinator to only select direct children */
-    & > .no--button, & > span {
-      color: white;
-    }
-  }
-}
-
-.no--button {
-  background: none;
-  border: none;
-  font-size: 1em;
+  border-radius: 50%; /* Makes the button perfectly round */
+  width: 22px;
+  height: 22px;
+  font-size: 17px;
+  padding: 0; /* Adjust padding to control the size */
+  margin: 8px;
   cursor: pointer;
 }
+
+.button-quantity:hover {
+  background-color: #6200EE;
+  color: white;
+}
+
+.button-quantity span {
+  display: block;
+  text-align: center;
+  width: 100%;
+  line-height: 22px; /* Set line height to the height of the button to vertically center text */
+}
+
+/* The following class is not necessary if using 'button_to' as it is a Rails helper method */
+.button_to {
+  display: inline-flex; /* Make the form itself flex container */
+  border: none; /* Remove if you have a border set on forms */
+  padding: 0; /* Remove if you have padding set on forms */
+  background: none; /* Remove if you have a background set on forms */
+}
+
 
 .violet {
   background-color: #6200EE;

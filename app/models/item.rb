@@ -7,4 +7,8 @@ class Item < ApplicationRecord
 
   validates :name, :image_url, :unit_price, presence: true
   validates :unit_price, numericality: { greater_than: 0 }
+
+  def name_with_price
+    "#{store.name} #{unit_price}€"
+  end
 end

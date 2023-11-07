@@ -19,7 +19,7 @@
       <% if @user_address %>
         <p><%= @user_address %></p>
       <% else %>
-      <p><%= current_user.address %></p>
+      <p><strong><%= current_user.address %><strong></p>
       <% end %>
     </div>
     <div class="flex-column" id="buttons" data-controller="buttons">
