@@ -1,0 +1,4 @@
+meta_name: "better shopper"
+meta_title: "BetterShopper"
+meta_description: "Mobile-first application that's capable of making grocery list from speech, adding discount items from near grocery stores, and deliver to your door. "
+meta_image: "cover.jpg" # should exist in `app/assets/images/`
