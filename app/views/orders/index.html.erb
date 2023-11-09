@@ -8,7 +8,7 @@
           <h5>#<%= order.order_identifier %></h5>
           <p><strong> Order date: </strong><%= order.created_at.strftime("%d.%m.%Y @%H:%M") %></p>
           <p><strong>Delivery method: </strong><%= order.delivery_option.capitalize %></p>
-          <p><strong>Total: </strong><%= number_with_precision(order.total_price + 5, precision: 2) %> €</p>
+          <p><strong>Total: </strong><%= number_with_precision(order.subtotal_price, precision: 2) %> €</p>
         <% end %>
       </div>
       <div>

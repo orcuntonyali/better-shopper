@@ -1,5 +1,5 @@
 class CartItemsController < ApplicationController
-  before_action :set_cart_service_variables, only: [:process_order, :my_cart]
+  before_action :set_cart_service_variables, only: [:process_order, :my_cart, :edit]
 
   def new
   end
@@ -55,7 +55,10 @@ class CartItemsController < ApplicationController
   def edit
     @cart_item = CartItem.find(params[:id])
     @item = @cart_item.item
-    @purchase_options = Item.where(name: @item.name).order(unit_price: :asc).limit(5)
+    @purchase_options = Item.where(store_id: @stores_within_distance.pluck(:id))
+                        .where(name: @item.name)
+                        .order(:unit_price)
+                        .limit(5)
   end
 
   def update

@@ -24,7 +24,7 @@
   <div>
     <div style="display: flex; align-items: center;">
       <h5>Subtotal:</h5>
-      <h5 style="margin-left: auto;"><%= @order.total_price %> €</h5>
+      <h5 style="margin-left: auto;"><%= number_to_currency(@order.subtotal_price, unit: '€', format: '%n %u')%></h5>
     </div>
     <div style="display: flex; align-items: center;">
       <h5>Service fee:</h5>
@@ -53,11 +53,11 @@
   <!-- Total section -->
   <div style="display: flex; align-items: center;">
     <h5>Total:</h5>
-    <h5 style="margin-left: auto;" class="total-price"><%= number_to_currency(@order.total_price + @service_fee, unit: '€', format: '%n %u') %></h5>
+    <h5 style="margin-left: auto;" class="total-price"><%= number_to_currency(@order.subtotal_price + @service_fee, unit: '€', format: '%n %u') %></h5>
   </div>
   <div class="d-flex flex-column justify-content-between flex-grow-1">
     <div class="d-flex justify-content-center text-center">
-    <h2>YOU SAVED <%= number_with_precision((@order.total_price * 0.32), precision: 2) %> € 🥳</h2>
+    <h2>YOU SAVED <%= number_with_precision((@order.subtotal_price * 0.32), precision: 2) %> € 🥳</h2>
     </div>
     <div class="d-flex justify-content-center margin-top: 25px, margin-bottom: 25px;">
       <dotlottie-player src="https://lottie.host/45f415fe-aafd-4f3e-a0d9-44491431f35d/Fx9kSxO7DE.json" background="transparent" speed="1" style="width: 150px; padding: 5px;" loop autoplay></dotlottie-player>
