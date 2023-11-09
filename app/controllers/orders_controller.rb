@@ -13,7 +13,7 @@ class OrdersController < ApplicationController
     end
     @items = @order.cart_items
     @delivery_toggle = @order.delivery_option
-    @service_fee = 5.00
+    @service_fee = @order.total_price * 0.1
     @delivery_fee = 5.00
   end
 

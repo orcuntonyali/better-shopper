@@ -41,12 +41,21 @@
 
   <!-- Toggle button for delivery -->
   <div data-controller= "buttons" style="display: flex; align-items: center;">
-    <h5>Deliver to my address</h5>
+    <h5>Optional Delivery</h5>
     <label class="switch" style="margin-left: auto;">
       <input type="checkbox" data-buttons-target="toggle">
       <span class="slider round" data-buttons-target="slider"></span>
     </label>
   </div>
+
+  <!-- Delivery message
+  <div style="display: flex; align-items: center; justify-content: center;">
+    <% if @delivery_toggle == 'delivery' %>
+      <h5>Get it delivered <%= Time.zone.today.strftime('%d.%m.%Y') %></h5>
+    <% else %>
+      <h5>I'll pick up myself</h5>
+    <% end %>
+  </div> -->
 
   <hr style="border-color: #6200EE; border-width: 2px; margin-left: 15px; margin-right: 15px;">
 
@@ -66,7 +75,7 @@
       <% if @order.pending? %>
         <%= link_to 'ORDER NOW', pickup_locations_order_path, class: 'button violet full-button' %>
       <% else %>
-        <%= link_to 'SEE PICKUP DIRECTIONS', pickup_locations_order_path, class: 'button violet' %>
+        <%= link_to 'SEE PICKUP DIRECTIONS', pickup_locations_order_path, class: 'button violet full-button' %>
       <% end %>
     </div>
   </div>
