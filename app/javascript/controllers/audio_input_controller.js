@@ -106,6 +106,7 @@ export default class extends Controller {
       console.log("Received data:", data);
       if (data.status === "success") {
         this.showTextArea(data.transcribed_text);
+        this.audioChunks = [];
       }
     })
     .catch(error => {
@@ -116,7 +117,6 @@ export default class extends Controller {
   showTextArea(transcribedText) {
     if (this.hasTranscribedTextTarget) {
       this.transcribedTextTarget.value += transcribedText;
-      // this.submitButtonTarget.classList.remove('hidden');
       this.submitButtonTarget.disabled = false;
       localStorage.setItem('transcribedText', this.transcribedTextTarget.value);
     }
