@@ -1,7 +1,7 @@
 <% @ribbon_text = "Welcome to BetterShopper" %>
 <div class="home--container d-flex flex-column align-items-center flex-grow-1 h--100">
   <div class="flex-column-reverse center-content mt-2">
-    <%= button_to "Not '#{current_user.name} #{current_user.surname}'?", destroy_user_session_path, method: :delete, class: "gray button" %>
+    <%= button_to "Not #{current_user.name} #{current_user.surname}?", destroy_user_session_path, method: :delete, class: "gray button" %>
   </div>
   <div class="flex-column flex-grow-1 justify-content-center center-content mt-2 mb-2">
     <div>
