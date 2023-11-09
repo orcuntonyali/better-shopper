@@ -8,14 +8,14 @@ User.delete_all
 
 puts "Create the master user"
 # Create the master user with default location in Rudi-Dutschke-Straße 26, 10969 Berlin
-User.create!(name: 'Mark',
-             surname: 'Schönberger',
-             email: 'mark@bettershopper.com',
+User.create!(name: 'Orcun',
+             surname: 'Tonyali',
+             email: 'orcun@bettershopper.com',
              password: '123456',
              address: 'Rudi-Dutschke-Straße 26, 10969 Berlin',
              latitude: 52.506931,
              longitude: 13.391634,
-             max_distance: 15.0,
+             max_distance: 10.0,
              )
 
 # Create Stores with their real-world information

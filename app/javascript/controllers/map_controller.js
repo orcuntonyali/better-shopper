@@ -120,6 +120,8 @@ export default class extends Controller {
 
     const userLatitude = parseFloat(this.element.dataset.userLatitude);
     const userLongitude = parseFloat(this.element.dataset.userLongitude);
+    const user_marker_color = '#6200ee'
+    const store_marker_color = 'gray'
 
 
     const storesData = this.element.dataset.stores;
@@ -128,7 +130,7 @@ export default class extends Controller {
     // Ensure that we have user location data before adding markers
     if (!isNaN(userLatitude) && !isNaN(userLongitude)) {
       // Add a marker for user location
-      new mapboxgl.Marker({ color: 'blue' })
+      new mapboxgl.Marker({ color: user_marker_color })
         .setLngLat([userLongitude, userLatitude])
         .addTo(this.map);
     }
@@ -136,7 +138,7 @@ export default class extends Controller {
     // Add markers for nearby stores if available
     stores.forEach((store) => {
       const popup = new mapboxgl.Popup().setHTML(store.info_window_html);
-      new mapboxgl.Marker({ color: store.marker_color })
+      new mapboxgl.Marker({ color: store_marker_color })
         .setLngLat([store.lng, store.lat])
         .setPopup(popup)
         .addTo(this.map);
