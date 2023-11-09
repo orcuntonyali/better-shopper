@@ -13,7 +13,7 @@ class PagesController < ApplicationController
       @markers << {
         lat: current_user.latitude,
         lng: current_user.longitude,
-        marker_color: 'blue'
+        marker_color: '#6200ee'
       }
     else
       add_user_marker
@@ -52,7 +52,7 @@ class PagesController < ApplicationController
       lat: current_user.latitude,
       lng: current_user.longitude,
       info_window_html: render_to_string(partial: "user_popup", locals: { user: current_user }),
-      marker_color: 'blue'
+      marker_color: '#6200ee'
     }
   end
 end

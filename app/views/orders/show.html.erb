@@ -64,7 +64,7 @@
     </div>
     <div class="d-flex justify-content-center">
       <% if @order.pending? %>
-        <%= link_to 'ORDER NOW', pickup_locations_order_path, class: 'button violet' %>
+        <%= link_to 'ORDER NOW', pickup_locations_order_path, class: 'button violet full-button' %>
       <% else %>
         <%= link_to 'SEE PICKUP DIRECTIONS', pickup_locations_order_path, class: 'button violet' %>
       <% end %>

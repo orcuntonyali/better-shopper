@@ -13,11 +13,9 @@ export default class extends Controller {
     const savedText = localStorage.getItem('transcribedText');
     if (savedText && savedText.trim().length > 0 && this.hasTranscribedTextTarget) {
       this.transcribedTextTarget.value = savedText.trim();
-      // this.submitButtonTarget.classList.remove('hidden');
       this.submitButtonTarget.disabled = false;
     } else {
       localStorage.removeItem('transcribedText'); // Clear whitespace or empty strings
-      // this.submitButtonTarget.classList.add('hidden');
       this.submitButtonTarget.disabled = true;
       this.transcribedTextTarget.value = "";
     }
@@ -28,11 +26,9 @@ export default class extends Controller {
         const textValue = this.transcribedTextTarget.value;
         if (textValue.trim().length > 0) {
           localStorage.setItem('transcribedText', textValue);
-          // this.submitButtonTarget.classList.remove('hidden');
           this.submitButtonTarget.disabled = false;
         } else {
           localStorage.removeItem('transcribedText');
-          // this.submitButtonTarget.classList.add('hidden');
           this.submitButtonTarget.disabled = true;
         }
       });
@@ -78,7 +74,6 @@ export default class extends Controller {
       this.recordButtonTarget.querySelector('.record-icon').classList.remove('active');
       this.recordButtonTarget.querySelector('.record-icon').classList.remove('fa-stop')
       this.recordButtonTarget.querySelector('.record-icon').classList.add('fa-microphone')
-      // this.recordButtonTarget.querySelector('.record-text').textContent = "Tap to Speak";
     }
   }
 
@@ -106,6 +101,7 @@ export default class extends Controller {
       console.log("Received data:", data);
       if (data.status === "success") {
         this.showTextArea(data.transcribed_text);
+        this.audioChunks = [];
       }
     })
     .catch(error => {
@@ -116,7 +112,6 @@ export default class extends Controller {
   showTextArea(transcribedText) {
     if (this.hasTranscribedTextTarget) {
       this.transcribedTextTarget.value += transcribedText;
-      // this.submitButtonTarget.classList.remove('hidden');
       this.submitButtonTarget.disabled = false;
       localStorage.setItem('transcribedText', this.transcribedTextTarget.value);
     }
