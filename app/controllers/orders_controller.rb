@@ -40,7 +40,8 @@ class OrdersController < ApplicationController
     @markers = @stores.geocoded.map do |store|
       {
         lat: store.latitude,
-        lng:store.longitude
+        lng:store.longitude,
+        marker_color: 'gray'
       }
     end
   end
