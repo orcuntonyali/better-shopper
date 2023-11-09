@@ -132,7 +132,6 @@ export default class extends Controller {
       // Add a marker for user location
       new mapboxgl.Marker({ color: user_marker_color })
         .setLngLat([userLongitude, userLatitude])
-        .setPopup(popup)
         .addTo(this.map);
     }
 
