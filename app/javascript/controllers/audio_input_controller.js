@@ -119,6 +119,9 @@ export default class extends Controller {
 
   submitReviewedText() {
     const reviewedText = this.transcribedTextTarget.value;
+    // Redirect to processing page immediately
+    window.location.href = '/cart_items/processing';
+
     fetch("/cart_items/process_order", {
       method: "POST",
       headers: {
@@ -129,14 +132,14 @@ export default class extends Controller {
     })
     .then(response => response.json())
     .then(data => {
+      // This part will not be reached immediately after redirect, but it's here if needed
       if (data.status === "success" && data.redirect_url) {
         window.location.href = data.redirect_url;
-        console.log(data); // For debugging
       } else {
         console.log('Error processing items:', data.message);
       }
     })
-  .catch(error => {
+    .catch(error => {
       console.log("Order processing failed:", error);
     });
   }

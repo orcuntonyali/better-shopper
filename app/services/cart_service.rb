@@ -8,12 +8,23 @@ class CartService
   def process_order(processed_order, order)
     prepare_list(processed_order)
 
-    create_cart_items(@cheapest_items, order) if @cheapest_items.present?
+    if @cheapest_items.present?
+      create_cart_items(@cheapest_items, order)
 
-    return {
-      'cheapest_items' => @cheapest_items,
-      'not_found_message' => not_found_message(@not_found_items)
-    }
+      # Assuming your Order model has a method to mark it as processed
+      mark_order_as_processed(order)
+
+      return {
+        'cheapest_items' => @cheapest_items,
+        'not_found_message' => not_found_message(@not_found_items)
+      }
+    else
+      # You may need to handle the case where there are no cheapest items found
+      return {
+        'cheapest_items' => [],
+        'not_found_message' => "No items found."
+      }
+    end
   end
 
   private
@@ -55,5 +66,10 @@ class CartService
     return if not_found_items.empty?
 
     "The following items couldn't be found:\n* #{not_found_items.join("\n* ")}"
+  end
+
+ # In CartService:
+  def mark_order_as_processed(order)
+    order.update(status: :ordered, processed_at: Time.current)
   end
 end

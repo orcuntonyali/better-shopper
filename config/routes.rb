@@ -13,11 +13,13 @@ Rails.application.routes.draw do
   end
 end
 
-  resources :cart_items, only: [:new, :show, :create, :edit, :update, :destroy] do
+  resources :cart_items, only: [:new, :create, :edit, :update, :destroy] do
     collection do
       post 'process_audio'
       post 'process_order'
       get 'my_cart'
+      get 'processing'
+      get 'order_status'
     end
     member do
       post 'update_cart'

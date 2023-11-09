@@ -6,13 +6,22 @@ class Order < ApplicationRecord
   enum status: { pending: 0, ordered: 1, shipped: 2, cancelled: 3 }
   enum delivery_option: { pickup: 0, delivery: 1 }
 
+  before_save :set_processed_at
   before_create :set_order_identifier
 
   def total_price
     cart_items.map { |cart_item| cart_item.item.unit_price * cart_item.quantity }.sum
   end
 
+  def processed?
+    processed_at.present?
+  end
+
   private
+
+  def set_processed_at
+    self.processed_at = Time.current if status_changed? && ordered?
+  end
 
   def set_order_identifier
     self.order_identifier = generate_order_id(user_id)

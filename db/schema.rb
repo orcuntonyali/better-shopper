@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_11_07_183558) do
+ActiveRecord::Schema[7.0].define(version: 2023_11_09_110436) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -41,6 +41,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_11_07_183558) do
     t.integer "delivery_option", default: 0
     t.integer "status", default: 0
     t.string "order_identifier"
+    t.datetime "processed_at"
     t.index ["order_identifier"], name: "index_orders_on_order_identifier", unique: true
     t.index ["user_id"], name: "index_orders_on_user_id"
   end

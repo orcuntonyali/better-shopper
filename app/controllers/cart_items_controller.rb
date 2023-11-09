@@ -1,5 +1,5 @@
 class CartItemsController < ApplicationController
-  before_action :set_cart_service_variables, only: [:process_order, :my_cart]
+  before_action :set_cart_service_variables, only: [:process_order, :my_cart, :order_status]
 
   def new
   end
@@ -37,7 +37,21 @@ class CartItemsController < ApplicationController
   def my_cart
     @order = current_user.orders.last
     @cart_items = @order.cart_items
-    # replace_cart_item
+  end
+
+  def processing
+  end
+
+  def order_status
+    @order = current_user.orders.order(created_at: :desc).first
+
+    if @order.nil?
+      render json: { status: "error", message: "No order found." }
+    elsif @order.status == 'processed' # or whatever status you use for a completed order
+      render json: { status: "success", message: "Order processed.", redirect_url: my_cart_cart_items_path }
+    else
+      render json: { status: "pending", message: "Order is still being processed." }
+    end
   end
 
   def update_cart
