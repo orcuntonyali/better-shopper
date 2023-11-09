@@ -48,21 +48,12 @@
     </label>
   </div>
 
-  <!-- Delivery message
-  <div style="display: flex; align-items: center; justify-content: center;">
-    <% if @delivery_toggle == 'delivery' %>
-      <h5>Get it delivered <%= Time.zone.today.strftime('%d.%m.%Y') %></h5>
-    <% else %>
-      <h5>I'll pick up myself</h5>
-    <% end %>
-  </div> -->
-
   <hr style="border-color: #6200EE; border-width: 2px; margin-left: 15px; margin-right: 15px;">
 
   <!-- Total section -->
   <div style="display: flex; align-items: center;">
     <h5>Total:</h5>
-    <h5 style="margin-left: auto;" class="total-price"><%= @order.total_price + @service_fee %> €</h5>
+    <h5 style="margin-left: auto;" class="total-price"><%= number_to_currency(@order.total_price + @service_fee, unit: '€', format: '%n %u') %></h5>
   </div>
   <div class="d-flex flex-column justify-content-between flex-grow-1">
     <div class="d-flex justify-content-center text-center">
