@@ -86,15 +86,14 @@ export default class extends Controller {
     this.audioChunks.push(event.data);
   }
 
-  handleStop(event) {
-    console.log("Recorder stopped: ", event);
-    const audioBlob = new Blob(this.audioChunks, { type: "audio/ogg codecs=opus" });
+  handleStop() {
+    const audioBlob = new Blob(this.audioChunks, { type: "audio/wav" });
     this.uploadAudio(audioBlob);
   }
 
   uploadAudio(audioBlob) {
     const formData = new FormData();
-    formData.append("audio_file", audioBlob, "user_audio.ogg");
+    formData.append("audio_file", audioBlob, "user_audio.wav");
     fetch("/cart_items/process_audio", {
       method: "POST",
       headers: {
