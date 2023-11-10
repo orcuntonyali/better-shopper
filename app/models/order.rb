@@ -8,7 +8,7 @@ class Order < ApplicationRecord
 
   before_create :set_order_identifier
 
-  def total_price
+  def subtotal_price
     cart_items.map { |cart_item| cart_item.item.unit_price * cart_item.quantity }.sum
   end
 
